@@ -1,0 +1,8 @@
+<resources>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="sdsu_red">#A81933</color>
+    <color name="sdsu_gold">#D2C694</color>
+    <color name="black">#000</color>
+
+</resources>
