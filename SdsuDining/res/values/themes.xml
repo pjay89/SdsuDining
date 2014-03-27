@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- ActionBar tabs styles -->
+    <style name="CustomTheme"
+           parent="@style/android:Theme.Holo">
+        <!-- tab indicator -->
+		<item name="android:background">#211e4d</item>
+    </style>
+</resources>
