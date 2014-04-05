@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,12 +34,16 @@ public class DetailsActivity extends FragmentActivity implements
 	 * intensive, it may be best to switch to a
 	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
 	 */
-	SectionsPagerAdapter sectionsPagerAdapter;
+	private SectionsPagerAdapter sectionsPagerAdapter;
 
 	/**
 	 * The {@link ViewPager} that will host the section contents.
 	 */
-	ViewPager viewPager;
+	private ViewPager viewPager;
+	
+	private int tabCount;
+	
+	static String title;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,20 +52,27 @@ public class DetailsActivity extends FragmentActivity implements
 		
 		Intent intent = getIntent();
 		this.setTitle(intent.getStringExtra("labelString"));
+		title = (intent.getStringExtra("labelString"));
+		Log.i("HERE", title);
+		tabCount = intent.getIntExtra("tabsCount", 3);
 		
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setDisplayHomeAsUpEnabled(true);
-
+		
+		
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
 		sectionsPagerAdapter = new SectionsPagerAdapter(
 				getSupportFragmentManager());
-
+		
+		
 		// Set up the ViewPager with the sections adapter.
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		viewPager.setAdapter(sectionsPagerAdapter);
+		
+		
 
 		// When swiping between different sections, select the corresponding
 		// tab. We can also use ActionBar.Tab#select() to do this if we have
@@ -94,6 +106,7 @@ public class DetailsActivity extends FragmentActivity implements
             case android.R.id.home:
                 Intent intent = new Intent(this, HomeActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                 finish();
                 return true;
         }
@@ -151,13 +164,12 @@ public class DetailsActivity extends FragmentActivity implements
 
 		@Override
 		public int getCount() {
-			// Show 3 total pages.
-			return 3;
+			return tabCount;
 		}
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			Locale l = Locale.getDefault();
+			/*Locale l = Locale.getDefault();
 			switch (position) {
 			case 0:
 				return getString(R.string.title_section1).toUpperCase(l);
@@ -166,8 +178,12 @@ public class DetailsActivity extends FragmentActivity implements
 			case 2:
 				return getString(R.string.title_section3).toUpperCase(l);
 			}
-			return null;
+			return null;*/
+			int i = position + 1;
+			
+			return ("Section "+ i);			
 		}
+
 	}
 
 	/**
@@ -191,8 +207,9 @@ public class DetailsActivity extends FragmentActivity implements
 					container, false);
 			TextView dummyTextView = (TextView) rootView
 					.findViewById(R.id.section_label);
-			dummyTextView.setText(Integer.toString(getArguments().getInt(
-					ARG_SECTION_NUMBER)));
+			//dummyTextView.setText(Integer.toString(getArguments().getInt(
+			//		ARG_SECTION_NUMBER)));
+			dummyTextView.setText(title);
 			return rootView;
 		}
 	}

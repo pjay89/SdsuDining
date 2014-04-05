@@ -23,8 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="sdsu.apps.sdsudining.DetailsActivity"
-            android:label="@string/title_activity_detail" >
+            android:name="sdsu.apps.sdsudining.DetailsActivity" >
         </activity>
     </application>
 

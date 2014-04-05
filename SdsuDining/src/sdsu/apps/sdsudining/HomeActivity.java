@@ -12,6 +12,10 @@ public class HomeActivity extends Activity {
 
 	ImageButton restaurantsButton;
 	ImageButton farmersMarketButton;
+	ImageButton couponsButton;
+	ImageButton cateringButton;
+	ImageButton sweetButton;
+	ImageButton contactUsButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,18 @@ public class HomeActivity extends Activity {
 		
 		farmersMarketButton = (ImageButton) findViewById(R.id.farmersMarketButton);
 		farmersMarketButton.setOnClickListener(getFarmersMarketButtonListener);
+		
+		couponsButton = (ImageButton) findViewById(R.id.couponsButton);
+		couponsButton.setOnClickListener(getCouponsButtonListener);
+		
+		cateringButton = (ImageButton) findViewById(R.id.cateringButton);
+		cateringButton.setOnClickListener(getCateringButtonListener);
+		
+		sweetButton = (ImageButton) findViewById(R.id.sweetButton);
+		sweetButton.setOnClickListener(getSweetButtonListener);
+		
+		contactUsButton = (ImageButton) findViewById(R.id.contactUsButton);
+		contactUsButton.setOnClickListener(getContactUsButtonListener);
 	}
 
 	@Override
@@ -39,6 +55,7 @@ public class HomeActivity extends Activity {
 		public void onClick(View v) {
 			Intent intent = new Intent(HomeActivity.this, DetailsActivity.class);
 			intent.putExtra("labelString", getResources().getString(R.string.restaurantsString));
+			intent.putExtra("tabsCount", 5);
 			startActivity(intent);
 		}
 
@@ -50,6 +67,55 @@ public class HomeActivity extends Activity {
 		public void onClick(View v) {
 			Intent intent = new Intent(HomeActivity.this, DetailsActivity.class);
 			intent.putExtra("labelString", getResources().getString(R.string.farmersMarketString));
+			intent.putExtra("tabsCount", 3);
+			startActivity(intent);
+		}
+
+	};
+	
+	public OnClickListener getCouponsButtonListener = new OnClickListener(){
+
+		@Override
+		public void onClick(View v) {
+			Intent intent = new Intent(HomeActivity.this, DetailsActivity.class);
+			intent.putExtra("labelString", getResources().getString(R.string.couponsString));
+			intent.putExtra("tabsCount", 3);
+			startActivity(intent);
+		}
+
+	};
+	
+	public OnClickListener getCateringButtonListener = new OnClickListener(){
+
+		@Override
+		public void onClick(View v) {
+			Intent intent = new Intent(HomeActivity.this, DetailsActivity.class);
+			intent.putExtra("labelString", getResources().getString(R.string.cateringString));
+			intent.putExtra("tabsCount", 3);
+			startActivity(intent);
+		}
+
+	};
+	
+	public OnClickListener getSweetButtonListener = new OnClickListener(){
+
+		@Override
+		public void onClick(View v) {
+			Intent intent = new Intent(HomeActivity.this, DetailsActivity.class);
+			intent.putExtra("labelString", getResources().getString(R.string.sweetString));
+			intent.putExtra("tabsCount", 3);
+			startActivity(intent);
+		}
+
+	};
+	
+	public OnClickListener getContactUsButtonListener = new OnClickListener(){
+
+		@Override
+		public void onClick(View v) {
+			Intent intent = new Intent(HomeActivity.this, DetailsActivity.class);
+			intent.putExtra("labelString", getResources().getString(R.string.contactUsString));
+			intent.putExtra("tabsCount", 2);
 			startActivity(intent);
 		}
 
