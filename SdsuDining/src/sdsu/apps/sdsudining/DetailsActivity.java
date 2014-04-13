@@ -1,10 +1,12 @@
 package sdsu.apps.sdsudining;
 
-import java.util.Locale;
 
+import webService.DataFetcher;
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -43,24 +45,27 @@ public class DetailsActivity extends FragmentActivity implements
 	
 	private int tabCount;
 	
-	static String title;
+	private static DataFetcher df;
+	private String code;
+	static String res;
+	//static AsyncCallWS task;
+	private static String TAG = "SDSU DINING TEST";
 
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_details);
-		
+			
 		Intent intent = getIntent();
 		this.setTitle(intent.getStringExtra("labelString"));
-		title = (intent.getStringExtra("labelString"));
-		Log.i("HERE", title);
 		tabCount = intent.getIntExtra("tabsCount", 3);
+		code = intent.getStringExtra("code");
 		
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setDisplayHomeAsUpEnabled(true);
-		
 		
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
@@ -96,6 +101,10 @@ public class DetailsActivity extends FragmentActivity implements
 					.setTabListener(this));
 		}
 		
+		res = "";
+		/*df = new DataFetcher("GetQuote","symbol", code);
+		task  = new AsyncCallWS();
+		task.execute();*/
 		
 	}
 
@@ -132,7 +141,7 @@ public class DetailsActivity extends FragmentActivity implements
 
 	@Override
 	public void onTabUnselected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction) {
+			FragmentTransaction fragmentTransaction){
 	}
 
 	@Override
@@ -156,6 +165,7 @@ public class DetailsActivity extends FragmentActivity implements
 			// Return a DummySectionFragment (defined as a static inner class
 			// below) with the page number as its lone argument.
 			Fragment fragment = new DummySectionFragment();
+			
 			Bundle args = new Bundle();
 			args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
 			fragment.setArguments(args);
@@ -190,7 +200,7 @@ public class DetailsActivity extends FragmentActivity implements
 	 * A dummy fragment representing a section of the app, but that simply
 	 * displays dummy text.
 	 */
-	public static class DummySectionFragment extends Fragment {
+	public static class DummySectionFragment extends Fragment{
 		/**
 		 * The fragment argument representing the section number for this
 		 * fragment.
@@ -198,21 +208,58 @@ public class DetailsActivity extends FragmentActivity implements
 		public static final String ARG_SECTION_NUMBER = "section_number";
 
 		public DummySectionFragment() {
+			
 		}
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_detail_dummy,
+			View rootView = inflater.inflate(R.layout.fragment_detail,
 					container, false);
 			TextView dummyTextView = (TextView) rootView
 					.findViewById(R.id.section_label);
 			//dummyTextView.setText(Integer.toString(getArguments().getInt(
 			//		ARG_SECTION_NUMBER)));
-			dummyTextView.setText(title);
+			
+			df = new DataFetcher("http://api.openweathermap.org/data/2.5/weather?q=new+york", dummyTextView);
+			new Thread(df).start();
+			Log.i(TAG, "res: "+ res);
+			//dummyTextView.setText(res);
 			return rootView;
 		}
 	}
+	
+
+/*	private class AsyncCallWS extends AsyncTask<String, Void, Void> {
+		@Override
+		protected void onPreExecute() {
+			Log.i(TAG, "onPreExec");
+		}
+
+
+		@Override
+		protected Void doInBackground(String... params) {
+			Log.i(TAG, "doInBackground");
+
+			res = df.fetch();
+			return null;
+		}
+
+		@Override
+		protected void onProgressUpdate(Void... values) {
+			Log.i(TAG, "onProgressUpdate");
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			Log.i(TAG,"onPostExec");
+			Log.i(TAG, "postExec Res: "+ res);
+		}   
+	} 
+	*/
+	
+	
+
 
 }
 

@@ -40,16 +40,15 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class drawable {
         public static final int catering=0x7f020000;
-        public static final int farmers_market=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int restaurants=0x7f020003;
-        public static final int sweet=0x7f020004;
+        public static final int ic_launcher=0x7f020001;
+        public static final int restaurants=0x7f020002;
+        public static final int sweet=0x7f020003;
     }
     public static final class id {
         public static final int TableLayout1=0x7f0a0001;
         public static final int TableLayout2=0x7f0a0003;
         public static final int action_settings=0x7f0a000d;
-        public static final int button1=0x7f0a000b;
+        public static final int browseByMap=0x7f0a000b;
         public static final int cateringButton=0x7f0a0008;
         public static final int contactUsButton=0x7f0a000a;
         public static final int couponsButton=0x7f0a0007;
@@ -62,17 +61,23 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int tableRow1=0x7f0a0004;
     }
     public static final class layout {
-        public static final int activity_details=0x7f030000;
-        public static final int activity_home=0x7f030001;
-        public static final int fragment_detail_dummy=0x7f030002;
+        public static final int activity_browse_by_location=0x7f030000;
+        public static final int activity_details=0x7f030001;
+        public static final int activity_home=0x7f030002;
+        public static final int activity_restaurants_list=0x7f030003;
+        public static final int fragment_detail=0x7f030004;
     }
     public static final class menu {
-        public static final int detail=0x7f090000;
-        public static final int home=0x7f090001;
+        public static final int browse_by_location=0x7f090000;
+        public static final int browse_by_map=0x7f090001;
+        public static final int detail=0x7f090002;
+        public static final int home=0x7f090003;
+        public static final int restaurants_list=0x7f090004;
     }
     public static final class string {
         public static final int action_settings=0x7f070001;
         public static final int app_name=0x7f070000;
+        public static final int browseByMapString=0x7f070009;
         public static final int cateringString=0x7f070006;
         public static final int contactUsString=0x7f070008;
         public static final int couponsString=0x7f070005;
