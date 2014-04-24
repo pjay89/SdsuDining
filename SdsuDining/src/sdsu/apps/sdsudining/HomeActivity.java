@@ -54,8 +54,6 @@ public class HomeActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			Intent intent = new Intent(HomeActivity.this, RestaurantsListActivity.class);
-			intent.putExtra("labelString", getResources().getString(R.string.restaurantsString));
-			intent.putExtra("tabsCount", 5);
 			intent.putExtra("code", "MSFT");
 			startActivity(intent);
 		}
@@ -66,9 +64,8 @@ public class HomeActivity extends Activity {
 
 		@Override
 		public void onClick(View v) {
-			Intent intent = new Intent(HomeActivity.this, DetailsActivity.class);
+			Intent intent = new Intent(HomeActivity.this, BrowseByLocationActivity.class);
 			intent.putExtra("labelString", getResources().getString(R.string.farmersMarketString));
-			intent.putExtra("tabsCount", 3);
 			intent.putExtra("code", "ORCL");
 			startActivity(intent);
 		}
@@ -79,7 +76,7 @@ public class HomeActivity extends Activity {
 
 		@Override
 		public void onClick(View v) {
-			Intent intent = new Intent(HomeActivity.this, DetailsActivity.class);
+			Intent intent = new Intent(HomeActivity.this, CouponsActivity.class);
 			intent.putExtra("labelString", getResources().getString(R.string.couponsString));
 			intent.putExtra("tabsCount", 3);
 			startActivity(intent);
@@ -94,6 +91,7 @@ public class HomeActivity extends Activity {
 			Intent intent = new Intent(HomeActivity.this, DetailsActivity.class);
 			intent.putExtra("labelString", getResources().getString(R.string.cateringString));
 			intent.putExtra("tabsCount", 3);
+			intent.putExtra("code", "ORCL");
 			startActivity(intent);
 		}
 
@@ -106,6 +104,7 @@ public class HomeActivity extends Activity {
 			Intent intent = new Intent(HomeActivity.this, DetailsActivity.class);
 			intent.putExtra("labelString", getResources().getString(R.string.sweetString));
 			intent.putExtra("tabsCount", 3);
+			intent.putExtra("code", "MSFT");
 			startActivity(intent);
 		}
 
@@ -117,7 +116,7 @@ public class HomeActivity extends Activity {
 		public void onClick(View v) {
 			Intent intent = new Intent(HomeActivity.this, DetailsActivity.class);
 			intent.putExtra("labelString", getResources().getString(R.string.contactUsString));
-			intent.putExtra("tabsCount", 1);
+			intent.putExtra("tabsCount", 2);
 			startActivity(intent);
 		}
 

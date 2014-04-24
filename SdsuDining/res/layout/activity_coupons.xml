@@ -6,38 +6,37 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".BrowseByLocationActivity" >
+    tools:context=".CouponsActivity" >
 
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="30dp" >
+        android:layout_alignParentTop="true" >
     </ScrollView>
 
     <TableLayout
         android:id="@+id/TableLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/scrollView1"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" >
+        android:layout_marginTop="@dimen/activity_horizontal_margin" >
 
         <TableRow
-            android:id="@+id/tableRow1"
+            android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_horizontal_margin" >
+            android:layout_height="wrap_content" >
 
             <Button
                 android:id="@+id/button1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="loc1" />
-        </TableRow>
+                android:hint="coupon"
+                android:text="coupon" />
 
+        </TableRow>
     </TableLayout>
 
 </RelativeLayout>

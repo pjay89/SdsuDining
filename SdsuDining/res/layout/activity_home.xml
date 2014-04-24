@@ -20,9 +20,9 @@
             android:layout_height="wrap_content" >
             
                 <TableRow
-        android:id="@+id/tableRow1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+                    android:id="@+id/homeRow1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
 
         <ImageButton
             android:id="@+id/restaurantsButton"
@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_horizontal_margin"
             android:layout_weight="1"
+            android:contentDescription="@string/restaurantsString"
             android:src="@drawable/restaurants" />
 
         <ImageButton
@@ -38,12 +39,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_horizontal_margin"
             android:layout_weight="1"
+            android:contentDescription="@string/farmersMarketString"
             android:src="@drawable/sweet" />
 
     </TableRow>
 
     <TableRow
-        android:id="@+id/tableRow1"
+        android:id="@+id/homeRow2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -52,6 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:contentDescription="@string/couponsString"
             android:src="@drawable/sweet" />
 
         <ImageButton
@@ -59,11 +62,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:contentDescription="@string/cateringString"
             android:src="@drawable/catering" />
+
     </TableRow>
 
     <TableRow
-        android:id="@+id/tableRow1"
+        android:id="@+id/homeRow3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -72,6 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:contentDescription="@string/sweetString"
             android:src="@drawable/sweet" />
 
         <ImageButton
@@ -79,7 +85,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:contentDescription="@string/contactUsString"
             android:src="@drawable/restaurants" />
+
     </TableRow>
 
    </TableLayout>

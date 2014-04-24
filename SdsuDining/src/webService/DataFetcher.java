@@ -7,7 +7,6 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class DataFetcher implements Runnable{
