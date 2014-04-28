@@ -1,10 +1,13 @@
 package sdsu.apps.sdsudining;
 
 
+import java.util.concurrent.ExecutionException;
+
 import webService.DataFetcher;
-import android.annotation.SuppressLint;
+//import webService.DataFetcher.AsyncCallWS;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -46,17 +49,18 @@ public class DetailsActivity extends FragmentActivity implements
 	private int tabCount;
 	
 	private static DataFetcher df;
-	private String code;
+	private static String code;
 	static String res;
 	//static AsyncCallWS task;
+	static ProgressDialog progress;
+	
 	private static String TAG = "SDSU DINING TEST";
 
-	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.activity_details);
-			
 		Intent intent = getIntent();
 		this.setTitle(intent.getStringExtra("labelString"));
 		tabCount = intent.getIntExtra("tabsCount", 3);
@@ -101,11 +105,9 @@ public class DetailsActivity extends FragmentActivity implements
 					.setTabListener(this));
 		}
 		
-		res = "";
-		/*df = new DataFetcher("GetQuote","symbol", code);
-		task  = new AsyncCallWS();
-		task.execute();*/
-		
+		progress = new ProgressDialog(this);
+		progress.setMessage("Loading");
+		progress.show();
 	}
 
 	
@@ -207,9 +209,7 @@ public class DetailsActivity extends FragmentActivity implements
 		 */
 		public static final String ARG_SECTION_NUMBER = "section_number";
 
-		public DummySectionFragment() {
-			
-		}
+		
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -220,17 +220,34 @@ public class DetailsActivity extends FragmentActivity implements
 					.findViewById(R.id.section_label);
 			//dummyTextView.setText(Integer.toString(getArguments().getInt(
 			//		ARG_SECTION_NUMBER)));
+					
 			
-			df = new DataFetcher("http://api.openweathermap.org/data/2.5/weather?q=new+york", dummyTextView);
-			new Thread(df).start();
-			Log.i(TAG, "res: "+ res);
+			/*df = new DataFetcher("http://api.openweathermap.org/data/2.5/weather?q="+code, dummyTextView);
+			task  = df.query();
+			task.execute();*/
+			
+			dummyTextView.invalidate();
 			//dummyTextView.setText(res);
 			return rootView;
+		}
+		
+		public void refresh(String data){
+			progress.dismiss();
+			TextView view = (TextView) this.getView();
+			view.setText(data);
 		}
 	}
 	
 
-/*	private class AsyncCallWS extends AsyncTask<String, Void, Void> {
+/*	public class AsyncCallWS extends AsyncTask<String, Void, Void> {
+		private TextView view; 
+		
+		public AsyncCallWS(TextView dummyTextView) {
+			// TODO Auto-generated constructor stub
+			view = dummyTextView;
+		}
+
+
 		@Override
 		protected void onPreExecute() {
 			Log.i(TAG, "onPreExec");
@@ -240,7 +257,7 @@ public class DetailsActivity extends FragmentActivity implements
 		@Override
 		protected Void doInBackground(String... params) {
 			Log.i(TAG, "doInBackground");
-
+			
 			res = df.fetch();
 			return null;
 		}
@@ -252,15 +269,13 @@ public class DetailsActivity extends FragmentActivity implements
 
 		@Override
 		protected void onPostExecute(Void result) {
+			progress.dismiss();
+			view.setText(res);
+			
 			Log.i(TAG,"onPostExec");
 			Log.i(TAG, "postExec Res: "+ res);
 		}   
-	} 
-	*/
-	
-	
-
-
+	}*/
 }
 
 

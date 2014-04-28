@@ -8,7 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class BrowseByLocationActivity extends Activity {
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -16,6 +16,7 @@ public class BrowseByLocationActivity extends Activity {
 		
 		Intent intent = getIntent();
 		this.setTitle(intent.getStringExtra("labelString"));
+		
 		
 		// Enable Home button on action bar
 		final ActionBar actionBar = getActionBar();
@@ -37,7 +38,7 @@ public class BrowseByLocationActivity extends Activity {
                 Intent intent = new Intent(this, HomeActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-                finish();
+                //finish();
                 return true;
         }
         return false;

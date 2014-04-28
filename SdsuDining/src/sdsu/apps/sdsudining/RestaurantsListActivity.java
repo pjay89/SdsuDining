@@ -41,7 +41,7 @@ public class RestaurantsListActivity extends Activity {
                 Intent intent = new Intent(this, HomeActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-                finish();
+                //finish();
                 return true;
         }
         return false;
