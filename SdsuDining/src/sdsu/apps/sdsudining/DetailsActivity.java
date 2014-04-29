@@ -57,6 +57,12 @@ public class DetailsActivity extends FragmentActivity implements
 	private static String TAG = "SDSU DINING TEST";
 
 	@Override
+	protected void onPause(){
+		super.onPause();
+		SdsuDining.appStatus(this);
+	}
+	
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		

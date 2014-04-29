@@ -18,7 +18,7 @@ public class CouponsActivity extends Activity {
 		final ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -38,5 +38,11 @@ public class CouponsActivity extends Activity {
         }
         return false;
     }
+	
+	@Override
+	protected void onPause(){
+		super.onPause();
+		SdsuDining.appStatus(this);
+	}
 
 }

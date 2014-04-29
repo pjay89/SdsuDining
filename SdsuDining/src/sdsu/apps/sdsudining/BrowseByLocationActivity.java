@@ -1,5 +1,6 @@
 package sdsu.apps.sdsudining;
 
+import parse.ContactParser;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -23,6 +24,15 @@ public class BrowseByLocationActivity extends Activity {
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		
 	}
+	
+	@Override
+	protected void onResume(){
+		super.onResume();
+		boolean isForeground = SdsuDining.isAppStart();
+		if(isForeground){
+
+		}
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -44,4 +54,9 @@ public class BrowseByLocationActivity extends Activity {
         return false;
     }
 
+	@Override
+	protected void onPause(){
+		super.onPause();
+		SdsuDining.appStatus(this);
+	}
 }

@@ -58,4 +58,9 @@ public class RestaurantsListActivity extends Activity {
 
 	};
 
+	@Override
+	protected void onPause(){
+		super.onPause();
+		SdsuDining.appStatus(this);
+	}
 }

@@ -3,10 +3,7 @@ package sdsu.apps.sdsudining;
 import parse.ContactParser;
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,49 +18,30 @@ public class HomeActivity extends Activity {
 	private ImageButton sweetButton;
 	private ImageButton contactUsButton;
 	
-	private String TAG = "STATE TEST";	
 
 	@Override
 	protected void onPause(){
 		super.onPause();
-		/*SharedPreferences queryState = getSharedPreferences("SdsuDiningApp", Context.MODE_PRIVATE);
-		SharedPreferences.Editor editor = queryState.edit();
-		editor.putBoolean("queryServer", true);
-		editor.commit();
-		this.finish();*/
-		
-		Log.i(TAG, "onPause");
-		DiningApp appState = DiningApp.instance();
-		appState.setTrue();
-		Log.i(TAG, "appState: "+appState.getQueryState());
+		SdsuDining.appStatus(this);
+	}
+
+	@Override
+	protected void onResume(){
+		super.onResume();
+		boolean isForeground = SdsuDining.isAppStart();
+		if(isForeground){
+			ContactParser cp = new ContactParser("http://api.androidhive.info/contacts/");
+			cp.parse();
+		}
 	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.activity_home);
 		this.setTitle(R.string.home);
 		
-		// Restore preferences
-		/*SharedPreferences queryState = getSharedPreferences("SdsuDiningApp", Context.MODE_PRIVATE);
-		boolean queryServer = queryState.getBoolean("queryServer", true);
-		if(queryServer){
-			ContactParser cp = new ContactParser("http://api.androidhive.info/contacts/");
-			cp.parse();
-		}*/
-		
-		DiningApp appState = DiningApp.instance();
-		boolean queryServer = appState.getQueryState();
-		if(queryServer){
-			ContactParser cp = new ContactParser("http://api.androidhive.info/contacts/");
-			cp.parse();
-			appState.setFalse();
-
-			Log.i(TAG, "in OnCreate appState: "+appState.getQueryState());
-		}
-	
-		
-
 		restaurantsButton = (ImageButton) findViewById(R.id.restaurantsButton);
 		restaurantsButton.setOnClickListener(getRestaurantButtonListner);
 		
