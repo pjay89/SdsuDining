@@ -1,22 +1,19 @@
 package sdsu.apps.sdsudining;
 
 
-import java.util.concurrent.ExecutionException;
+import java.util.ArrayList;
 
 import webService.DataFetcher;
-//import webService.DataFetcher.AsyncCallWS;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,11 +44,11 @@ public class DetailsActivity extends FragmentActivity implements
 	private ViewPager viewPager;
 	
 	private int tabCount;
+	private ArrayList<String> titles;
 	
 	private static DataFetcher df;
 	private static String code;
 	static String res;
-	//static AsyncCallWS task;
 	static ProgressDialog progress;
 	
 	private static String TAG = "SDSU DINING TEST";
@@ -70,6 +67,7 @@ public class DetailsActivity extends FragmentActivity implements
 		Intent intent = getIntent();
 		this.setTitle(intent.getStringExtra("labelString"));
 		tabCount = intent.getIntExtra("tabsCount", 3);
+		titles = intent.getStringArrayListExtra("titles");
 		code = intent.getStringExtra("code");
 		
 		// Set up the action bar.
@@ -199,7 +197,7 @@ public class DetailsActivity extends FragmentActivity implements
 			return null;*/
 			int i = position + 1;
 			
-			return ("Section  "+ i);			
+			return (titles.get(position));			
 		}
 
 	}

@@ -12,5 +12,7 @@
     <string name="contactUsString">Contact Us</string>
     <string name="browseByMapString">Browse By Map</string>
     <string name="title_activity_plain_test">PlainTestActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_plain_test_list_item">PlainTestListItemActivity</string>
 
 </resources>

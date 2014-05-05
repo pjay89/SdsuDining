@@ -30,11 +30,11 @@ public class DataFetcher {
 			return response;
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
-			Log.i(TAG, "ERROR: "+e.getMessage());
+			Log.i(TAG, "ERROR1: "+e.getMessage());
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			Log.i(TAG, "ERROR: "+e.getMessage());
+			Log.i(TAG, "ERROR2: "+e.getMessage());
 			e.printStackTrace();
 		}
 		return null;
