@@ -41,7 +41,7 @@ public class PlainTestActivity extends ListActivity {
 		if(isForeground){
 			if(SdsuDining.isNetworkConnected(this)){
 				ContactParser cp = new ContactParser("http://api.androidhive.info/contacts/", this.getApplicationContext());
-				cp.parse();
+				//cp.parse();
 			}
 			else{
 				final AlertDialog alert = new AlertDialog.Builder(this).create();

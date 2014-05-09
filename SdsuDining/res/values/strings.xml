@@ -10,9 +10,33 @@
     <string name="cateringString">Catering</string>
     <string name="sweetString">Sweet</string>
     <string name="contactUsString">Contact Us</string>
-    <string name="browseByMapString">Browse By Map</string>
+    <string name="browseByMapString">Browse By Location</string>
     <string name="title_activity_plain_test">PlainTestActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_plain_test_list_item">PlainTestListItemActivity</string>
+    
+    <string name="DATABASE_NAME">sdsuDiningDB</string>
+    
+    <string name="LOCATION_TABLE">locationTable</string>
+    <string name="LOCATION_ID">locationId</string>
+    <string name="LOCATION_NAME">locationName</string>
+    
+    
+    <string name="CATERING_TABLE">cateringTable</string>
+	<string name="CATERING_ID">cateringId</string>
+	<string name="CATERING_PHONE">cateringPhone</string>
+	<string name="CATERING_FAX">cateringFax</string>
+	<string name="CATERING_EMAIL">cateringEmail</string>
+	<string name="CATERING_ADDRS">cateringAddrs</string>
+	<string name="CATERING_SNIPPET">cateringSnippet</string>
+	<string name="CATERING_GUIDELINES">cateringGuidelines</string>
+	<string name="CATERING_SERVICE_LEVEL">catering</string>     
+    
+    
+    <string name="CONTACT_HOME">home</string>
+    <string name="CONTACT_MOBILE">mobile</string>
+    <string name="CONTACT_ID">id</string>
+    <string name="CONTACT_NAME">name</string>
+    
 
 </resources>

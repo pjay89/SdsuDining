@@ -3,13 +3,13 @@ package database;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import sdsu.apps.sdsudining.R;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.webkit.WebChromeClient.CustomViewCallback;
 
 public class DatabaseHelper extends SQLiteOpenHelper{
 	
@@ -18,7 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final int DATABASE_VERSION = 1;
     
     // Database Name
-    private static final String DATABASE_NAME = "sdsuDiningDB";
+    //private static final String DATABASE_NAME = "sdsuDiningDB";
     
     // Table Names
     private static final String TABLE_CONTACTS = "contacts";
@@ -27,23 +27,25 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String KEY_ID = "id";
     
     // CONTACTS table column names
-    private static final String CONTACTS_NAME = "name";
-    private static final String CONTACTS_MOBILE = "mobile";
-    private static final String CONTACTS_HOME = "home";
+    private static String CONTACTS_NAME;
+    private static String CONTACTS_MOBILE = "mobile";
+    private static String CONTACTS_HOME = "home";
     
- // CONTACTS table create statement
-    private static final String CREATE_TABLE_CONTACTS = "CREATE TABLE "
-            + TABLE_CONTACTS + "(" + KEY_ID + " VARCHAR PRIMARY KEY," + CONTACTS_NAME
-            + " TEXT," + CONTACTS_MOBILE + " TEXT," + CONTACTS_HOME + " TEXT" + ")";
+
     
     
     public DatabaseHelper(Context context){   	
-    	super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    	super(context, context.getString(R.string.DATABASE_NAME), null, DATABASE_VERSION);
+    	CONTACTS_NAME = context.getString(R.string.CONTACT_NAME);
     }
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		// TODO Auto-generated method stub
+		 // CONTACTS table create statement
+	    String CREATE_TABLE_CONTACTS = "CREATE TABLE "
+	            + TABLE_CONTACTS + "(" + KEY_ID + " VARCHAR PRIMARY KEY," + CONTACTS_NAME
+	            + " TEXT," + CONTACTS_MOBILE + " TEXT," + CONTACTS_HOME + " TEXT" + ")"; 
+	    
 		db.execSQL(CREATE_TABLE_CONTACTS);
 	}
 

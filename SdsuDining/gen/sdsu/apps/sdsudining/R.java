@@ -90,6 +90,23 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int restaurants_list=0x7f090007;
     }
     public static final class string {
+        public static final int CATERING_ADDRS=0x7f070016;
+        public static final int CATERING_EMAIL=0x7f070015;
+        public static final int CATERING_FAX=0x7f070014;
+        public static final int CATERING_GUIDELINES=0x7f070018;
+        public static final int CATERING_ID=0x7f070012;
+        public static final int CATERING_PHONE=0x7f070013;
+        public static final int CATERING_SERVICE_LEVEL=0x7f070019;
+        public static final int CATERING_SNIPPET=0x7f070017;
+        public static final int CATERING_TABLE=0x7f070011;
+        public static final int CONTACT_HOME=0x7f07001a;
+        public static final int CONTACT_ID=0x7f07001c;
+        public static final int CONTACT_MOBILE=0x7f07001b;
+        public static final int CONTACT_NAME=0x7f07001d;
+        public static final int DATABASE_NAME=0x7f07000d;
+        public static final int LOCATION_ID=0x7f07000f;
+        public static final int LOCATION_NAME=0x7f070010;
+        public static final int LOCATION_TABLE=0x7f07000e;
         public static final int action_settings=0x7f070001;
         public static final int app_name=0x7f070000;
         public static final int browseByMapString=0x7f070009;
