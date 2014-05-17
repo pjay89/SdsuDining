@@ -1,6 +1,6 @@
 package sdsu.apps.sdsudining;
 
-import parse.ContactParser;
+import parse.ContactsParser;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -46,6 +46,7 @@ public class BrowseByLocationActivity extends Activity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent intent = new Intent(this, HomeActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                 //finish();

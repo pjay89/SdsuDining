@@ -11,25 +11,26 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class CateringDBHelper extends SQLiteOpenHelper{
-	
+
 	// Database Version
-    private static final int DATABASE_VERSION = 1;
-        
-    // Table Name
-    private static String TABLE; 
-    
-    // Column names
-    private static String CATERING_ID;
-    private static String CATERING_PHONE;
-    private static String CATERING_FAX;
-    private static String CATERING_EMAIL;
-    private static String CATERING_ADDRS;
-    private static String CATERING_SNIPPET;
-    private static String CATERING_GUIDELINES;
-    private static String CATERING_SERVICE_LEVEL;
-    
+	private static final int DATABASE_VERSION = 1;
+
+	// Table Name
+	private static String TABLE; 
+
+	// Column names
+	private static String CATERING_ID;
+	private static String CATERING_PHONE;
+	private static String CATERING_FAX;
+	private static String CATERING_EMAIL;
+	private static String CATERING_ADDRS;
+	private static String CATERING_SNIPPET;
+	private static String CATERING_GUIDELINES;
+	private static String CATERING_SERVICE_LEVEL;
+
 	public CateringDBHelper(Context context){
 		super(context, context.getString(R.string.DATABASE_NAME), null, DATABASE_VERSION);
+		TABLE = context.getString(R.string.CATERING_TABLE);
 		CATERING_ID = context.getString(R.string.CATERING_ID);
 		CATERING_PHONE = context.getString(R.string.CATERING_PHONE);
 		CATERING_FAX = context.getString(R.string.CATERING_FAX);
@@ -39,18 +40,18 @@ public class CateringDBHelper extends SQLiteOpenHelper{
 		CATERING_GUIDELINES = context.getString(R.string.CATERING_GUIDELINES);
 		CATERING_SERVICE_LEVEL = context.getString(R.string.CATERING_SERVICE_LEVEL);
 	}
-	
+
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		 // CATERING table create statement
-	    String CREATE_TABLE_CATERING = "CREATE TABLE "
-	            + TABLE + "(" + CATERING_ID + " VARCHAR PRIMARY KEY," + CATERING_PHONE
-	            + " TEXT," + CATERING_FAX + " TEXT," + CATERING_EMAIL 
-	            + " TEXT," + CATERING_ADDRS + " TEXT," + CATERING_SNIPPET 
-	            + " TEXT," + CATERING_GUIDELINES + " TEXT," + CATERING_SERVICE_LEVEL 
-	            + " TEXT"+ ")"; 
+		// CATERING table create statement
+		String CREATE_TABLE_CATERING = "CREATE TABLE "
+				+ TABLE + "(" + CATERING_ID + " VARCHAR PRIMARY KEY," + CATERING_PHONE
+				+ " TEXT," + CATERING_FAX + " TEXT," + CATERING_EMAIL 
+				+ " TEXT," + CATERING_ADDRS + " TEXT," + CATERING_SNIPPET 
+				+ " TEXT," + CATERING_GUIDELINES + " TEXT," + CATERING_SERVICE_LEVEL 
+				+ " TEXT"+ ")"; 
 
-	    db.execSQL(CREATE_TABLE_CATERING);
+		db.execSQL(CREATE_TABLE_CATERING);
 	}
 
 	@Override
@@ -58,10 +59,10 @@ public class CateringDBHelper extends SQLiteOpenHelper{
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE);
 		onCreate(db);
 	}
-	
+
 	public void addToDB(String id, String phone, String fax, String email, String addrs, String snippet, String guidelines, String level){
 		SQLiteDatabase db = this.getWritableDatabase();
-		
+
 		ContentValues values = new ContentValues();
 		values.put(CATERING_ID, id);
 		values.put(CATERING_PHONE, phone);
@@ -71,15 +72,15 @@ public class CateringDBHelper extends SQLiteOpenHelper{
 		values.put(CATERING_SNIPPET, snippet);
 		values.put(CATERING_GUIDELINES, guidelines);
 		values.put(CATERING_SERVICE_LEVEL, level);
-		
+
 		db.insert(TABLE, null, values);
 		db.close();
 	}
-	
+
 	public ArrayList<HashMap<String, String>> getDetails(){
 		ArrayList<HashMap<String, String>> catering = new ArrayList<HashMap<String,String>>();
 		String query = "SELECT * FROM " + TABLE;
-		
+
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(query, null);
 		//Move to first row
@@ -99,13 +100,8 @@ public class CateringDBHelper extends SQLiteOpenHelper{
 		}
 		cursor.close();
 		db.close();
-		
+
 		return catering;
 	}
 
-	public void deleteTable(){
-		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(TABLE, null, null);
-		db.close();
-	}
 }

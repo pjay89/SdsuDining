@@ -78,10 +78,4 @@ public class BrowseByLocationDBHelper extends SQLiteOpenHelper{
 		return locations;
 	}
 	
-	public void deleteTable(){
-		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(TABLE, null, null);
-		db.close();
-	}
-
 }

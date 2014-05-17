@@ -1,15 +1,12 @@
 package sdsu.apps.sdsudining;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
-import database.DatabaseHelper;
-import parse.ContactParser;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import parse.ContactsParser;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
@@ -25,9 +22,7 @@ public class HomeActivity extends Activity {
 	private ImageButton couponsButton;
 	private ImageButton cateringButton;
 	private ImageButton sweetButton;
-	private ImageButton contactUsButton;
-
-	private static String TAG = "STATE TEST";	
+	private ImageButton contactUsButton;	
 
 	@Override
 	protected void onPause(){
@@ -42,8 +37,9 @@ public class HomeActivity extends Activity {
 		boolean isForeground = SdsuDining.isAppStart();
 		if(isForeground){
 			if(SdsuDining.isNetworkConnected(this)){
-				ContactParser cp = new ContactParser("http://api.androidhive.info/contacts/", this.getApplicationContext());
-				//cp.parse();
+				new ContactsParser(this.getString(R.string.CONTACTS_URL), this.getApplicationContext());
+				//new BrowseByLocationParser("http://api.androidhive.info/contacts/", this.getApplicationContext());
+
 			}
 			else{
 				final AlertDialog alert = new AlertDialog.Builder(this).create();
@@ -67,7 +63,6 @@ public class HomeActivity extends Activity {
 
 
 		setContentView(R.layout.activity_home);
-		this.setTitle(R.string.home);
 
 		restaurantsButton = (ImageButton) findViewById(R.id.restaurantsButton);
 		restaurantsButton.setOnClickListener(getRestaurantButtonListner);
@@ -86,6 +81,7 @@ public class HomeActivity extends Activity {
 
 		contactUsButton = (ImageButton) findViewById(R.id.contactUsButton);
 		contactUsButton.setOnClickListener(getContactUsButtonListener);
+	
 	}
 
 	@Override

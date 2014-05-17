@@ -76,7 +76,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 	
 	public ArrayList<HashMap<String, String>> getUserDetails(){
 		ArrayList<HashMap<String, String>> users = new ArrayList<HashMap<String,String>>();
-		String query = "SELECT * FROM " + TABLE_CONTACTS;
+		String query = "SELECT * FROM " + TABLE_CONTACTS + " GROUP BY mobile";
 		Log.i(TAG, query);
 		
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -103,8 +103,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(TABLE_CONTACTS, null, null);
 		db.close();
-		Log.i(TAG, "delete table");
 	}
+	
 
 	public void printColumns(){
 		String cmd = "SELECT sql from sqlite_master WHERE tbl_name = 'contacts' AND type = 'table'";

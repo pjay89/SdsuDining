@@ -3,7 +3,7 @@ package sdsu.apps.sdsudining;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import parse.ContactParser;
+import parse.ContactsParser;
 
 import database.DatabaseHelper;
 import android.os.Bundle;
@@ -40,7 +40,7 @@ public class PlainTestActivity extends ListActivity {
 		boolean isForeground = SdsuDining.isAppStart();
 		if(isForeground){
 			if(SdsuDining.isNetworkConnected(this)){
-				ContactParser cp = new ContactParser("http://api.androidhive.info/contacts/", this.getApplicationContext());
+				ContactsParser cp = new ContactsParser("http://api.androidhive.info/contacts/", this.getApplicationContext());
 				//cp.parse();
 			}
 			else{

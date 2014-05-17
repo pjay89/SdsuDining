@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import database.BrowseByLocationDBHelper;
 import sdsu.apps.sdsudining.R;
 import android.content.Context;
+import android.util.Log;
 
 public class BrowseByLocationParser extends SdsuDiningParser{
 	private Context context;
@@ -16,6 +17,8 @@ public class BrowseByLocationParser extends SdsuDiningParser{
 	private static  String LOCATION_NAME;
 	
 	private JSONArray locations = null;
+	
+	private String TAG = "BROWSEBYLOCATION PARSER";
 	
 	public BrowseByLocationParser(String url, Context context){
 		this.context = context;
@@ -40,7 +43,6 @@ public class BrowseByLocationParser extends SdsuDiningParser{
 						JSONObject jsonObj = new JSONObject(jsonString);
 						locations = jsonObj.getJSONArray(TABLE_NAME);
 						BrowseByLocationDBHelper db = new BrowseByLocationDBHelper(context);
-						db.deleteTable();
 						
 						for(int i=0; i<locations.length(); i++){
 							JSONObject contact = locations.getJSONObject(i);
@@ -51,8 +53,7 @@ public class BrowseByLocationParser extends SdsuDiningParser{
 						db.close();
 						
 					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						Log.i(TAG, "ERROR: "+e.getMessage());
 					}
 				}
 				

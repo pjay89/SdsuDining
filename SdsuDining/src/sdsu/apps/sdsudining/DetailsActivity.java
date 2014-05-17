@@ -196,8 +196,8 @@ public class DetailsActivity extends FragmentActivity implements
 			}
 			return null;*/
 			int i = position + 1;
-			
-			return (titles.get(position));			
+			return ("Section "+i);
+			//return (titles.get(position));			
 		}
 
 	}
