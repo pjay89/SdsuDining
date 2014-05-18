@@ -9,6 +9,15 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".HomeActivity" >
 
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/sdsudining" />
+
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="wrap_content"
@@ -18,81 +27,75 @@
             android:id="@+id/TableLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
-            
-                <TableRow
-                    android:id="@+id/homeRow1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
 
-        <ImageButton
-            android:id="@+id/restaurantsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:layout_weight="1"
-            android:contentDescription="@string/restaurantsString"
-            android:src="@drawable/restaurants" />
+            <TableRow
+                android:id="@+id/homeRow1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
 
-        <ImageButton
-            android:id="@+id/farmersMarketButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:layout_weight="1"
-            android:contentDescription="@string/farmersMarketString"
-            android:src="@drawable/sweet" />
+                <ImageButton
+                    android:id="@+id/restaurantsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/restaurantsString"
+                    android:src="@drawable/restaurants" />
 
-    </TableRow>
+                <ImageButton
+                    android:id="@+id/farmersMarketButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/farmersMarketString"
+                    android:src="@drawable/farmersmarket" />
+            </TableRow>
 
-    <TableRow
-        android:id="@+id/homeRow2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+            <TableRow
+                android:id="@+id/homeRow2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
 
-        <ImageButton
-            android:id="@+id/couponsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:contentDescription="@string/couponsString"
-            android:src="@drawable/sweet" />
+                <ImageButton
+                    android:id="@+id/couponsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/couponsString"
+                    android:src="@drawable/coupons" />
 
-        <ImageButton
-            android:id="@+id/cateringButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:contentDescription="@string/cateringString"
-            android:src="@drawable/catering" />
+                <ImageButton
+                    android:id="@+id/cateringButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/cateringString"
+                    android:src="@drawable/catering" />
+            </TableRow>
 
-    </TableRow>
+            <TableRow
+                android:id="@+id/homeRow3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
 
-    <TableRow
-        android:id="@+id/homeRow3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+                <ImageButton
+                    android:id="@+id/sweetButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/sweetString"
+                    android:src="@drawable/sweet" />
 
-        <ImageButton
-            android:id="@+id/sweetButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:contentDescription="@string/sweetString"
-            android:src="@drawable/sweet" />
-
-        <ImageButton
-            android:id="@+id/contactUsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:contentDescription="@string/contactUsString"
-            android:src="@drawable/restaurants" />
-
-    </TableRow>
-
-   </TableLayout>
-  </ScrollView>
-
-
+                <ImageButton
+                    android:id="@+id/contactUsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/contactUsString"
+                    android:src="@drawable/contactus" />
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
 
 </TableLayout>

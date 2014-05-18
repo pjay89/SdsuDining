@@ -2,8 +2,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- ActionBar tabs styles -->
     <style name="CustomTheme"
-           parent="@style/android:Theme.Holo">
-        <!-- tab indicator -->
-		<item name="android:background">#211e4d</item>
+           parent="@style/android:Theme.Holo.Light">
+         tab indicator 
+		<item name="android:background">#00ff00</item>
     </style>
 </resources>

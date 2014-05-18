@@ -40,32 +40,38 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class drawable {
         public static final int catering=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int restaurants=0x7f020002;
-        public static final int sweet=0x7f020003;
+        public static final int contactus=0x7f020001;
+        public static final int coupons=0x7f020002;
+        public static final int farmersmarket=0x7f020003;
+        public static final int hepnerhall=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
+        public static final int restaurants=0x7f020006;
+        public static final int sdsudining=0x7f020007;
+        public static final int sweet=0x7f020008;
     }
     public static final class id {
         public static final int TableLayout1=0x7f0a0001;
-        public static final int TableLayout2=0x7f0a0006;
-        public static final int action_settings=0x7f0a0016;
-        public static final int browseByMap=0x7f0a0014;
+        public static final int TableLayout2=0x7f0a0007;
+        public static final int action_settings=0x7f0a0017;
+        public static final int browseByMap=0x7f0a0015;
         public static final int button1=0x7f0a0003;
-        public static final int cateringButton=0x7f0a000c;
-        public static final int contactUsButton=0x7f0a000f;
-        public static final int couponsButton=0x7f0a000b;
-        public static final int farmersMarketButton=0x7f0a0009;
-        public static final int homeRow1=0x7f0a0007;
-        public static final int homeRow2=0x7f0a000a;
-        public static final int homeRow3=0x7f0a000d;
-        public static final int mapRow=0x7f0a0013;
-        public static final int mobile=0x7f0a0012;
-        public static final int name=0x7f0a0011;
+        public static final int cateringButton=0x7f0a000d;
+        public static final int contactUsButton=0x7f0a0010;
+        public static final int couponsButton=0x7f0a000c;
+        public static final int farmersMarketButton=0x7f0a000a;
+        public static final int homeRow1=0x7f0a0008;
+        public static final int homeRow2=0x7f0a000b;
+        public static final int homeRow3=0x7f0a000e;
+        public static final int imageView1=0x7f0a0006;
+        public static final int mapRow=0x7f0a0014;
+        public static final int mobile=0x7f0a0013;
+        public static final int name=0x7f0a0012;
         public static final int pager=0x7f0a0005;
-        public static final int plainTest=0x7f0a0010;
-        public static final int restaurantsButton=0x7f0a0008;
+        public static final int plainTest=0x7f0a0011;
+        public static final int restaurantsButton=0x7f0a0009;
         public static final int scrollView1=0x7f0a0000;
-        public static final int section_label=0x7f0a0015;
-        public static final int sweetButton=0x7f0a000e;
+        public static final int section_label=0x7f0a0016;
+        public static final int sweetButton=0x7f0a000f;
         public static final int tableRow1=0x7f0a0002;
         public static final int tableRow2=0x7f0a0004;
     }
