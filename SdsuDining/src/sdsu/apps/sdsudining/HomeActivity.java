@@ -1,9 +1,13 @@
 package sdsu.apps.sdsudining;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
+
+
+import parse.CateringParser;
+import parse.ContactParser;
 import parse.ContactsParser;
+import parse.SweetParser;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -37,7 +41,12 @@ public class HomeActivity extends Activity {
 		boolean isForeground = SdsuDining.isAppStart();
 		if(isForeground){
 			if(SdsuDining.isNetworkConnected(this)){
-				new ContactsParser(this.getString(R.string.CONTACTS_URL), this.getApplicationContext());
+				//new ContactsParser(this.getString(R.string.CONTACTS_URL), this.getApplicationContext());
+				
+				
+				new ContactParser(this.getString(R.string.CONTACT_URL), this.getApplicationContext());
+				new SweetParser(this.getString(R.string.SWEET_URL), this.getApplicationContext());
+				new CateringParser(this.getString(R.string.CATERING_URL), this.getApplicationContext());
 				//new BrowseByLocationParser("http://api.androidhive.info/contacts/", this.getApplicationContext());
 
 			}

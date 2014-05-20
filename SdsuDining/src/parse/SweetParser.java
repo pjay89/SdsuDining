@@ -3,7 +3,8 @@ package parse;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import database.SweetDBHelper;
+
+import database.SdsuDBHelper;
 import sdsu.apps.sdsudining.R;
 import android.content.Context;
 import android.util.Log;
@@ -11,7 +12,7 @@ import android.util.Log;
 public class SweetParser extends SdsuDiningParser{
 	private Context context;
 	
-	private static String TABLE_NAME;
+	private static String SWEET_OBJECT_TAG;
 	private static String SWEET_PHONE;
 	private static String SWEET_FAX;
 	private static String SWEET_EMAIL;
@@ -21,11 +22,11 @@ public class SweetParser extends SdsuDiningParser{
 	
 	private JSONArray sweet = null;
 
-	private String TAG = "SWEET	 PARSER";
+	private String TAG = "PARSER";
 	
 	public SweetParser(String url, Context context){
 		this.context = context;
-		TABLE_NAME = context.getString(R.string.SWEET_TABLE);
+		SWEET_OBJECT_TAG = context.getString(R.string.SWEET_OBJECT_TAG);
 		SWEET_PHONE = context.getString(R.string.SWEET_PHONE);
 		SWEET_FAX = context.getString(R.string.SWEET_FAX);
 		SWEET_EMAIL = context.getString(R.string.SWEET_EMAIL);
@@ -48,8 +49,9 @@ public class SweetParser extends SdsuDiningParser{
 				if(jsonString != null){
 					try {
 						JSONObject jsonObj = new JSONObject(jsonString);
-						sweet = jsonObj.getJSONArray(TABLE_NAME);
-						SweetDBHelper db = new SweetDBHelper(context);
+						sweet = jsonObj.getJSONArray(SWEET_OBJECT_TAG);
+						SdsuDBHelper db = new SdsuDBHelper(context);
+						db.deleteSweetTable();
 						
 						for(int i=0; i<sweet.length(); i++){
 							JSONObject entry = sweet.getJSONObject(i);
@@ -59,8 +61,7 @@ public class SweetParser extends SdsuDiningParser{
 							String website = entry.getString(SWEET_WEBSITE);
 							String menu = entry.getString(SWEET_MENU);
 							String orderForm = entry.getString(SWEET_ORDER_FORM);
-							
-							db.addToDB(phone, fax, email, website, menu, orderForm);
+							db.addToSweetTable(phone, fax, email, website, menu, orderForm);
 						}
 					}
 					catch (JSONException e) {

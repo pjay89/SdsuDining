@@ -2,9 +2,11 @@ package parse;
 
 import webService.DataFetcher;
 import android.os.AsyncTask;
+import android.util.Log;
 
 public abstract class SdsuDiningParser {
 	
+	private String TAG = "PARSER";
 	
 	protected class AsyncWebServiceCall extends AsyncTask<String, Void, Void> {
 		private String jsonString = "";
@@ -13,6 +15,7 @@ public abstract class SdsuDiningParser {
 		protected void onPreExecute() {}
 
 		protected Void doInBackground(String... params) {
+			Log.i(TAG, "sdsudining bckgroun");
 			DataFetcher df = new DataFetcher(params[0]);
 			jsonString = df.fetch();
 			return null;
@@ -23,6 +26,7 @@ public abstract class SdsuDiningParser {
 
 		@Override
 		protected void onPostExecute(Void result) {
+			Log.i(TAG, "post exec");
 			AsyncJsonStringParser asyncParse = getAsyncJsonStringParser();
 			asyncParse.execute(jsonString);
 		}

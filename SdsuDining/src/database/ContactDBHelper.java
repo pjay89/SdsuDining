@@ -30,17 +30,26 @@ public class ContactDBHelper extends SQLiteOpenHelper{
 		CONTACT_PHONE = context.getString(R.string.CONTACT_PHONE);
 		CONTACT_FAX = context.getString(R.string.CONTACT_FAX);
 		CONTACT_EMAIL = context.getString(R.string.CONTACT_EMAIL);
-		CONTACT_ADDRS = context.getString(R.string.CONTACT_ADDRS);
+		CONTACT_ADDRS = context.getString(R.string.CONTACT_ADDRESS);
 	}
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// CONTACT table create statement
 		String CREATE_TABLE_CONTACT = "CREATE TABLE "
-				+ TABLE + "(id INTEGER PRIMARY KEY AUTO INCREMENT," + CONTACT_PHONE
+				+ TABLE + "(id INTEGER PRIMARY KEY," + CONTACT_PHONE
 				+ " TEXT," + CONTACT_FAX + " TEXT," + CONTACT_EMAIL 
 				+ " TEXT," + CONTACT_ADDRS	+ " TEXT"+ ")"; 
 		
 		db.execSQL(CREATE_TABLE_CONTACT);
+		
+		// SWEET table create statement
+				String CREATE_TABLE_SWEET = "CREATE TABLE "
+						+ "sweetTable" + "( id INTEGER PRIMARY KEY," + "phone"
+						+ " TEXT," + "fax" + " TEXT," + "email" 
+						+ " TEXT," + "website" + " TEXT," + "menu_pdf" 
+						+ " TEXT," + "order_form_pdf" + " TEXT"+ ")";
+
+				db.execSQL(CREATE_TABLE_SWEET);
 	}
 
 	@Override
@@ -82,6 +91,12 @@ public class ContactDBHelper extends SQLiteOpenHelper{
 		db.close();
 
 		return contact;
+	}
+	
+	public void deleteTable(){
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(TABLE, null, null);
+		db.close();
 	}
 
 }

@@ -29,16 +29,17 @@
     <string name="LOCATION_TABLE">locationTable</string>
     <string name="LOCATION_ID">locationId</string>
     <string name="LOCATION_NAME">locationName</string>
-        
+       
+    <string name="CATERING_URL">http://192.168.2.3:8080/sdsuDining/catering.html</string>
+	<string name="CATERING_OBJECT_TAG">catering</string>
     <string name="CATERING_TABLE">cateringTable</string>
-	<string name="CATERING_ID">cateringId</string>
-	<string name="CATERING_PHONE">cateringPhone</string>
-	<string name="CATERING_FAX">cateringFax</string>
-	<string name="CATERING_EMAIL">cateringEmail</string>
-	<string name="CATERING_ADDRS">cateringAddrs</string>
-	<string name="CATERING_SNIPPET">cateringSnippet</string>
-	<string name="CATERING_GUIDELINES">cateringGuidelines</string>
-	<string name="CATERING_SERVICE_LEVEL">catering</string>     
+	<string name="CATERING_PHONE">phone</string>
+	<string name="CATERING_FAX">fax</string>
+	<string name="CATERING_EMAIL">email</string>
+	<string name="CATERING_ADDRESS">address</string>
+	<string name="CATERING_SNIPPET">snippet</string>
+	<string name="CATERING_GUIDELINES">guidelines</string>
+	<string name="CATERING_SERVICE_LEVEL">service_level</string>     
  
 	<string name="COUPON_TABLE">couponsTable</string>
 	<string name="COUPON_ID">couponsId</string>
@@ -49,19 +50,23 @@
 	<string name="COUPON_DEAL">couponsDeal</string>
 	<string name="COUPON_EXPIRATION">couponsExpiration</string>
 	
+	<string name="SWEET_URL">http://192.168.2.3:8080/sdsuDining/sweet.html</string>
+	<string name="SWEET_OBJECT_TAG">sweet</string>
 	<string name="SWEET_TABLE">sweetTable</string>
-	<string name="SWEET_PHONE">sweetPhone</string>
-	<string name="SWEET_FAX">sweetFax</string>
-	<string name="SWEET_EMAIL">sweetEmail</string>
-	<string name="SWEET_WEBSITE">sweetWebsite</string>
-	<string name="SWEET_MENU">sweetMenu</string>
-	<string name="SWEET_ORDER_FORM">sweetOrderForm</string>
-	
+	<string name="SWEET_PHONE">phone</string>
+	<string name="SWEET_FAX">fax</string>
+	<string name="SWEET_EMAIL">email</string>
+	<string name="SWEET_WEBSITE">website</string>
+	<string name="SWEET_MENU">menu_pdf</string>
+	<string name="SWEET_ORDER_FORM">order_form_pdf</string>
+
+	<string name="CONTACT_URL">http://192.168.2.3:8080/sdsuDining/contactUs.html</string>	
+	<string name="CONTACT_OBJECT_TAG">contactUs</string>
 	<string name="CONTACT_TABLE">contactTable</string>
 	<string name="CONTACT_PHONE">phone</string>
 	<string name="CONTACT_FAX">fax</string>
 	<string name="CONTACT_EMAIL">email</string>
-	<string name="CONTACT_ADDRS">addrs</string>
+	<string name="CONTACT_ADDRESS">address</string>
 	
 	<string name="HOURS_TABLE">hoursTable</string>
 	<string name="HOURS_RESTAURANT_ID">hoursRestaurantId</string>

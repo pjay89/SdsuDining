@@ -8,7 +8,6 @@ import android.app.Application;
 import android.app.ActivityManager.RunningTaskInfo;
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.util.Log;
 
 public class SdsuDining extends Application{

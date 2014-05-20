@@ -3,9 +3,13 @@ package sdsu.apps.sdsudining;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import parse.ContactsParser;
+import parse.SweetParser;
 
+
+import database.ContactDBHelper;
 import database.DatabaseHelper;
+import database.SdsuDBHelper;
+import database.SweetDBHelper;
 import android.os.Bundle;
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -40,7 +44,7 @@ public class PlainTestActivity extends ListActivity {
 		boolean isForeground = SdsuDining.isAppStart();
 		if(isForeground){
 			if(SdsuDining.isNetworkConnected(this)){
-				ContactsParser cp = new ContactsParser("http://api.androidhive.info/contacts/", this.getApplicationContext());
+				//ContactsParser cp = new ContactsParser("http://api.androidhive.info/contacts/", this.getApplicationContext());
 				//cp.parse();
 			}
 			else{
@@ -64,13 +68,52 @@ public class PlainTestActivity extends ListActivity {
 		setContentView(R.layout.activity_plain_test);
 		
 		
+		SdsuDBHelper db = new SdsuDBHelper(getApplicationContext());
+		ArrayList<HashMap<String, String>> dbList = db.getContactDetails();
 		
-		DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-		final ArrayList<HashMap<String, String>> contactsList = db.getUserDetails();
+		Log.i(TAG, String.valueOf(dbList.size()));
+		for(int i=0; i<dbList.size(); i++){
+			
+			HashMap<String, String> entry = dbList.get(i);
+
+			Log.i(TAG, entry.get(this.getApplicationContext().getString(R.string.CONTACT_PHONE)));
+			Log.i(TAG, entry.get(this.getApplicationContext().getString(R.string.CONTACT_FAX)));
+			Log.i(TAG, entry.get(this.getApplicationContext().getString(R.string.CONTACT_ADDRESS)));	
+		}
 		
-		Log.i(TAG, String.valueOf(contactsList.size()));
+		Log.i(TAG, "******************");
+		dbList = db.getSweetDetails();
 		
-		ListAdapter adapter = new SimpleAdapter(PlainTestActivity.this, contactsList, R.layout.activity_plain_test_list_item, new String[] {"name", "mobile"}, new int[] {R.id.name, R.id.mobile});
+		Log.i(TAG, String.valueOf(dbList.size()));
+		for(int i=0; i<dbList.size(); i++){
+			HashMap<String, String> entry = dbList.get(i);
+					
+			Log.i(TAG, entry.get(this.getApplicationContext().getString(R.string.SWEET_PHONE)));
+			Log.i(TAG, entry.get(this.getApplicationContext().getString(R.string.SWEET_FAX)));
+			Log.i(TAG, entry.get(this.getApplicationContext().getString(R.string.SWEET_EMAIL)));
+			Log.i(TAG, entry.get(this.getApplicationContext().getString(R.string.SWEET_WEBSITE)));
+			Log.i(TAG, entry.get(this.getApplicationContext().getString(R.string.SWEET_MENU)));
+			Log.i(TAG, entry.get(this.getApplicationContext().getString(R.string.SWEET_ORDER_FORM)));			
+		}
+		
+		
+		Log.i(TAG, "******************");
+		dbList = db.getCateringDetails();
+		
+		Log.i(TAG, String.valueOf(dbList.size()));
+		for(int i=0; i<dbList.size(); i++){
+			HashMap<String, String> entry = dbList.get(i);
+					
+			Log.i(TAG, entry.get(this.getApplicationContext().getString(R.string.CATERING_PHONE)));
+			Log.i(TAG, entry.get(this.getApplicationContext().getString(R.string.CATERING_FAX)));
+			Log.i(TAG, entry.get(this.getApplicationContext().getString(R.string.CATERING_EMAIL)));
+			Log.i(TAG, entry.get(this.getApplicationContext().getString(R.string.CATERING_ADDRESS)));
+			Log.i(TAG, entry.get(this.getApplicationContext().getString(R.string.CATERING_SNIPPET)));
+			Log.i(TAG, entry.get(this.getApplicationContext().getString(R.string.CATERING_GUIDELINES)));
+			Log.i(TAG, entry.get(this.getApplicationContext().getString(R.string.CATERING_SERVICE_LEVEL)));
+		}
+		
+		/*ListAdapter adapter = new SimpleAdapter(PlainTestActivity.this, contactsList, R.layout.activity_plain_test_list_item, new String[] {"name", "mobile"}, new int[] {R.id.name, R.id.mobile});
 		setListAdapter(adapter);
 		
 		ListView listView = getListView();
@@ -87,7 +130,7 @@ public class PlainTestActivity extends ListActivity {
 				startActivity(intent);
 			}
 			
-		});
+		});*/
 		
 		
 	}

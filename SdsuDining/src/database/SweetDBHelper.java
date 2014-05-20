@@ -9,9 +9,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class SweetDBHelper extends SQLiteOpenHelper{
-
+	private static final String TAG = "DATABASEHELPER";
+	
 	// Database Version
 	private static final int DATABASE_VERSION = 1;
 
@@ -41,11 +43,12 @@ public class SweetDBHelper extends SQLiteOpenHelper{
 	public void onCreate(SQLiteDatabase db) {
 		// SWEET table create statement
 		String CREATE_TABLE_SWEET = "CREATE TABLE "
-				+ TABLE + "( id INTEGER PRIMARY KEY AUTO INCREMENT," + SWEET_PHONE
+				+ TABLE + "( id INTEGER PRIMARY KEY," + SWEET_PHONE
 				+ " TEXT," + SWEET_FAX + " TEXT," + SWEET_EMAIL 
 				+ " TEXT," + SWEET_WEBSITE + " TEXT," + SWEET_MENU 
 				+ " TEXT," + SWEET_ORDER_FORM + " TEXT"+ ")";
 
+		Log.i(TAG, CREATE_TABLE_SWEET); 
 		db.execSQL(CREATE_TABLE_SWEET);
 
 	}
@@ -98,5 +101,10 @@ public class SweetDBHelper extends SQLiteOpenHelper{
 		return sweet;
 	}
 
+	public void deleteTable(){
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(TABLE, null, null);
+		db.close();
+	}
 }
 

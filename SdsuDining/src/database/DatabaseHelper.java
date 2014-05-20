@@ -76,7 +76,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 	
 	public ArrayList<HashMap<String, String>> getUserDetails(){
 		ArrayList<HashMap<String, String>> users = new ArrayList<HashMap<String,String>>();
-		String query = "SELECT * FROM " + TABLE_CONTACTS + " GROUP BY mobile";
+		String query = "SELECT * FROM " + TABLE_CONTACTS;
 		Log.i(TAG, query);
 		
 		SQLiteDatabase db = this.getReadableDatabase();
