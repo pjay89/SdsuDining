@@ -1,13 +1,14 @@
 package sdsu.apps.sdsudining;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 
-import parse.CateringParser;
-import parse.ContactParser;
-import parse.ContactsParser;
-import parse.SweetParser;
+import sdsu.apps.sdsudining.parse.CateringParser;
+import sdsu.apps.sdsudining.parse.ContactParser;
+import sdsu.apps.sdsudining.parse.ContactsParser;
+import sdsu.apps.sdsudining.parse.SweetParser;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -138,11 +139,14 @@ public class HomeActivity extends Activity {
 
 		@Override
 		public void onClick(View v) {
+			ArrayList<String> titles = new ArrayList<String>();
+			titles.add(getResources().getString(R.string.contact));
+			titles.add(getResources().getString(R.string.information));
+			titles.add(getResources().getString(R.string.getting_started));
+			
 			Intent intent = new Intent(HomeActivity.this, DetailsActivity.class);
 			intent.putExtra("labelString", getResources().getString(R.string.cateringString));
-			intent.putExtra("tabsCount", 3);
-			intent.putExtra("titles", new ArrayList<String>());
-			intent.putExtra("code", "new+york");
+			intent.putExtra("titles", titles);
 			startActivity(intent);
 		}
 
@@ -152,11 +156,14 @@ public class HomeActivity extends Activity {
 
 		@Override
 		public void onClick(View v) {
+			ArrayList<String> titles = new ArrayList<String>();
+			titles.add(getResources().getString(R.string.contact));
+			titles.add(getResources().getString(R.string.menu));
+			titles.add(getResources().getString(R.string.brochure));
+			
 			Intent intent = new Intent(HomeActivity.this, DetailsActivity.class);
 			intent.putExtra("labelString", getResources().getString(R.string.sweetString));
-			intent.putExtra("tabsCount", 3);
-			intent.putExtra("titles", new ArrayList<String>());
-			intent.putExtra("code", "san+diego");
+			intent.putExtra("titles", titles);
 			startActivity(intent);
 		}
 
@@ -166,10 +173,13 @@ public class HomeActivity extends Activity {
 
 		@Override
 		public void onClick(View v) {
-			Intent intent = new Intent(HomeActivity.this, PlainTestActivity.class);
+			ArrayList<String> titles = new ArrayList<String>();
+			titles.add(getResources().getString(R.string.contact));
+			titles.add(getResources().getString(R.string.address));
+			
+			Intent intent = new Intent(HomeActivity.this, DetailsActivity.class);
 			intent.putExtra("labelString", getResources().getString(R.string.contactUsString));
-			intent.putExtra("tabsCount", 2);
-			intent.putExtra("code", "houston");
+			intent.putExtra("titles", titles);
 			startActivity(intent);
 		}
 

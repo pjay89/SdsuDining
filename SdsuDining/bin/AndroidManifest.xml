@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="11"
-        android:targetSdkVersion="19" />
+        android:targetSdkVersion="18" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_TASKS" />
@@ -46,6 +46,14 @@
         <activity
             android:name="sdsu.apps.sdsudining.PlainTestListItemActivity"
             android:label="@string/title_activity_plain_test_list_item" >
+        </activity>
+        <activity
+            android:name="sdsu.apps.sdsudiningfragements.CateringContactFragementActivity"
+            android:label="@string/title_activity_catering_contact" >
+        </activity>
+        <activity
+            android:name="sdsu.apps.sdsudiningfragements.DisplayInfoFragment"
+            android:label="@string/title_activity_display_info_fragment" >
         </activity>
     </application>
 

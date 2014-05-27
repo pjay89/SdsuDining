@@ -3,13 +3,13 @@ package sdsu.apps.sdsudining;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import parse.SweetParser;
+import sdsu.apps.sdsudining.database.ContactDBHelper;
+import sdsu.apps.sdsudining.database.DatabaseHelper;
+import sdsu.apps.sdsudining.database.SdsuDBHelper;
+import sdsu.apps.sdsudining.database.SweetDBHelper;
+import sdsu.apps.sdsudining.parse.SweetParser;
 
 
-import database.ContactDBHelper;
-import database.DatabaseHelper;
-import database.SdsuDBHelper;
-import database.SweetDBHelper;
 import android.os.Bundle;
 import android.app.AlertDialog;
 import android.app.ListActivity;

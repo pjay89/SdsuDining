@@ -1,6 +1,6 @@
 package sdsu.apps.sdsudining;
 
-import parse.ContactsParser;
+import sdsu.apps.sdsudining.parse.ContactsParser;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;

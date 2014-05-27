@@ -14,9 +14,18 @@
     <string name="title_activity_plain_test">PlainTestActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_plain_test_list_item">PlainTestListItemActivity</string>
-    
+    <string name="contact">Contact</string>
+    <string name="address">Address</string>
+    <string name="phone">Phone</string>
+    <string name="fax">Fax</string>
+    <string name="email">Email</string>
+    <string name="website">Website</string>
+    <string name="menu">Menu</string>
+    <string name="brochure">Brochure</string>
+    <string name="information">Information</string>
+    <string name="getting_started">Getting Started</string>
+    <string name="hours">Hours</string>
     <string name="DATABASE_NAME">sdsuDiningDB</string>
-    
     <string name="RESTAURANT_TABLE">restaurantTable</string>
     <string name="RESTAURANT_ID">restaurantId</string>
     <string name="RESTAURANT_NAME">restaurantName</string>
@@ -25,62 +34,54 @@
     <string name="RESTAURANT_LOCATION_NAME">restaurantLocationName</string>
     <string name="RESTAURANT_PHONE">restaurantPhone</string>
     <string name="RESTAURANT_WEBSITE">restaurantWebsite</string>
-    
     <string name="LOCATION_TABLE">locationTable</string>
     <string name="LOCATION_ID">locationId</string>
     <string name="LOCATION_NAME">locationName</string>
-       
     <string name="CATERING_URL">http://192.168.2.3:8080/sdsuDining/catering.html</string>
-	<string name="CATERING_OBJECT_TAG">catering</string>
+    <string name="CATERING_OBJECT_TAG">catering</string>
     <string name="CATERING_TABLE">cateringTable</string>
-	<string name="CATERING_PHONE">phone</string>
-	<string name="CATERING_FAX">fax</string>
-	<string name="CATERING_EMAIL">email</string>
-	<string name="CATERING_ADDRESS">address</string>
-	<string name="CATERING_SNIPPET">snippet</string>
-	<string name="CATERING_GUIDELINES">guidelines</string>
-	<string name="CATERING_SERVICE_LEVEL">service_level</string>     
- 
-	<string name="COUPON_TABLE">couponsTable</string>
-	<string name="COUPON_ID">couponsId</string>
-	<string name="COUPON_IMAGE">couponsImage</string>
-	<string name="COUPON_LOCATION_ID">couponsLocationId</string>
-	<string name="COUPON_RESTAURANT_ID">couponsRestaurantId</string>
-	<string name="COUPON_RESTAURANT_NAME">couponsRestaurantName</string>
-	<string name="COUPON_DEAL">couponsDeal</string>
-	<string name="COUPON_EXPIRATION">couponsExpiration</string>
-	
-	<string name="SWEET_URL">http://192.168.2.3:8080/sdsuDining/sweet.html</string>
-	<string name="SWEET_OBJECT_TAG">sweet</string>
-	<string name="SWEET_TABLE">sweetTable</string>
-	<string name="SWEET_PHONE">phone</string>
-	<string name="SWEET_FAX">fax</string>
-	<string name="SWEET_EMAIL">email</string>
-	<string name="SWEET_WEBSITE">website</string>
-	<string name="SWEET_MENU">menu_pdf</string>
-	<string name="SWEET_ORDER_FORM">order_form_pdf</string>
-
-	<string name="CONTACT_URL">http://192.168.2.3:8080/sdsuDining/contactUs.html</string>	
-	<string name="CONTACT_OBJECT_TAG">contactUs</string>
-	<string name="CONTACT_TABLE">contactTable</string>
-	<string name="CONTACT_PHONE">phone</string>
-	<string name="CONTACT_FAX">fax</string>
-	<string name="CONTACT_EMAIL">email</string>
-	<string name="CONTACT_ADDRESS">address</string>
-	
-	<string name="HOURS_TABLE">hoursTable</string>
-	<string name="HOURS_RESTAURANT_ID">hoursRestaurantId</string>
-	<string name="HOURS_DAY">hoursDay</string>
-	<string name="HOURS_OPEN">hoursOpen</string>
-	<string name="HOURS_CLOSE">hoursClose</string>
-	
-	
-	
-	<string name="CONTACTS_URL">http://192.168.2.3:8080/sdsuDining/contacts.html</string>
+    <string name="CATERING_PHONE">phone</string>
+    <string name="CATERING_FAX">fax</string>
+    <string name="CATERING_EMAIL">email</string>
+    <string name="CATERING_ADDRESS">address</string>
+    <string name="CATERING_SNIPPET">snippet</string>
+    <string name="CATERING_GUIDELINES">guidelines</string>
+    <string name="CATERING_SERVICE_LEVEL">service_level</string>
+    <string name="COUPON_TABLE">couponsTable</string>
+    <string name="COUPON_ID">couponsId</string>
+    <string name="COUPON_IMAGE">couponsImage</string>
+    <string name="COUPON_LOCATION_ID">couponsLocationId</string>
+    <string name="COUPON_RESTAURANT_ID">couponsRestaurantId</string>
+    <string name="COUPON_RESTAURANT_NAME">couponsRestaurantName</string>
+    <string name="COUPON_DEAL">couponsDeal</string>
+    <string name="COUPON_EXPIRATION">couponsExpiration</string>
+    <string name="SWEET_URL">http://192.168.2.3:8080/sdsuDining/sweet.html</string>
+    <string name="SWEET_OBJECT_TAG">sweet</string>
+    <string name="SWEET_TABLE">sweetTable</string>
+    <string name="SWEET_PHONE">phone</string>
+    <string name="SWEET_FAX">fax</string>
+    <string name="SWEET_EMAIL">email</string>
+    <string name="SWEET_WEBSITE">website</string>
+    <string name="SWEET_MENU">menu_pdf</string>
+    <string name="SWEET_ORDER_FORM">order_form_pdf</string>
+    <string name="CONTACT_URL">http://192.168.2.3:8080/sdsuDining/contactUs.html</string>
+    <string name="CONTACT_OBJECT_TAG">contactUs</string>
+    <string name="CONTACT_TABLE">contactTable</string>
+    <string name="CONTACT_PHONE">phone</string>
+    <string name="CONTACT_FAX">fax</string>
+    <string name="CONTACT_EMAIL">email</string>
+    <string name="CONTACT_ADDRESS">address</string>
+    <string name="HOURS_TABLE">hoursTable</string>
+    <string name="HOURS_RESTAURANT_ID">hoursRestaurantId</string>
+    <string name="HOURS_DAY">hoursDay</string>
+    <string name="HOURS_OPEN">hoursOpen</string>
+    <string name="HOURS_CLOSE">hoursClose</string>
+    <string name="CONTACTS_URL">http://192.168.2.3:8080/sdsuDining/contacts.html</string>
     <string name="CONTACT_HOME">home</string>
     <string name="CONTACT_MOBILE">mobile</string>
     <string name="CONTACT_ID">id</string>
     <string name="CONTACT_NAME">name</string>
-    
+    <string name="title_activity_catering_contact">CateringContactActivity</string>
+    <string name="title_activity_display_info_fragment">DisplayInfoFragment</string>
 
 </resources>
