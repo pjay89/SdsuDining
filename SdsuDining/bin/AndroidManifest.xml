@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -48,12 +49,28 @@
             android:label="@string/title_activity_plain_test_list_item" >
         </activity>
         <activity
-            android:name="sdsu.apps.sdsudiningfragements.CateringContactFragementActivity"
+            android:name="sdsu.apps.sdsudiningfragements.CateringContactFragmentActivity"
             android:label="@string/title_activity_catering_contact" >
         </activity>
         <activity
             android:name="sdsu.apps.sdsudiningfragements.DisplayInfoFragment"
             android:label="@string/title_activity_display_info_fragment" >
+        </activity>
+        <activity
+            android:name="sdsu.apps.sdsudiningfragements.DisplayContactFragment"
+            android:label="@string/title_activity_display_contact_fragment" >
+        </activity>
+        <activity
+            android:name="sdsu.apps.sdsudiningfragements.DisplayWebFragment"
+            android:label="@string/title_activity_display_web_fragment" >
+        </activity>
+        <activity
+            android:name="sdsu.apps.sdsudining.RestaurantListRow"
+            android:label="@string/title_activity_restaurant_list_row" >
+        </activity>
+        <activity
+            android:name="sdsu.apps.sdsudining.BrowseByLocationListRow"
+            android:label="@string/title_activity_browse_by_location_list_row" >
         </activity>
     </application>
 

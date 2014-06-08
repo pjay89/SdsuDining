@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import sdsu.apps.sdsudining.util.SectionsPagerAdapter;
 import sdsu.apps.sdsudining.webService.DataFetcher;
-import sdsu.apps.sdsudiningfragements.CateringContactFragementActivity;
+import sdsu.apps.sdsudiningfragements.CateringContactFragmentActivity;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;

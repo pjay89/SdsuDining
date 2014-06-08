@@ -4,5 +4,6 @@
     <color name="sdsu_red">#A81933</color>
     <color name="sdsu_gold">#D2C694</color>
     <color name="black">#000</color>
+    <color name="holo_sdsu_light">#A81933</color>
 
 </resources>

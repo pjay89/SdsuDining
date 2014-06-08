@@ -1,14 +1,21 @@
 package sdsu.apps.sdsudining;
 
-import sdsu.apps.sdsudining.parse.ContactsParser;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import sdsu.apps.sdsudining.database.SdsuDBHelper;
 import android.os.Bundle;
 import android.app.ActionBar;
-import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListAdapter;
+import android.widget.SimpleAdapter;
 
-public class BrowseByLocationActivity extends Activity {
+public class BrowseByLocationActivity extends ListActivity {
+	
+	private ArrayList<HashMap<String, String>> locations = new ArrayList<HashMap<String, String>>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +25,18 @@ public class BrowseByLocationActivity extends Activity {
 		Intent intent = getIntent();
 		this.setTitle(intent.getStringExtra("labelString"));
 		
+		SdsuDBHelper db = new SdsuDBHelper(this);
+		ArrayList<HashMap<String,String>> dbList = db.getUniqueLocationsExceptFarmersMarket();
+		
+		for(int i=0; i<dbList.size(); i++){
+			HashMap<String, String> entry = dbList.get(i);
+			locations.add(entry);
+		}
+		db.close();
+		
+		ListAdapter adapter = new SimpleAdapter(this, locations, R.layout.activity_browse_by_location_list_row, new String[]{getString(R.string.RESTAURANT_LOCATION_NAME)}, new int[]{R.id.locationListViewButton});
+		//ListView listView = (ListView) findViewById(R.id.locationListView);
+		setListAdapter(adapter);
 		
 		// Enable Home button on action bar
 		final ActionBar actionBar = getActionBar();

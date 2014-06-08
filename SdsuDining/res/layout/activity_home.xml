@@ -1,100 +1,71 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/TableLayout1"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".HomeActivity" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/sdsudining" />
+        android:orientation="vertical" >
 
-    <ScrollView
-        android:id="@+id/scrollView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-
-        <TableLayout
-            android:id="@+id/TableLayout2"
+        <ImageView
+            android:id="@+id/sdsuDiningLogo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/sdsudining" />
 
-            <TableRow
-                android:id="@+id/homeRow1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+        <ImageButton
+            android:id="@+id/restaurantsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:contentDescription="@string/restaurantsString"
+            android:src="@drawable/restaurants" />
 
-                <ImageButton
-                    android:id="@+id/restaurantsButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/restaurantsString"
-                    android:src="@drawable/restaurants" />
+        <ImageButton
+            android:id="@+id/farmersMarketButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:contentDescription="@string/farmersMarketString"
+            android:src="@drawable/farmersmarket" />
 
-                <ImageButton
-                    android:id="@+id/farmersMarketButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/farmersMarketString"
-                    android:src="@drawable/farmersmarket" />
-            </TableRow>
+        <ImageButton
+            android:id="@+id/couponsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:contentDescription="@string/couponsString"
+            android:src="@drawable/coupons" />
 
-            <TableRow
-                android:id="@+id/homeRow2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+        <ImageButton
+            android:id="@+id/cateringButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:contentDescription="@string/cateringString"
+            android:src="@drawable/catering" />
 
-                <ImageButton
-                    android:id="@+id/couponsButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/couponsString"
-                    android:src="@drawable/coupons" />
+        <ImageButton
+            android:id="@+id/sweetButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:contentDescription="@string/sweetString"
+            android:src="@drawable/sweet" />
 
-                <ImageButton
-                    android:id="@+id/cateringButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/cateringString"
-                    android:src="@drawable/catering" />
-            </TableRow>
+        <ImageButton
+            android:id="@+id/contactUsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:contentDescription="@string/contactUsString"
+            android:src="@drawable/contactus" />
 
-            <TableRow
-                android:id="@+id/homeRow3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+    </LinearLayout>
 
-                <ImageButton
-                    android:id="@+id/sweetButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/sweetString"
-                    android:src="@drawable/sweet" />
-
-                <ImageButton
-                    android:id="@+id/contactUsButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/contactUsString"
-                    android:src="@drawable/contactus" />
-            </TableRow>
-
-        </TableLayout>
-    </ScrollView>
-
-</TableLayout>
+</ScrollView>

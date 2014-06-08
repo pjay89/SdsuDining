@@ -8,6 +8,7 @@ import java.util.Arrays;
 import sdsu.apps.sdsudining.parse.CateringParser;
 import sdsu.apps.sdsudining.parse.ContactParser;
 import sdsu.apps.sdsudining.parse.ContactsParser;
+import sdsu.apps.sdsudining.parse.RestaurantsParser;
 import sdsu.apps.sdsudining.parse.SweetParser;
 import android.os.Bundle;
 import android.app.Activity;
@@ -22,6 +23,13 @@ import android.widget.ImageButton;
 
 public class HomeActivity extends Activity {
 
+	int[] homeEntryButtons = new int[]{
+			R.drawable.restaurants,
+			R.drawable.farmersmarket
+	};
+	
+	
+	
 	private ImageButton restaurantsButton;
 	private ImageButton farmersMarketButton;
 	private ImageButton couponsButton;
@@ -48,6 +56,7 @@ public class HomeActivity extends Activity {
 				new ContactParser(this.getString(R.string.CONTACT_URL), this.getApplicationContext());
 				new SweetParser(this.getString(R.string.SWEET_URL), this.getApplicationContext());
 				new CateringParser(this.getString(R.string.CATERING_URL), this.getApplicationContext());
+				new RestaurantsParser(this.getString(R.string.RESTAURANTS_URL), this.getApplicationContext());
 				//new BrowseByLocationParser("http://api.androidhive.info/contacts/", this.getApplicationContext());
 
 			}
@@ -69,11 +78,8 @@ public class HomeActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-
-
 		setContentView(R.layout.activity_home);
-
+	
 		restaurantsButton = (ImageButton) findViewById(R.id.restaurantsButton);
 		restaurantsButton.setOnClickListener(getRestaurantButtonListner);
 
@@ -127,9 +133,8 @@ public class HomeActivity extends Activity {
 
 		@Override
 		public void onClick(View v) {
-			Intent intent = new Intent(HomeActivity.this, CouponsActivity.class);
+			Intent intent = new Intent(HomeActivity.this, PlainTestActivity.class);
 			intent.putExtra("labelString", getResources().getString(R.string.couponsString));
-			//intent.putExtra("tabsCount", 3);
 			startActivity(intent);
 		}
 

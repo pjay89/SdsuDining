@@ -4,6 +4,7 @@
     <string name="app_name">SDSU Dining</string>
     <string name="action_settings">Settings</string>
     <string name="home">Home</string>
+    <string name="menuItemString">Menu Item</string>
     <string name="restaurantsString">Restaurants</string>
     <string name="farmersMarketString">Farmer\'s Market</string>
     <string name="couponsString">Coupons</string>
@@ -12,7 +13,7 @@
     <string name="contactUsString">Contact Us</string>
     <string name="browseByMapString">Browse By Location</string>
     <string name="title_activity_plain_test">PlainTestActivity</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="restaurantsImagesFolder">restaurantsImagesFolder</string>
     <string name="title_activity_plain_test_list_item">PlainTestListItemActivity</string>
     <string name="contact">Contact</string>
     <string name="address">Address</string>
@@ -26,14 +27,17 @@
     <string name="getting_started">Getting Started</string>
     <string name="hours">Hours</string>
     <string name="DATABASE_NAME">sdsuDiningDB</string>
+    <string name="RESTAURANTS_URL">http://192.168.2.3:8080/sdsuDining/restaurants.html</string>
+    <string name="RESTAURANTS_OBJECT_TAG">restaurants</string>
+    <string name="DB_FARMERS_MARKET">Farmer\'\'s Market</string>
     <string name="RESTAURANT_TABLE">restaurantTable</string>
-    <string name="RESTAURANT_ID">restaurantId</string>
-    <string name="RESTAURANT_NAME">restaurantName</string>
-    <string name="RESTAURANT_IMAGE">restaurantImage</string>
-    <string name="RESTAURANT_LOCATION_ID">restaurantLocationId</string>
-    <string name="RESTAURANT_LOCATION_NAME">restaurantLocationName</string>
-    <string name="RESTAURANT_PHONE">restaurantPhone</string>
-    <string name="RESTAURANT_WEBSITE">restaurantWebsite</string>
+    <string name="RESTAURANT_ID">restaurant_id</string>
+    <string name="RESTAURANT_NAME">restaurant_name</string>
+    <string name="RESTAURANT_IMAGE">image</string>
+    <string name="RESTAURANT_LOCATION_ID">location_id</string>
+    <string name="RESTAURANT_LOCATION_NAME">location_name</string>
+    <string name="RESTAURANT_PHONE">phone</string>
+    <string name="RESTAURANT_WEBSITE">website</string>
     <string name="LOCATION_TABLE">locationTable</string>
     <string name="LOCATION_ID">locationId</string>
     <string name="LOCATION_NAME">locationName</string>
@@ -83,5 +87,10 @@
     <string name="CONTACT_NAME">name</string>
     <string name="title_activity_catering_contact">CateringContactActivity</string>
     <string name="title_activity_display_info_fragment">DisplayInfoFragment</string>
+    <string name="title_activity_display_contact_fragment">DisplayContactFragment</string>
+    <string name="title_activity_display_web_fragment">DisplayWebFragment</string>
+    <string name="title_activity_restaurant_list_row">RestaurantListRow</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_browse_by_location_list_row">BrowseByLocationListRow</string>
 
 </resources>

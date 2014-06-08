@@ -3,15 +3,19 @@ package sdsu.apps.sdsudining.util;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import sdsu.apps.sdsudining.DetailsActivity.DummySectionFragment;
 import sdsu.apps.sdsudining.R;
 import sdsu.apps.sdsudining.database.SdsuDBHelper;
-import sdsu.apps.sdsudiningfragements.CateringContactFragementActivity;
+import sdsu.apps.sdsudiningfragements.CateringContactFragmentActivity;
+import sdsu.apps.sdsudiningfragements.DisplayContactFragment;
 import sdsu.apps.sdsudiningfragements.DisplayInfoFragment;
+import sdsu.apps.sdsudiningfragements.DisplayWebFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -23,6 +27,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 	String lableString;
 	Context context;
 	
+	private String TAG = "SECTIONS";	
 
 
 	public SectionsPagerAdapter(FragmentManager fragmentManager, ArrayList<String> tabTitles, String lableString, Context context) {
@@ -39,14 +44,13 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 		if(lableString.equals(context.getString(R.string.cateringString))){
 			return getCateringFragement(position);
 		}
-		return null;
- 
+		else if(lableString.equals(context.getString(R.string.sweetString))){
+			return getSweetFragment(position);
+		}
 
 
 
-
-
-
+		return new DummySectionFragment();
 
 	}
 
@@ -94,7 +98,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 		db.close();
 		
 		if(position == 0){
-			return new CateringContactFragementActivity();
+			return new CateringContactFragmentActivity();
 		}
 		if(position == 1){
 			Bundle args = new Bundle();
@@ -112,4 +116,54 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
 	}
 
+	
+	private Fragment getSweetFragment(int position){
+		SdsuDBHelper db = new SdsuDBHelper(context.getApplicationContext());
+		ArrayList<HashMap<String, String>> dbList = db.getSweetDetails();
+		
+		String phone="";
+		String fax="";
+		String email="";
+		String website="";
+		String menu="";
+		String orderForm="";
+		
+		for(int i=0; i<dbList.size(); i++){
+			HashMap<String, String> entry = dbList.get(i);
+			phone = entry.get(context.getApplicationContext().getString(R.string.SWEET_PHONE));
+			fax = entry.get(context.getApplicationContext().getString(R.string.SWEET_FAX));
+			email = entry.get(context.getApplicationContext().getString(R.string.SWEET_EMAIL));
+			website = entry.get(context.getApplicationContext().getString(R.string.SWEET_WEBSITE));
+			menu = entry.get(context.getApplicationContext().getString(R.string.SWEET_MENU));
+			orderForm = entry.get(context.getApplicationContext().getString(R.string.SWEET_ORDER_FORM));
+		}
+		db.close();
+		
+		
+		Bundle args = new Bundle();
+		Fragment fragment;
+		
+		if(position == 0){
+			args.putString(context.getResources().getString(R.string.phone), phone);
+			args.putString(context.getResources().getString(R.string.fax), fax);
+			args.putString(context.getResources().getString(R.string.email), email);
+			args.putString(context.getResources().getString(R.string.website), website);
+			
+			fragment = new DisplayContactFragment();
+			fragment.setArguments(args);
+			return fragment;
+		}
+		else if(position == 1){
+			Log.i(TAG, menu);
+			args.putString(context.getResources().getString(R.string.menu), menu);
+			
+			fragment = new DisplayWebFragment();
+			fragment.setArguments(args);
+			return fragment;
+		}
+		else{
+			
+		}
+		return new DummySectionFragment();
+	}
 }

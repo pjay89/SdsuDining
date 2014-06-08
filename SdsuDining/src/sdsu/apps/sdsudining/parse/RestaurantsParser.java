@@ -5,14 +5,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import sdsu.apps.sdsudining.R;
-import sdsu.apps.sdsudining.database.RestaurantDBHelper;
+import sdsu.apps.sdsudining.database.SdsuDBHelper;
 import android.content.Context;
 import android.util.Log;
 
 public class RestaurantsParser extends SdsuDiningParser{
 	private Context context;
 
-	private static  String TABLE_NAME;
+	private static  String RESTAURANTS_OBJECT_TAG;
 	private static String RESTAURANT_ID;
 	private static String RESTAURANT_NAME;
 	private static String RESTAURANT_IMAGE;
@@ -27,7 +27,7 @@ public class RestaurantsParser extends SdsuDiningParser{
 
 	public RestaurantsParser(String url, Context context){
 		this.context = context;
-		TABLE_NAME = context.getString(R.string.CATERING_TABLE);
+		RESTAURANTS_OBJECT_TAG = context.getString(R.string.RESTAURANTS_OBJECT_TAG);
 		RESTAURANT_ID = context.getString(R.string.RESTAURANT_ID);
 		RESTAURANT_NAME = context.getString(R.string.RESTAURANT_NAME);
 		RESTAURANT_IMAGE = context.getString(R.string.RESTAURANT_IMAGE);
@@ -52,8 +52,9 @@ public class RestaurantsParser extends SdsuDiningParser{
 				if(jsonString != null){
 					try {
 						JSONObject jsonObj = new JSONObject(jsonString);
-						restaurants = jsonObj.getJSONArray(TABLE_NAME);
-						RestaurantDBHelper db = new RestaurantDBHelper(context);
+						restaurants = jsonObj.getJSONArray(RESTAURANTS_OBJECT_TAG);
+						SdsuDBHelper db = new SdsuDBHelper(context);
+						db.deleteRestaurantTable();
 						
 						for(int i=0; i<restaurants.length(); i++){
 							JSONObject entry = restaurants.getJSONObject(i);
@@ -64,7 +65,7 @@ public class RestaurantsParser extends SdsuDiningParser{
 							String locationName = entry.getString(RESTAURANT_LOCATION_NAME);
 							String phone = entry.getString(RESTAURANT_PHONE);
 							String website = entry.getString(RESTAURANT_WEBSITE);
-							db.addToDB(id, name, image, locationId, locationName, phone, website);
+							db.addToRestaurantTable(id, name, image, locationId, locationName, phone, website);
 						}
 						
 					}
