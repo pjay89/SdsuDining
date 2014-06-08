@@ -15,14 +15,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
 public class RestaurantsListActivity extends Activity {
 
 	private Button browseByMap;
-	private AQuery aq;
+	private AQuery rootAQuery;
 	private ArrayList<String> entries = new ArrayList<String>();
+	private ArrayList<String> restaurantNames = new ArrayList<String>();
 	private static final String TAG = "RESTAURANT";
 
 	@Override
@@ -37,41 +41,40 @@ public class RestaurantsListActivity extends Activity {
 		browseByMap = (Button) findViewById(R.id.browseByMap);
 		browseByMap.setOnClickListener(getBrowseByMapButtonListener);
 
-		/*RestaurantsListViewAdapter adapter = new RestaurantsListViewAdapter(getApplicationContext());
-		ListView restaurantListView = (ListView) findViewById(R.id.restaurantsListView);
-		restaurantListView.setAdapter(adapter);*/
-
-		
 		SdsuDBHelper db = new SdsuDBHelper(this);
 		ArrayList<HashMap<String,String>> dbList = db.getUniqueRestaurantsExceptFarmersMarket();
 
 
-		aq = new AQuery(findViewById(R.layout.activity_restaurants_list));
+		rootAQuery = new AQuery(this);
 		for(int i=0; i<dbList.size(); i++){
 			HashMap<String, String> entry = dbList.get(i);
 			entries.add(entry.get(getString(R.string.RESTAURANT_IMAGE)));
+			restaurantNames.add(entry.get(getString(R.string.RESTAURANT_NAME)));
 		}
 		db.close();
 		
-
-
-		ArrayAdapter<ArrayList<String>> adapter = new ArrayAdapter<ArrayList<String>>(this, R.layout.activity_restaurant_list_row){
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.activity_restaurant_list_row, entries){
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent){
-				Log.i(TAG, "here");
 				if(convertView == null){
-					convertView = getLayoutInflater().inflate(R.layout.activity_restaurant_list_row, parent, false);
+					convertView = getLayoutInflater().inflate(R.layout.activity_restaurant_list_row, null);
 				}
-
-				AQuery aq = new AQuery(convertView);
+				
+							
+				AQuery listRowAQuery = new AQuery(convertView);
 				String url = entries.get(position);
-				Log.i(TAG, "URL: "+url);
-				aq.id(R.id.restaurantListViewImage).image(url, true, true, 0, 0, null, AQuery.FADE_IN_NETWORK, 1.0f);
+				listRowAQuery.id(R.id.restaurantListViewImage).image(url);
+				
 				return convertView;
 			}
 		};
-		aq.id(R.id.restaurantsList).adapter(adapter);
-		Log.i(TAG, "done");
+
+		ListView listView = (ListView) findViewById(R.id.restaurantsListView);
+		listView.setOnItemClickListener(getRestaurantItemClickListener);
+		
+		rootAQuery.id(R.id.restaurantsListView).adapter(adapter);
+		
+		
 	}
 
 	@Override
@@ -105,7 +108,16 @@ public class RestaurantsListActivity extends Activity {
 
 	};
 
+	public OnItemClickListener getRestaurantItemClickListener = new OnItemClickListener() {
 
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
+			Log.i(TAG, String.valueOf(position));
+			Log.i(TAG, entries.get(position));
+			Log.i(TAG, restaurantNames.get(position));
+		}
+	
+	};
 
 
 

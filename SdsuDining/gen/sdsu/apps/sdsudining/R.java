@@ -40,7 +40,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         /**  Default screen margins, per the Android Design guidelines. 
          */
         public static final int divider_height=0x7f060000;
-        public static final int list_entry_height=0x7f060003;
+        public static final int font_size_19=0x7f060003;
+        public static final int list_entry_height=0x7f060004;
     }
     public static final class drawable {
         public static final int catering=0x7f020000;
@@ -55,41 +56,43 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class id {
         public static final int LinearLayout1=0x7f0a0001;
         public static final int TableLayout1=0x7f0a0004;
-        public static final int action_settings=0x7f0a0024;
-        public static final int address=0x7f0a0020;
-        public static final int addressHeading=0x7f0a001f;
-        public static final int browseByMap=0x7f0a0013;
-        public static final int cateringButton=0x7f0a000b;
-        public static final int contactUsButton=0x7f0a000d;
-        public static final int couponsButton=0x7f0a000a;
-        public static final int email=0x7f0a001c;
-        public static final int emailHeading=0x7f0a001b;
-        public static final int farmersMarketButton=0x7f0a0009;
-        public static final int fax=0x7f0a001a;
-        public static final int faxHeading=0x7f0a0019;
-        public static final int fragementWebView=0x7f0a0023;
-        public static final int infoText=0x7f0a0022;
+        public static final int action_settings=0x7f0a0026;
+        public static final int address=0x7f0a0022;
+        public static final int addressHeading=0x7f0a0021;
+        public static final int browseByMap=0x7f0a0015;
+        public static final int cateringButton=0x7f0a000c;
+        public static final int contactUsButton=0x7f0a000e;
+        public static final int couponsButton=0x7f0a000b;
+        public static final int email=0x7f0a001e;
+        public static final int emailHeading=0x7f0a001d;
+        public static final int farmersMarketButton=0x7f0a000a;
+        public static final int fax=0x7f0a001c;
+        public static final int faxHeading=0x7f0a001b;
+        public static final int fragementWebView=0x7f0a0025;
+        public static final int infoText=0x7f0a0024;
         public static final int locationList=0x7f0a0000;
-        public static final int locationListViewButton=0x7f0a0002;
-        public static final int mobile=0x7f0a0010;
-        public static final int name=0x7f0a000f;
-        public static final int pager=0x7f0a0006;
-        public static final int phone=0x7f0a0018;
-        public static final int phoneHeading=0x7f0a0017;
-        public static final int plainTest=0x7f0a000e;
-        public static final int restaurantListViewImage=0x7f0a0011;
-        public static final int restaurantsButton=0x7f0a0008;
-        public static final int restaurantsList=0x7f0a0014;
-        public static final int restaurantsListRelativeLayout=0x7f0a0012;
-        public static final int restaurantsListView=0x7f0a0015;
+        public static final int locationListViewButton=0x7f0a0006;
+        public static final int locationListViewText=0x7f0a0002;
+        public static final int mobile=0x7f0a0011;
+        public static final int name=0x7f0a0010;
+        public static final int pager=0x7f0a0007;
+        public static final int phone=0x7f0a001a;
+        public static final int phoneHeading=0x7f0a0019;
+        public static final int plainTest=0x7f0a000f;
+        public static final int restaurantListRowLinearLayout=0x7f0a0012;
+        public static final int restaurantListViewImage=0x7f0a0013;
+        public static final int restaurantsButton=0x7f0a0009;
+        public static final int restaurantsList=0x7f0a0016;
+        public static final int restaurantsListRelativeLayout=0x7f0a0014;
+        public static final int restaurantsListView=0x7f0a0017;
         public static final int scrollView1=0x7f0a0003;
-        public static final int sdsuDiningLogo=0x7f0a0007;
-        public static final int section_label=0x7f0a0021;
-        public static final int sweetButton=0x7f0a000c;
-        public static final int tableRow1=0x7f0a0016;
+        public static final int sdsuDiningLogo=0x7f0a0008;
+        public static final int section_label=0x7f0a0023;
+        public static final int sweetButton=0x7f0a000d;
+        public static final int tableRow1=0x7f0a0018;
         public static final int tableRow2=0x7f0a0005;
-        public static final int website=0x7f0a001e;
-        public static final int websiteHeading=0x7f0a001d;
+        public static final int website=0x7f0a0020;
+        public static final int websiteHeading=0x7f0a001f;
     }
     public static final class layout {
         public static final int activity_browse_by_location=0x7f030000;

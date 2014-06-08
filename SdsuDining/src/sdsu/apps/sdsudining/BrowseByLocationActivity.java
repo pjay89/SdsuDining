@@ -8,14 +8,20 @@ import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class BrowseByLocationActivity extends ListActivity {
 	
 	private ArrayList<HashMap<String, String>> locations = new ArrayList<HashMap<String, String>>();
+	private static final String TAG = "RESTAURANT";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +40,14 @@ public class BrowseByLocationActivity extends ListActivity {
 		}
 		db.close();
 		
-		ListAdapter adapter = new SimpleAdapter(this, locations, R.layout.activity_browse_by_location_list_row, new String[]{getString(R.string.RESTAURANT_LOCATION_NAME)}, new int[]{R.id.locationListViewButton});
-		//ListView listView = (ListView) findViewById(R.id.locationListView);
+		ListView listView = getListView();
+		listView.setOnItemClickListener(getLocationItemClickListener);
+		
+		ListAdapter adapter = new SimpleAdapter(this, locations, R.layout.activity_browse_by_location_list_row, new String[]{getString(R.string.RESTAURANT_LOCATION_NAME)}, new int[]{R.id.locationListViewText});
 		setListAdapter(adapter);
+		
+		
+		
 		
 		// Enable Home button on action bar
 		final ActionBar actionBar = getActionBar();
@@ -73,6 +84,17 @@ public class BrowseByLocationActivity extends ListActivity {
         }
         return false;
     }
+	
+	public OnItemClickListener getLocationItemClickListener = new OnItemClickListener() {
+
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
+			Log.i(TAG, String.valueOf(position));
+			HashMap<String, String> s = locations.get(position);
+			Log.i(TAG, s.get(getString(R.string.RESTAURANT_LOCATION_NAME)));
+		}
+	
+	};
 
 	@Override
 	protected void onPause(){

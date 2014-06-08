@@ -1,13 +1,11 @@
 package sdsu.apps.sdsudining;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 
 import sdsu.apps.sdsudining.parse.CateringParser;
 import sdsu.apps.sdsudining.parse.ContactParser;
-import sdsu.apps.sdsudining.parse.ContactsParser;
 import sdsu.apps.sdsudining.parse.RestaurantsParser;
 import sdsu.apps.sdsudining.parse.SweetParser;
 import android.os.Bundle;
