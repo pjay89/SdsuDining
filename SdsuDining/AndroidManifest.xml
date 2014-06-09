@@ -72,6 +72,14 @@
             android:name="sdsu.apps.sdsudining.BrowseByLocationListRow"
             android:label="@string/title_activity_browse_by_location_list_row" >
         </activity>
+        <activity
+            android:name="sdsu.apps.sdsudining.RestaurantsDetails"
+            android:label="@string/title_activity_restaurants_details" >
+        </activity>
+        <activity
+            android:name="sdsu.apps.sdsudiningfragements.DisplayRestaurantInfoFragment"
+            android:label="@string/title_activity_display_restaurant_info_fragment" >
+        </activity>
     </application>
 
 </manifest>

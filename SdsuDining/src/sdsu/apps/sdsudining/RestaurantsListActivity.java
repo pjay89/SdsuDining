@@ -112,9 +112,11 @@ public class RestaurantsListActivity extends Activity {
 
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
-			Log.i(TAG, String.valueOf(position));
-			Log.i(TAG, entries.get(position));
 			Log.i(TAG, restaurantNames.get(position));
+			
+			Intent intent = new Intent(RestaurantsListActivity.this, RestaurantsDetails.class);
+			intent.putExtra("labelString", restaurantNames.get(position));
+			startActivity(intent);
 		}
 	
 	};

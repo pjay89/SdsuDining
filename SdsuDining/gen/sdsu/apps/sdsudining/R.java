@@ -56,9 +56,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class id {
         public static final int LinearLayout1=0x7f0a0001;
         public static final int TableLayout1=0x7f0a0004;
-        public static final int action_settings=0x7f0a0026;
-        public static final int address=0x7f0a0022;
-        public static final int addressHeading=0x7f0a0021;
+        public static final int action_settings=0x7f0a002c;
+        public static final int address=0x7f0a0024;
+        public static final int addressHeading=0x7f0a0023;
         public static final int browseByMap=0x7f0a0015;
         public static final int cateringButton=0x7f0a000c;
         public static final int contactUsButton=0x7f0a000e;
@@ -68,8 +68,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int farmersMarketButton=0x7f0a000a;
         public static final int fax=0x7f0a001c;
         public static final int faxHeading=0x7f0a001b;
-        public static final int fragementWebView=0x7f0a0025;
-        public static final int infoText=0x7f0a0024;
+        public static final int fragementWebView=0x7f0a002b;
+        public static final int include1=0x7f0a0027;
+        public static final int infoText=0x7f0a0026;
         public static final int locationList=0x7f0a0000;
         public static final int locationListViewButton=0x7f0a0006;
         public static final int locationListViewText=0x7f0a0002;
@@ -87,10 +88,15 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int restaurantsListView=0x7f0a0017;
         public static final int scrollView1=0x7f0a0003;
         public static final int sdsuDiningLogo=0x7f0a0008;
-        public static final int section_label=0x7f0a0023;
+        public static final int section_label=0x7f0a0025;
         public static final int sweetButton=0x7f0a000d;
         public static final int tableRow1=0x7f0a0018;
         public static final int tableRow2=0x7f0a0005;
+        public static final int textView1=0x7f0a0021;
+        public static final int textView2=0x7f0a0022;
+        public static final int textView3=0x7f0a0028;
+        public static final int textView4=0x7f0a0029;
+        public static final int textView5=0x7f0a002a;
         public static final int website=0x7f0a0020;
         public static final int websiteHeading=0x7f0a001f;
     }
@@ -103,13 +109,16 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int activity_plain_test=0x7f030005;
         public static final int activity_plain_test_list_item=0x7f030006;
         public static final int activity_restaurant_list_row=0x7f030007;
-        public static final int activity_restaurants_list=0x7f030008;
-        public static final int fragement_contact_generic=0x7f030009;
-        public static final int fragment_catering_contact=0x7f03000a;
-        public static final int fragment_detail=0x7f03000b;
-        public static final int fragment_display_contact=0x7f03000c;
-        public static final int fragment_display_info=0x7f03000d;
-        public static final int fragment_display_web=0x7f03000e;
+        public static final int activity_restaurants_details=0x7f030008;
+        public static final int activity_restaurants_list=0x7f030009;
+        public static final int fragement_contact_generic=0x7f03000a;
+        public static final int fragement_hours=0x7f03000b;
+        public static final int fragment_catering_contact=0x7f03000c;
+        public static final int fragment_detail=0x7f03000d;
+        public static final int fragment_display_contact=0x7f03000e;
+        public static final int fragment_display_info=0x7f03000f;
+        public static final int fragment_display_restaurant_info=0x7f030010;
+        public static final int fragment_display_web=0x7f030011;
     }
     public static final class menu {
         public static final int browse_by_location=0x7f090000;
@@ -120,12 +129,14 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int detail=0x7f090005;
         public static final int display_contact=0x7f090006;
         public static final int display_info=0x7f090007;
-        public static final int display_web=0x7f090008;
-        public static final int home=0x7f090009;
-        public static final int plain_test=0x7f09000a;
-        public static final int plain_test_list_item=0x7f09000b;
-        public static final int restaurant_list_row=0x7f09000c;
-        public static final int restaurants_list=0x7f09000d;
+        public static final int display_restaurant_info=0x7f090008;
+        public static final int display_web=0x7f090009;
+        public static final int home=0x7f09000a;
+        public static final int plain_test=0x7f09000b;
+        public static final int plain_test_list_item=0x7f09000c;
+        public static final int restaurant_list_row=0x7f09000d;
+        public static final int restaurants_details=0x7f09000e;
+        public static final int restaurants_list=0x7f09000f;
     }
     public static final class string {
         public static final int CATERING_ADDRESS=0x7f07002e;
@@ -214,10 +225,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int title_activity_catering_contact=0x7f070054;
         public static final int title_activity_display_contact_fragment=0x7f070056;
         public static final int title_activity_display_info_fragment=0x7f070055;
+        public static final int title_activity_display_restaurant_info_fragment=0x7f07005c;
         public static final int title_activity_display_web_fragment=0x7f070057;
         public static final int title_activity_plain_test=0x7f07000b;
         public static final int title_activity_plain_test_list_item=0x7f07000d;
         public static final int title_activity_restaurant_list_row=0x7f070058;
+        public static final int title_activity_restaurants_details=0x7f07005b;
         public static final int website=0x7f070013;
     }
     public static final class style {

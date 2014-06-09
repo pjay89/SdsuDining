@@ -44,7 +44,7 @@ ActionBar.TabListener {
 	 * The {@link ViewPager} that will host the section contents.
 	 */
 	private ViewPager viewPager;
-	static String res;
+	//static String res;
 
 	private static String TAG = "SDSU DINING TEST";
 

@@ -92,5 +92,7 @@
     <string name="title_activity_restaurant_list_row">RestaurantListRow</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_browse_by_location_list_row">BrowseByLocationListRow</string>
+    <string name="title_activity_restaurants_details">RestaurantsDetails</string>
+    <string name="title_activity_display_restaurant_info_fragment">DisplayRestaurantInfoFragment</string>
 
 </resources>
