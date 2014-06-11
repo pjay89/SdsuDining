@@ -27,8 +27,7 @@ import android.widget.TextView;
 
 
 
-public class DetailsActivity extends FragmentActivity implements
-ActionBar.TabListener {
+public class DetailsActivity extends FragmentActivity implements ActionBar.TabListener {
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -60,15 +59,14 @@ ActionBar.TabListener {
 
 		setContentView(R.layout.activity_details);
 		Intent intent = getIntent();
-		this.setTitle(intent.getStringExtra("labelString"));
+		//this.setTitle(intent.getStringExtra("labelString"));
 
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
-		// Create the adapter that will return a fragment for each of the three
-		// primary sections of the app.
+		// Create the adapter that will return a fragment for each of the primary sections of the app.
 		sectionsPagerAdapter = new SectionsPagerAdapter(
 				getSupportFragmentManager(), intent.getStringArrayListExtra("titles"), intent.getStringExtra("labelString"), getApplicationContext());
 
