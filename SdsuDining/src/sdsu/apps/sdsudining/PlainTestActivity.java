@@ -70,12 +70,12 @@ public class PlainTestActivity extends ListActivity {
 		
 		SdsuDBHelper db = new SdsuDBHelper(getApplicationContext());
 		ArrayList<HashMap<String, String>> dbList = db.getUniqueRestaurantsExceptFarmersMarket();
-		Log.i(TAG, "All Restaurants Except Farmers: "+String.valueOf(dbList.size()));
+		/*Log.i(TAG, "All Restaurants Except Farmers: "+String.valueOf(dbList.size()));
 		for(int i=0; i<dbList.size(); i++){
 			HashMap<String, String> entry = dbList.get(i);
 			//Log.i(TAG, entry.get(this.getApplicationContext().getString(R.string.RESTAURANT_IMAGE)));
 			Log.i(TAG, entry.get(this.getApplicationContext().getString(R.string.RESTAURANT_NAME)));
-		}
+		}*/
 		
 		Log.i(TAG, "******************");
 		dbList = db.getAllRestaurantDetailsOf("Aztec Market & Convenience Store");

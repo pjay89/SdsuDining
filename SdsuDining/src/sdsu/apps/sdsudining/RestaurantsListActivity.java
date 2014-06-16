@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,6 +40,8 @@ public class RestaurantsListActivity extends Activity {
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
 		browseByMap = (Button) findViewById(R.id.browseByMap);
+		Typeface font = Typeface.createFromAsset(getAssets(), "CenturyGothic.ttf");
+		browseByMap.setTypeface(font);
 		browseByMap.setOnClickListener(getBrowseByMapButtonListener);
 
 		SdsuDBHelper db = new SdsuDBHelper(this);
@@ -54,6 +57,7 @@ public class RestaurantsListActivity extends Activity {
 		db.close();
 		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.activity_restaurant_list_row, entries){
+
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent){
 				if(convertView == null){
@@ -63,14 +67,16 @@ public class RestaurantsListActivity extends Activity {
 							
 				AQuery listRowAQuery = new AQuery(convertView);
 				String url = entries.get(position);
-				listRowAQuery.id(R.id.restaurantListViewImage).image(url);
-				
+				int id = getApplicationContext().getResources().getIdentifier(url, "drawable", getPackageName());
+				listRowAQuery.id(R.id.restaurantListViewImage).background(id);
 				return convertView;
 			}
 		};
 
 		ListView listView = (ListView) findViewById(R.id.restaurantsListView);
+		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(getRestaurantItemClickListener);
+
 		
 		rootAQuery.id(R.id.restaurantsListView).adapter(adapter);
 		
@@ -111,12 +117,11 @@ public class RestaurantsListActivity extends Activity {
 	public OnItemClickListener getRestaurantItemClickListener = new OnItemClickListener() {
 
 		@Override
-		public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
-			Log.i(TAG, restaurantNames.get(position));
-			
+		public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {			
 			Intent intent = new Intent(RestaurantsListActivity.this, RestaurantsDetails.class);
 			intent.putExtra("labelString", restaurantNames.get(position));
 			startActivity(intent);
+			Log.i(TAG, restaurantNames.get(position));
 		}
 	
 	};

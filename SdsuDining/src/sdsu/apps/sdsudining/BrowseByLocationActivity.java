@@ -43,6 +43,7 @@ public class BrowseByLocationActivity extends ListActivity {
 		ListView listView = getListView();
 		listView.setOnItemClickListener(getLocationItemClickListener);
 		
+
 		ListAdapter adapter = new SimpleAdapter(this, locations, R.layout.activity_browse_by_location_list_row, new String[]{getString(R.string.RESTAURANT_LOCATION_NAME)}, new int[]{R.id.locationListViewText});
 		setListAdapter(adapter);
 		

@@ -21,13 +21,6 @@ import android.widget.ImageButton;
 
 public class HomeActivity extends Activity {
 
-	int[] homeEntryButtons = new int[]{
-			R.drawable.restaurants,
-			R.drawable.farmersmarket
-	};
-	
-	
-	
 	private ImageButton restaurantsButton;
 	private ImageButton farmersMarketButton;
 	private ImageButton couponsButton;

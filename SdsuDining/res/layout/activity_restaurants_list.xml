@@ -10,8 +10,8 @@
         android:layout_height="wrap_content"
         android:minHeight="70dp"
         android:text="@string/browseByMapString"
-        android:textStyle="bold"
-        android:typeface="serif" />
+        android:textSize="@dimen/font_size_30"
+        android:typeface="normal" />
 
     <LinearLayout
         android:id="@+id/restaurantsList"

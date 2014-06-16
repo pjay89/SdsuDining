@@ -15,8 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:textSize="@dimen/font_size_19"
-        android:textStyle="bold"
-        android:typeface="serif" />
+        android:textSize="@dimen/font_size_30"
+        android:typeface="normal" />
 
 </LinearLayout>

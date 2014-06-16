@@ -10,6 +10,7 @@ public class BrowseByLocationListRow extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_browse_by_location_list_row);
+		
 	}
 
 	@Override

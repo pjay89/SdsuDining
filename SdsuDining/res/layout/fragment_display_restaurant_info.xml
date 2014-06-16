@@ -8,21 +8,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".DisplayRestaurantInfoFragment" >
 
-     <TextView
-         android:id="@+id/textView1"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_alignParentLeft="true"
-         android:layout_alignParentTop="true"
-         android:text="Large Text"
-         android:textAppearance="?android:attr/textAppearanceLarge" />
+    <TextView
+        android:id="@+id/restaurantStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <include
         android:id="@+id/include1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/restaurantStatus"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
         layout="@layout/fragement_hours" />
 
@@ -39,17 +39,22 @@
             android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/restaurantPhoneHeading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="@string/phone"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/sdsu_red"
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/restaurantPhoneText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_weight="1"
-                android:text="TextView" />
+                android:text="Medium Text"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
         </TableRow>
 
         <TableRow
@@ -58,17 +63,22 @@
             android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/restaurantWebsiteHeading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="@string/website"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/sdsu_red"
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/restaurantWebsiteText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_weight="1"
-                android:text="TextView" />
+                android:text="Medium Text"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
         </TableRow>
     </TableLayout>
 

@@ -59,7 +59,7 @@ public class DetailsActivity extends FragmentActivity implements ActionBar.TabLi
 
 		setContentView(R.layout.activity_details);
 		Intent intent = getIntent();
-		//this.setTitle(intent.getStringExtra("labelString"));
+		this.setTitle(intent.getStringExtra("labelString"));
 
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();

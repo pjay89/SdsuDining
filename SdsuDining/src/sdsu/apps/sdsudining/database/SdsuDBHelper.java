@@ -202,7 +202,7 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 	
 	public ArrayList<HashMap<String, String>> getAllRestaurantDetailsOf(String restaurantName){
 		ArrayList<HashMap<String, String>> restaurants = new ArrayList<HashMap<String,String>>();
-		String query = "SELECT * FROM " + RESTAURANT_TABLE + " WHERE " + RESTAURANT_NAME + "='" + restaurantName + "'";
+		String query = "SELECT * FROM " + RESTAURANT_TABLE + " WHERE " + RESTAURANT_NAME + "=\"" + restaurantName + "\"";
 
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(query, null);
@@ -250,7 +250,7 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 		
 	public ArrayList<HashMap<String, String>> getRestaurantsAt(String locationName){
 		ArrayList<HashMap<String, String>> restaurants = new ArrayList<HashMap<String,String>>();
-		String query = "SELECT " + RESTAURANT_ID + ", "+ RESTAURANT_NAME + ", "+ RESTAURANT_IMAGE + " FROM " + RESTAURANT_TABLE + " WHERE " + RESTAURANT_LOCATION_NAME + "='" + locationName + "'";
+		String query = "SELECT " + RESTAURANT_ID + ", "+ RESTAURANT_NAME + ", "+ RESTAURANT_IMAGE + " FROM " + RESTAURANT_TABLE + " WHERE " + RESTAURANT_LOCATION_NAME + "=\"" + locationName + "\"";
 		Log.i(TAG, query);
 		
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -284,7 +284,7 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 	
 	public ArrayList<HashMap<String, String>> getAllRestaurantsAt(String locationId){
 		ArrayList<HashMap<String, String>> restaurants = new ArrayList<HashMap<String,String>>();
-		String query = "SELECT * FROM " + RESTAURANT_TABLE + " WHERE " + RESTAURANT_LOCATION_ID + "='" + locationId + "'";
+		String query = "SELECT * FROM " + RESTAURANT_TABLE + " WHERE " + RESTAURANT_LOCATION_ID + "=\"" + locationId + "\"";
 
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(query, null);

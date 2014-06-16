@@ -8,64 +8,58 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <ImageView
-            android:id="@+id/sdsuDiningLogo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/sdsudining" />
+        
 
         <ImageButton
             android:id="@+id/restaurantsButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:contentDescription="@string/restaurantsString"
-            android:src="@drawable/restaurants" />
+            android:background="@drawable/restaurants"
+            android:contentDescription="@string/restaurantsString" />
 
         <ImageButton
             android:id="@+id/farmersMarketButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:contentDescription="@string/farmersMarketString"
-            android:src="@drawable/farmersmarket" />
+            android:background="@drawable/farmersmarket"
+            android:contentDescription="@string/farmersMarketString" />
 
         <ImageButton
             android:id="@+id/couponsButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:contentDescription="@string/couponsString"
-            android:src="@drawable/coupons" />
+            android:background="@drawable/coupons"
+            android:contentDescription="@string/couponsString" />
 
         <ImageButton
             android:id="@+id/cateringButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:contentDescription="@string/cateringString"
-            android:src="@drawable/catering" />
+            android:background="@drawable/catering"
+            android:contentDescription="@string/cateringString" />
 
         <ImageButton
             android:id="@+id/sweetButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:contentDescription="@string/sweetString"
-            android:src="@drawable/sweet" />
+            android:background="@drawable/sweet"
+            android:contentDescription="@string/sweetString" />
 
         <ImageButton
             android:id="@+id/contactUsButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:contentDescription="@string/contactUsString"
-            android:src="@drawable/contactus" />
+            android:background="@drawable/contactus"
+            android:contentDescription="@string/contactUsString" />
+        
 
+        <ImageView
+            android:id="@+id/sdsuDiningLogo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/sdsudining" />
     </LinearLayout>
 
+    
 </ScrollView>
