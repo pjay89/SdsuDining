@@ -3,9 +3,9 @@ package sdsu.apps.sdsudining;
 
 import java.util.ArrayList;
 
+import sdsu.apps.sdsudining.fragements.CateringContactFragmentActivity;
 import sdsu.apps.sdsudining.util.SectionsPagerAdapter;
 import sdsu.apps.sdsudining.webService.DataFetcher;
-import sdsu.apps.sdsudiningfragements.CateringContactFragmentActivity;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;

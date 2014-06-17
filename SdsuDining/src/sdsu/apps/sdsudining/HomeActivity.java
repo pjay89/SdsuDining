@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import sdsu.apps.sdsudining.parse.CateringParser;
 import sdsu.apps.sdsudining.parse.ContactParser;
+import sdsu.apps.sdsudining.parse.HoursParser;
 import sdsu.apps.sdsudining.parse.RestaurantsParser;
 import sdsu.apps.sdsudining.parse.SweetParser;
 import android.os.Bundle;
@@ -48,6 +49,7 @@ public class HomeActivity extends Activity {
 				new SweetParser(this.getString(R.string.SWEET_URL), this.getApplicationContext());
 				new CateringParser(this.getString(R.string.CATERING_URL), this.getApplicationContext());
 				new RestaurantsParser(this.getString(R.string.RESTAURANTS_URL), this.getApplicationContext());
+				new HoursParser(this.getString(R.string.HOURS_URL), this.getApplicationContext());
 				//new BrowseByLocationParser("http://api.androidhive.info/contacts/", this.getApplicationContext());
 
 			}

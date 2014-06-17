@@ -1,4 +1,4 @@
-package sdsu.apps.sdsudiningfragements;
+package sdsu.apps.sdsudining.fragements;
 
 import sdsu.apps.sdsudining.R;
 import android.os.Bundle;

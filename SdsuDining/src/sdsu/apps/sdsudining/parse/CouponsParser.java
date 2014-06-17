@@ -5,7 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import sdsu.apps.sdsudining.R;
-import sdsu.apps.sdsudining.database.CouponsDBHelper;
+import sdsu.apps.sdsudining.database.SdsuDBHelper;
 import android.content.Context;
 import android.util.Log;
 
@@ -53,7 +53,7 @@ public class CouponsParser extends SdsuDiningParser{
 					try {
 						JSONObject jsonObj = new JSONObject(jsonString);
 						coupon = jsonObj.getJSONArray(TABLE_NAME);
-						CouponsDBHelper db = new CouponsDBHelper(context);
+						SdsuDBHelper db = new SdsuDBHelper(context);
 						
 						for(int i=0; i<coupon.length(); i++){
 							JSONObject entry = coupon.getJSONObject(i);
@@ -64,7 +64,7 @@ public class CouponsParser extends SdsuDiningParser{
 							String restaurantName = entry.getString(COUPON_RESTAURANT_NAME);
 							String deal = entry.getString(COUPON_DEAL);
 							String expiration = entry.getString(COUPON_EXPIRATION);
-							db.addToDB(id, image, locationId, restaurantId, restaurantName, deal, expiration);
+							//db.addToDB(id, image, locationId, restaurantId, restaurantName, deal, expiration);
 						}
 						
 					}

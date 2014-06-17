@@ -49,19 +49,19 @@
             android:label="@string/title_activity_plain_test_list_item" >
         </activity>
         <activity
-            android:name="sdsu.apps.sdsudiningfragements.CateringContactFragmentActivity"
+            android:name="sdsu.apps.sdsudining.fragements.CateringContactFragmentActivity"
             android:label="@string/title_activity_catering_contact" >
         </activity>
         <activity
-            android:name="sdsu.apps.sdsudiningfragements.DisplayInfoFragment"
+            android:name="sdsu.apps.sdsudining.fragements.DisplayInfoFragment"
             android:label="@string/title_activity_display_info_fragment" >
         </activity>
         <activity
-            android:name="sdsu.apps.sdsudiningfragements.DisplayContactFragment"
+            android:name="sdsu.apps.sdsudining.fragements.DisplayContactFragment"
             android:label="@string/title_activity_display_contact_fragment" >
         </activity>
         <activity
-            android:name="sdsu.apps.sdsudiningfragements.DisplayWebFragment"
+            android:name="sdsu.apps.sdsudining.fragements.DisplayWebFragment"
             android:label="@string/title_activity_display_web_fragment" >
         </activity>
         <activity
@@ -77,7 +77,7 @@
             android:label="@string/title_activity_restaurants_details" >
         </activity>
         <activity
-            android:name="sdsu.apps.sdsudiningfragements.DisplayRestaurantInfoFragment"
+            android:name="sdsu.apps.sdsudining.fragements.DisplayRestaurantInfoFragment"
             android:label="@string/title_activity_display_restaurant_info_fragment" >
         </activity>
     </application>

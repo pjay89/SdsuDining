@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import sdsu.apps.sdsudining.R;
 import sdsu.apps.sdsudining.database.SdsuDBHelper;
-import sdsu.apps.sdsudiningfragements.DisplayRestaurantInfoFragment;
+import sdsu.apps.sdsudining.fragements.DisplayRestaurantInfoFragment;
 
 import android.content.Context;
 import android.os.Bundle;

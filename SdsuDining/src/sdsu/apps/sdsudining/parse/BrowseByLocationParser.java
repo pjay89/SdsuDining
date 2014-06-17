@@ -5,7 +5,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import sdsu.apps.sdsudining.R;
-import sdsu.apps.sdsudining.database.BrowseByLocationDBHelper;
+import sdsu.apps.sdsudining.database.SdsuDBHelper;
+
 import android.content.Context;
 import android.util.Log;
 
@@ -42,13 +43,13 @@ public class BrowseByLocationParser extends SdsuDiningParser{
 					try {
 						JSONObject jsonObj = new JSONObject(jsonString);
 						locations = jsonObj.getJSONArray(TABLE_NAME);
-						BrowseByLocationDBHelper db = new BrowseByLocationDBHelper(context);
+						SdsuDBHelper db = new SdsuDBHelper(context);
 						
 						for(int i=0; i<locations.length(); i++){
 							JSONObject contact = locations.getJSONObject(i);
 							String id = contact.getString(LOCATION_ID);
 							String name = contact.getString(LOCATION_NAME);
-							db.addToDB(id, name);
+							//db.addToDB(id, name);
 						}
 						db.close();
 						

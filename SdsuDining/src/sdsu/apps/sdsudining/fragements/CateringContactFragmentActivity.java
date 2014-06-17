@@ -1,4 +1,4 @@
-package sdsu.apps.sdsudiningfragements;
+package sdsu.apps.sdsudining.fragements;
 
 import java.util.ArrayList;
 import java.util.HashMap;

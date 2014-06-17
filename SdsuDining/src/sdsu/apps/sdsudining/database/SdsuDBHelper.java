@@ -56,7 +56,12 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 	private static String CONTACT_EMAIL;
 	private static String CONTACT_ADDRESS;
 
-
+	// Hours Table
+	private static String HOURS_TABLE; 
+	private static String HOURS_RESTAURANT_ID;
+	private static String HOURS_DAY;
+	private static String HOURS_OPEN;
+	private static String HOURS_CLOSE;
 	
 
 
@@ -101,6 +106,13 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 		CONTACT_FAX = context.getString(R.string.CONTACT_FAX);
 		CONTACT_EMAIL = context.getString(R.string.CONTACT_EMAIL);
 		CONTACT_ADDRESS = context.getString(R.string.CONTACT_ADDRESS);
+		
+		//Hours Table
+		HOURS_TABLE = context.getString(R.string.HOURS_TABLE);
+		HOURS_RESTAURANT_ID = context.getString(R.string.HOURS_RESTAURANT_ID);
+		HOURS_DAY = context.getString(R.string.HOURS_DAY);
+		HOURS_OPEN = context.getString(R.string.HOURS_OPEN);
+		HOURS_CLOSE = context.getString(R.string.HOURS_CLOSE);
 	}
 
 
@@ -150,6 +162,14 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 				+ " TEXT," + CONTACT_ADDRESS	+ " TEXT"+ ")"; 
 		Log.i(TAG, CREATE_TABLE_CONTACT);
 		db.execSQL(CREATE_TABLE_CONTACT);
+		
+		// HOURS table create statement
+		String CREATE_TABLE_HOURS = "CREATE TABLE "
+				+ HOURS_TABLE + "(id INTEGER PRIMARY KEY," + HOURS_RESTAURANT_ID
+				+ " TEXT," + HOURS_DAY + " TEXT," + HOURS_OPEN 
+				+ " TEXT," + HOURS_CLOSE + " TEXT"+ ")";
+		Log.i(TAG, CREATE_TABLE_HOURS);
+		db.execSQL(CREATE_TABLE_HOURS);
 	}
 
 	@Override
@@ -158,6 +178,7 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 		db.execSQL("DROP TABLE IF EXISTS " + CATERING_TABLE);
 		db.execSQL("DROP TABLE IF EXISTS " + SWEET_TABLE);
 		db.execSQL("DROP TABLE IF EXISTS " + CONTACT_TABLE);
+		db.execSQL("DROP TABLE IF EXISTS " + HOURS_TABLE);
 		onCreate(db);
 	}
 	
@@ -411,6 +432,7 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 		values.put(CONTACT_ADDRESS, address);
 
 		db.insert(CONTACT_TABLE, null, values);
+		db.close();
 	}
 
 	public ArrayList<HashMap<String, String>> getContactDetails(){
@@ -435,6 +457,62 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 
 		return contact;
 	}
+	
+	
+	
+	/* ******* HOURS ******* */
+	public void addToHoursTable(String restaurantId, String day, String open, String close){
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(HOURS_RESTAURANT_ID, restaurantId);
+		values.put(HOURS_DAY, day);
+		values.put(HOURS_OPEN, open);
+		values.put(HOURS_CLOSE, close);
+
+		db.insert(HOURS_TABLE, null, values);
+		db.close();
+	}
+	
+	public ArrayList<HashMap<String, String>> getHoursFor(String restaurandId){
+		ArrayList<HashMap<String, String>> hours = new ArrayList<HashMap<String,String>>();
+		String query = "SELECT * FROM " + HOURS_TABLE + " WHERE " + HOURS_RESTAURANT_ID + "=\"" + restaurandId + "\"";
+
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.rawQuery(query, null);
+		//Move to first row
+		cursor.moveToFirst();
+		while(cursor.getCount() > 0 && !cursor.isAfterLast()){
+			HashMap<String, String> entry = new HashMap<String, String>();
+			entry.put(HOURS_RESTAURANT_ID, cursor.getString(1));
+			entry.put(HOURS_DAY, cursor.getString(2));
+			entry.put(HOURS_OPEN, cursor.getString(3));
+			entry.put(HOURS_CLOSE, cursor.getString(4));
+			hours.add(entry);
+			cursor.moveToNext();
+		}
+		cursor.close();
+		db.close();
+
+		return hours;
+	}
+	
+	public String getClosingTimeFor(String restaurandId, String day){
+		String closeTime = "";
+		String query = "SELECT " + HOURS_CLOSE + ",  FROM " + HOURS_TABLE + " WHERE " + HOURS_RESTAURANT_ID + "=\"" + restaurandId + "\" AND " + HOURS_DAY + "=\"" + day + "\"";
+
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.rawQuery(query, null);
+		//Move to first row
+		cursor.moveToFirst();
+		if(cursor.getCount() > 0 && !cursor.isAfterLast()){
+			closeTime = cursor.getString(4);
+		}
+		cursor.close();
+		db.close();
+		
+		return closeTime;
+	}
 
 	/* **************************************************************** */
 	public void deleteRestaurantTable(){
@@ -458,6 +536,12 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 	public void deleteContactTable(){
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(CONTACT_TABLE, null, null);
+		db.close();
+	}
+	
+	public void deleteHoursTable(){
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(HOURS_TABLE, null, null);
 		db.close();
 	}
 }
