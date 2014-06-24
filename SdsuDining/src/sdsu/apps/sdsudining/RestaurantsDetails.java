@@ -11,7 +11,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class RestaurantsDetails extends FragmentActivity implements ActionBar.TabListener {
-
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
 	 * fragments for each of the sections. We use a
@@ -70,7 +69,6 @@ public class RestaurantsDetails extends FragmentActivity implements ActionBar.Ta
 			 */
 			actionBar.addTab(actionBar.newTab().setText(restaurantsPagerAdapter.getPageTitle(i)).setTabListener(this));
 		}
-
 	}
 
 	@Override

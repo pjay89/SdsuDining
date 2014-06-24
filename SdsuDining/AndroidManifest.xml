@@ -80,6 +80,14 @@
             android:name="sdsu.apps.sdsudining.fragements.DisplayRestaurantInfoFragment"
             android:label="@string/title_activity_display_restaurant_info_fragment" >
         </activity>
+        <activity
+            android:name="sdsu.apps.sdsudining.RestaurantsAtLocationListActivity"
+            android:label="@string/title_activity_restaurants_at_location_list" >
+        </activity>
+        <activity
+            android:name="sdsu.apps.sdsudining.RestaurantsAtLocationListRowActivity"
+            android:label="@string/title_activity_restaurants_at_location_list_row" >
+        </activity>
     </application>
 
 </manifest>

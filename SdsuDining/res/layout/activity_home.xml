@@ -8,47 +8,46 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        
-
         <ImageButton
             android:id="@+id/restaurantsButton"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="@drawable/restaurants"
             android:contentDescription="@string/restaurantsString" />
 
         <ImageButton
             android:id="@+id/farmersMarketButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@drawable/farmersmarket"
-            android:contentDescription="@string/farmersMarketString" />
+            android:contentDescription="@string/farmersMarketString"
+            android:scaleType="center" />
 
         <ImageButton
             android:id="@+id/couponsButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@drawable/coupons"
             android:contentDescription="@string/couponsString" />
 
         <ImageButton
             android:id="@+id/cateringButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@drawable/catering"
             android:contentDescription="@string/cateringString" />
 
         <ImageButton
             android:id="@+id/sweetButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@drawable/sweet"
             android:contentDescription="@string/sweetString" />
 
         <ImageButton
             android:id="@+id/contactUsButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@drawable/contactus"
             android:contentDescription="@string/contactUsString" />
 

@@ -127,14 +127,14 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// RESTAURANT table create statement
-				String CREATE_TABLE_RESTAURANT = "CREATE TABLE "
-						+ RESTAURANT_TABLE + "(" + RESTAURANT_ID + " VARCHAR PRIMARY KEY," + RESTAURANT_NAME
-						+ " TEXT," + RESTAURANT_IMAGE + " TEXT," + RESTAURANT_LOCATION_ID 
-						+ " TEXT," + RESTAURANT_LOCATION_NAME + " TEXT," + RESTAURANT_PHONE 
-						+ " TEXT," + RESTAURANT_WEBSITE + " TEXT"+ ")"; 
-				Log.i(TAG, CREATE_TABLE_RESTAURANT);
-				db.execSQL(CREATE_TABLE_RESTAURANT);
-		
+		String CREATE_TABLE_RESTAURANT = "CREATE TABLE "
+				+ RESTAURANT_TABLE + "(" + RESTAURANT_ID + " VARCHAR PRIMARY KEY," + RESTAURANT_NAME
+				+ " TEXT," + RESTAURANT_IMAGE + " TEXT," + RESTAURANT_LOCATION_ID 
+				+ " TEXT," + RESTAURANT_LOCATION_NAME + " TEXT," + RESTAURANT_PHONE 
+				+ " TEXT," + RESTAURANT_WEBSITE + " TEXT"+ ")"; 
+		Log.i(TAG, CREATE_TABLE_RESTAURANT);
+		db.execSQL(CREATE_TABLE_RESTAURANT);
+
 		//CATERING table create statement
 		String CREATE_TABLE_CATERING = "CREATE TABLE "
 				+ CATERING_TABLE + "(id INTEGER PRIMARY KEY," + CATERING_PHONE
@@ -223,7 +223,7 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 	
 	public ArrayList<HashMap<String, String>> getAllRestaurantDetailsOf(String restaurantName){
 		ArrayList<HashMap<String, String>> restaurants = new ArrayList<HashMap<String,String>>();
-		String query = "SELECT * FROM " + RESTAURANT_TABLE + " WHERE " + RESTAURANT_NAME + "=\"" + restaurantName + "\"";
+		String query = "SELECT * FROM " + RESTAURANT_TABLE + " WHERE " + RESTAURANT_NAME + "=\"" + restaurantName + "\" ORDER BY " + RESTAURANT_LOCATION_NAME;
 
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(query, null);
@@ -272,7 +272,6 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 	public ArrayList<HashMap<String, String>> getRestaurantsAt(String locationName){
 		ArrayList<HashMap<String, String>> restaurants = new ArrayList<HashMap<String,String>>();
 		String query = "SELECT " + RESTAURANT_ID + ", "+ RESTAURANT_NAME + ", "+ RESTAURANT_IMAGE + " FROM " + RESTAURANT_TABLE + " WHERE " + RESTAURANT_LOCATION_NAME + "=\"" + locationName + "\"";
-		Log.i(TAG, query);
 		
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(query, null);
@@ -469,49 +468,52 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 		values.put(HOURS_DAY, day);
 		values.put(HOURS_OPEN, open);
 		values.put(HOURS_CLOSE, close);
-
+		
 		db.insert(HOURS_TABLE, null, values);
 		db.close();
 	}
 	
-	public ArrayList<HashMap<String, String>> getHoursFor(String restaurandId){
-		ArrayList<HashMap<String, String>> hours = new ArrayList<HashMap<String,String>>();
-		String query = "SELECT * FROM " + HOURS_TABLE + " WHERE " + HOURS_RESTAURANT_ID + "=\"" + restaurandId + "\"";
+	public String getHoursFor(String restaurandId, String day){
+		String hours = "";
+		String query = "SELECT " + HOURS_OPEN + ", " + HOURS_CLOSE + " FROM " + HOURS_TABLE + " WHERE " + HOURS_RESTAURANT_ID + "=\"" + restaurandId + "\" AND " + HOURS_DAY + "=\"" + day + "\"";
+		
 
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(query, null);
 		//Move to first row
 		cursor.moveToFirst();
 		while(cursor.getCount() > 0 && !cursor.isAfterLast()){
-			HashMap<String, String> entry = new HashMap<String, String>();
-			entry.put(HOURS_RESTAURANT_ID, cursor.getString(1));
-			entry.put(HOURS_DAY, cursor.getString(2));
-			entry.put(HOURS_OPEN, cursor.getString(3));
-			entry.put(HOURS_CLOSE, cursor.getString(4));
-			hours.add(entry);
+			hours += "\n" + cursor.getString(0) + " - " + cursor.getString(1);
 			cursor.moveToNext();
 		}
 		cursor.close();
 		db.close();
 
+		hours = hours.substring(1);
 		return hours;
 	}
 	
-	public String getClosingTimeFor(String restaurandId, String day){
-		String closeTime = "";
-		String query = "SELECT " + HOURS_CLOSE + ",  FROM " + HOURS_TABLE + " WHERE " + HOURS_RESTAURANT_ID + "=\"" + restaurandId + "\" AND " + HOURS_DAY + "=\"" + day + "\"";
+	public ArrayList<String[]> getHoursForRestaurantStatus(String restaurandId, String today){
+		ArrayList<String[]> closingTimes = new ArrayList<String[]>();
+		
+		String query = "SELECT " + HOURS_OPEN + ", " + HOURS_CLOSE + " FROM " + HOURS_TABLE + " WHERE " + HOURS_RESTAURANT_ID + "=\"" + restaurandId + "\" AND " + HOURS_DAY + "=\"" + today + "\"";
 
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(query, null);
 		//Move to first row
 		cursor.moveToFirst();
-		if(cursor.getCount() > 0 && !cursor.isAfterLast()){
-			closeTime = cursor.getString(4);
+		while(cursor.getCount() > 0 && !cursor.isAfterLast()){
+			String[] hours = new String[2];
+			hours[0] = cursor.getString(0);
+			hours[1] = cursor.getString(1);
+			
+			closingTimes.add(hours);
+			cursor.moveToNext();
 		}
 		cursor.close();
 		db.close();
 		
-		return closeTime;
+		return closingTimes;
 	}
 
 	/* **************************************************************** */

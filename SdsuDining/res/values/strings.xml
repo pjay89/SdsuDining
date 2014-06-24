@@ -26,6 +26,7 @@
     <string name="information">Information</string>
     <string name="getting_started">Getting Started</string>
     <string name="hours">Hours</string>
+    <string name="restaurantStatus">restaurantStatus</string>
     <string name="monday">Monday</string>
     <string name="tuesday">Tuesday</string>
     <string name="wednesday">Wednesday</string>
@@ -34,7 +35,7 @@
     <string name="saturday">Saturday</string>
     <string name="sunday">Sunday</string>
     <string name="DATABASE_NAME">sdsuDiningDB</string>
-    <string name="RESTAURANTS_URL">http://192.168.1.3:8080/sdsuDining/restaurants.html</string>
+    <string name="RESTAURANTS_URL">http://192.168.1.6:8080/sdsuDining/restaurants.html</string>
     <string name="RESTAURANTS_OBJECT_TAG">restaurants</string>
     <string name="DB_FARMERS_MARKET">Farmer\'\'s Market</string>
     <string name="RESTAURANT_TABLE">restaurantTable</string>
@@ -48,7 +49,7 @@
     <string name="LOCATION_TABLE">locationTable</string>
     <string name="LOCATION_ID">locationId</string>
     <string name="LOCATION_NAME">locationName</string>
-    <string name="CATERING_URL">http://192.168.1.3:8080/sdsuDining/catering.html</string>
+    <string name="CATERING_URL">http://192.168.1.6:8080/sdsuDining/catering.html</string>
     <string name="CATERING_OBJECT_TAG">catering</string>
     <string name="CATERING_TABLE">cateringTable</string>
     <string name="CATERING_PHONE">phone</string>
@@ -66,7 +67,7 @@
     <string name="COUPON_RESTAURANT_NAME">couponsRestaurantName</string>
     <string name="COUPON_DEAL">couponsDeal</string>
     <string name="COUPON_EXPIRATION">couponsExpiration</string>
-    <string name="SWEET_URL">http://192.168.1.3:8080/sdsuDining/sweet.html</string>
+    <string name="SWEET_URL">http://192.168.1.6:8080/sdsuDining/sweet.html</string>
     <string name="SWEET_OBJECT_TAG">sweet</string>
     <string name="SWEET_TABLE">sweetTable</string>
     <string name="SWEET_PHONE">phone</string>
@@ -75,18 +76,19 @@
     <string name="SWEET_WEBSITE">website</string>
     <string name="SWEET_MENU">menu_pdf</string>
     <string name="SWEET_ORDER_FORM">order_form_pdf</string>
-    <string name="CONTACT_URL">http://192.168.1.3:8080/sdsuDining/contactUs.html</string>
+    <string name="CONTACT_URL">http://192.168.1.6:8080/sdsuDining/contactUs.html</string>
     <string name="CONTACT_OBJECT_TAG">contactUs</string>
     <string name="CONTACT_TABLE">contactTable</string>
     <string name="CONTACT_PHONE">phone</string>
     <string name="CONTACT_FAX">fax</string>
     <string name="CONTACT_EMAIL">email</string>
     <string name="CONTACT_ADDRESS">address</string>
-    <string name="HOURS_URL">http://192.168.1.3:8080/sdsuDining/hours.html</string>
+    <string name="HOURS_URL">http://192.168.1.6:8080/sdsuDining/hours.html</string>
     <string name="HOURS_OBJECT_TAG">hours</string>
     <string name="HOURS_TABLE">hoursTable</string>
     <string name="HOURS_RESTAURANT_ID">restaurant_id</string>
     <string name="HOURS_DAY">day</string>
+    <string name="HOURS_DAYHOURS">dayHours</string>
     <string name="HOURS_OPEN">open</string>
     <string name="HOURS_CLOSE">close</string>
     <string name="title_activity_catering_contact">CateringContactActivity</string>
@@ -98,5 +100,7 @@
     <string name="title_activity_browse_by_location_list_row">BrowseByLocationListRow</string>
     <string name="title_activity_restaurants_details">RestaurantsDetails</string>
     <string name="title_activity_display_restaurant_info_fragment">DisplayRestaurantInfoFragment</string>
+    <string name="title_activity_restaurants_at_location_list">RestaurantsAtLocationListActivity</string>
+    <string name="title_activity_restaurants_at_location_list_row">RestaurantsAtLocationListRowActivity</string>
 
 </resources>

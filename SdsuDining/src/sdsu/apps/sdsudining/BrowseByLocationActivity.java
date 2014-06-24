@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.ListActivity;
 import android.content.Intent;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +20,6 @@ import android.widget.AdapterView.OnItemClickListener;
 public class BrowseByLocationActivity extends ListActivity {
 	
 	private ArrayList<HashMap<String, String>> locations = new ArrayList<HashMap<String, String>>();
-	private static final String TAG = "RESTAURANT";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +44,7 @@ public class BrowseByLocationActivity extends ListActivity {
 
 		ListAdapter adapter = new SimpleAdapter(this, locations, R.layout.activity_browse_by_location_list_row, new String[]{getString(R.string.RESTAURANT_LOCATION_NAME)}, new int[]{R.id.locationListViewText});
 		setListAdapter(adapter);
-		
-		
-		
-		
+	
 		// Enable Home button on action bar
 		final ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
@@ -90,9 +85,10 @@ public class BrowseByLocationActivity extends ListActivity {
 
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
-			Log.i(TAG, String.valueOf(position));
-			HashMap<String, String> s = locations.get(position);
-			Log.i(TAG, s.get(getString(R.string.RESTAURANT_LOCATION_NAME)));
+			HashMap<String, String> item = locations.get(position);
+			Intent intent = new Intent(BrowseByLocationActivity.this, RestaurantsAtLocationListActivity.class);
+			intent.putExtra("labelString", item.get(getString(R.string.RESTAURANT_LOCATION_NAME)));
+			startActivity(intent);
 		}
 	
 	};

@@ -14,11 +14,13 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Matrix.ScaleToFit;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import android.widget.ImageView.ScaleType;
 
 public class HomeActivity extends Activity {
 
@@ -75,22 +77,27 @@ public class HomeActivity extends Activity {
 	
 		restaurantsButton = (ImageButton) findViewById(R.id.restaurantsButton);
 		restaurantsButton.setOnClickListener(getRestaurantButtonListner);
+		restaurantsButton.setScaleType(ScaleType.CENTER);
 
 		farmersMarketButton = (ImageButton) findViewById(R.id.farmersMarketButton);
 		farmersMarketButton.setOnClickListener(getFarmersMarketButtonListener);
-
+		farmersMarketButton.setScaleType(ScaleType.CENTER_CROP);
+		
 		couponsButton = (ImageButton) findViewById(R.id.couponsButton);
 		couponsButton.setOnClickListener(getCouponsButtonListener);
-
+		couponsButton.setScaleType(ScaleType.CENTER_INSIDE);
+		
 		cateringButton = (ImageButton) findViewById(R.id.cateringButton);
 		cateringButton.setOnClickListener(getCateringButtonListener);
-
+		cateringButton.setScaleType(ScaleType.FIT_CENTER);
+		
 		sweetButton = (ImageButton) findViewById(R.id.sweetButton);
 		sweetButton.setOnClickListener(getSweetButtonListener);
-
+		sweetButton.setScaleType(ScaleType.FIT_START);
+		
 		contactUsButton = (ImageButton) findViewById(R.id.contactUsButton);
 		contactUsButton.setOnClickListener(getContactUsButtonListener);
-	
+		contactUsButton.setScaleType(ScaleType.FIT_END);
 	}
 
 	@Override
@@ -105,7 +112,6 @@ public class HomeActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			Intent intent = new Intent(HomeActivity.this, RestaurantsListActivity.class);
-			//intent.putExtra("code", "MSFT");
 			startActivity(intent);
 		}
 
