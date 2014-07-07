@@ -8,6 +8,7 @@ import sdsu.apps.sdsudining.parse.SweetParser;
 
 
 import android.os.Bundle;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
@@ -23,7 +24,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-public class PlainTestActivity extends ListActivity {
+public class PlainTestActivity extends Activity {
 	
 	private String TAG = "PLAIN TEST";	
 	
@@ -66,7 +67,7 @@ public class PlainTestActivity extends ListActivity {
 		
 		
 		SdsuDBHelper db = new SdsuDBHelper(getApplicationContext());
-		ArrayList<HashMap<String, String>> dbList = db.getUniqueRestaurantsExceptFarmersMarket();
+		ArrayList<HashMap<String, String>> dbList = db.getUniqueRestaurants();
 		/*Log.i(TAG, "All Restaurants Except Farmers: "+String.valueOf(dbList.size()));
 		for(int i=0; i<dbList.size(); i++){
 			HashMap<String, String> entry = dbList.get(i);
@@ -75,7 +76,27 @@ public class PlainTestActivity extends ListActivity {
 		}*/
 		
 		Log.i(TAG, "******************");
-		dbList = db.getAllRestaurantDetailsOf("Aztec Market & Convenience Store");
+		dbList = db.getCouponDetails();
+		Log.i(TAG, "Coupons: "+String.valueOf(dbList.size()));
+		for(int i=0; i<dbList.size(); i++){
+			HashMap<String, String> entry = dbList.get(i);
+			Log.i(TAG, entry.get(this.getApplicationContext().getString(R.string.COUPON_ID)));
+			Log.i(TAG, entry.get(this.getApplicationContext().getString(R.string.COUPON_IMAGE)));
+			Log.i(TAG, entry.get(this.getApplicationContext().getString(R.string.COUPON_EXPIRATION)));
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*dbList = db.getAllRestaurantDetailsOf("Aztec Market & Convenience Store");
 		Log.i(TAG, "Aztec Market Details: "+String.valueOf(dbList.size()));
 		for(int i=0; i<dbList.size(); i++){
 			HashMap<String, String> entry = dbList.get(i);
@@ -89,7 +110,7 @@ public class PlainTestActivity extends ListActivity {
 		}
 		
 		Log.i(TAG, "******************");
-		dbList = db.getUniqueLocationsExceptFarmersMarket();
+		dbList = db.getUniqueLocations();
 		Log.i(TAG, "All Locations Except Farmers Market: "+String.valueOf(dbList.size()));
 		for(int i=0; i<dbList.size(); i++){
 			HashMap<String, String> entry = dbList.get(i);
@@ -108,16 +129,7 @@ public class PlainTestActivity extends ListActivity {
 		}
 		
 		Log.i(TAG, "******************");
-		dbList = db.getRestaurantsAtFarmersMarket();
-		Log.i(TAG, "All Rests At: "+String.valueOf(dbList.size()));
-		for(int i=0; i<dbList.size(); i++){
-			HashMap<String, String> entry = dbList.get(i);
-			Log.i(TAG, entry.get(this.getApplicationContext().getString(R.string.RESTAURANT_ID)));
-			//Log.i(TAG, entry.get(this.getApplicationContext().getString(R.string.RESTAURANT_IMAGE)));
-			Log.i(TAG, entry.get(this.getApplicationContext().getString(R.string.RESTAURANT_NAME)));
-		}
-		
-		
+
 		
 		
 /*		Log.i(TAG, "******************");
@@ -188,16 +200,7 @@ public class PlainTestActivity extends ListActivity {
 		
 		
 	}
-	
-	private ArrayList<String> getNames(ArrayList<HashMap<String, String>> contactsList){
-		ArrayList<String> names = new ArrayList<String>();
-		for(HashMap<String, String> each: contactsList){
-			names.add(each.get("name"));
-			Log.i(TAG, each.get("name"));
-		}
-		
-		return names;
-	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

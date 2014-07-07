@@ -34,10 +34,10 @@
             android:name="sdsu.apps.sdsudining.RestaurantsListActivity"
             android:label="@string/restaurantsString" >
         </activity>
-        <activity android:name="sdsu.apps.sdsudining.BrowseByLocationActivity" >
+        <activity android:name="sdsu.apps.sdsudining.BrowseByLocationListActivity" >
         </activity>
         <activity
-            android:name="sdsu.apps.sdsudining.CouponsActivity"
+            android:name="sdsu.apps.sdsudining.CouponsListActivity"
             android:label="@string/couponsString" >
         </activity>
         <activity
@@ -49,11 +49,11 @@
             android:label="@string/title_activity_plain_test_list_item" >
         </activity>
         <activity
-            android:name="sdsu.apps.sdsudining.fragements.CateringContactFragmentActivity"
+            android:name="sdsu.apps.sdsudining.fragements.DisplayHousFragment"
             android:label="@string/title_activity_catering_contact" >
         </activity>
         <activity
-            android:name="sdsu.apps.sdsudining.fragements.DisplayInfoFragment"
+            android:name="sdsu.apps.sdsudining.fragements.DisplayAboutFragment"
             android:label="@string/title_activity_display_info_fragment" >
         </activity>
         <activity
@@ -85,8 +85,12 @@
             android:label="@string/title_activity_restaurants_at_location_list" >
         </activity>
         <activity
-            android:name="sdsu.apps.sdsudining.RestaurantsAtLocationListRowActivity"
+            android:name="sdsu.apps.sdsudining.RestaurantsAtLocationListRow"
             android:label="@string/title_activity_restaurants_at_location_list_row" >
+        </activity>
+        <activity
+            android:name="sdsu.apps.sdsudining.CouponsListRow"
+            android:label="@string/title_activity_coupons_list_row" >
         </activity>
     </application>
 

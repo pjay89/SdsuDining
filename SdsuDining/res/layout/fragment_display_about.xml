@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignParentLeft="true"
-    android:layout_below="@+id/infoText" >
+    android:layout_below="@+id/aboutText" >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,10 +13,10 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context=".DisplayInfoFragment" >
+        tools:context=".DisplayAboutFragment" >
 
         <TextView
-            android:id="@+id/infoText"
+            android:id="@+id/aboutText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"

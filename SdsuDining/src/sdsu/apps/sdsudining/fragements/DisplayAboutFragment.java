@@ -8,14 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class DisplayInfoFragment extends Fragment {
+public class DisplayAboutFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-		View rootView = inflater.inflate(R.layout.fragment_display_info, container, false);
+		View rootView = inflater.inflate(R.layout.fragment_display_about, container, false);
 		
-		TextView infoText = (TextView) rootView.findViewById(R.id.infoText);
-		infoText.setText(getArguments().getString("info"));
+		TextView aboutText = (TextView) rootView.findViewById(R.id.aboutText);
+		aboutText.setText(getArguments().getString(getActivity().getResources().getString(R.string.about)));
 		return rootView;
 	}
 

@@ -1,0 +1,29 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TextView
+        android:id="@+id/noCouponsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:text="@string/noCouponsString"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/sdsu_red"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/couponsList"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/couponsListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+        </ListView>
+    </LinearLayout>
+
+</RelativeLayout>

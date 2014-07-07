@@ -3,7 +3,7 @@ package sdsu.apps.sdsudining;
 
 import java.util.ArrayList;
 
-import sdsu.apps.sdsudining.fragements.CateringContactFragmentActivity;
+import sdsu.apps.sdsudining.fragements.DisplayHousFragment;
 import sdsu.apps.sdsudining.util.SectionsPagerAdapter;
 import sdsu.apps.sdsudining.webService.DataFetcher;
 

@@ -44,7 +44,7 @@ public class RestaurantsListActivity extends Activity {
 		browseByMap.setOnClickListener(getBrowseByMapButtonListener);
 
 		SdsuDBHelper db = new SdsuDBHelper(this);
-		ArrayList<HashMap<String,String>> dbList = db.getUniqueRestaurantsExceptFarmersMarket();
+		ArrayList<HashMap<String,String>> dbList = db.getUniqueRestaurants();
 
 
 		rootAQuery = new AQuery(this);
@@ -107,7 +107,7 @@ public class RestaurantsListActivity extends Activity {
 
 		@Override
 		public void onClick(View v) {
-			Intent intent = new Intent(RestaurantsListActivity.this, BrowseByLocationActivity.class);
+			Intent intent = new Intent(RestaurantsListActivity.this, BrowseByLocationListActivity.class);
 			intent.putExtra("labelString", getResources().getString(R.string.browseByMapString));
 			startActivity(intent);
 		}

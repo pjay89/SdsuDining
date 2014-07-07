@@ -13,28 +13,20 @@ public class CouponsParser extends SdsuDiningParser{
 
 	private Context context;
 
-	private static  String TABLE_NAME;
+	private static String COUPON_OBJECT_TAG;
 	private static String COUPON_ID;
 	private static String COUPON_IMAGE;
-	private static String COUPON_LOCATION_ID;
-	private static String COUPON_RESTAURANT_ID;
-	private static String COUPON_RESTAURANT_NAME;
-	private static String COUPON_DEAL;
 	private static String COUPON_EXPIRATION;
 	
 	private JSONArray coupon = null;
 
-	private String TAG = "COUPON PARSER";
+	private String TAG = "PARSER";
 
 	public CouponsParser(String url, Context context){
 		this.context = context;
-		TABLE_NAME = context.getString(R.string.CATERING_TABLE);
+		COUPON_OBJECT_TAG = context.getString(R.string.COUPON_OBJECT_TAG);
 		COUPON_ID = context.getString(R.string.COUPON_ID);
 		COUPON_IMAGE = context.getString(R.string.COUPON_IMAGE);
-		COUPON_LOCATION_ID = context.getString(R.string.COUPON_LOCATION_ID);
-		COUPON_RESTAURANT_ID = context.getString(R.string.COUPON_RESTAURANT_ID);
-		COUPON_RESTAURANT_NAME = context.getString(R.string.COUPON_RESTAURANT_NAME);
-		COUPON_DEAL = context.getString(R.string.COUPON_DEAL);
 		COUPON_EXPIRATION = context.getString(R.string.COUPON_EXPIRATION);
 
 		AsyncWebServiceCall ws = new AsyncWebServiceCall();
@@ -52,19 +44,16 @@ public class CouponsParser extends SdsuDiningParser{
 				if(jsonString != null){
 					try {
 						JSONObject jsonObj = new JSONObject(jsonString);
-						coupon = jsonObj.getJSONArray(TABLE_NAME);
+						coupon = jsonObj.getJSONArray(COUPON_OBJECT_TAG);
 						SdsuDBHelper db = new SdsuDBHelper(context);
+						db.deleteCouponTable();
 						
 						for(int i=0; i<coupon.length(); i++){
 							JSONObject entry = coupon.getJSONObject(i);
 							String id = entry.getString(COUPON_ID);
 							String image = entry.getString(COUPON_IMAGE);
-							String locationId = entry.getString(COUPON_LOCATION_ID);
-							String restaurantId = entry.getString(COUPON_RESTAURANT_ID);
-							String restaurantName = entry.getString(COUPON_RESTAURANT_NAME);
-							String deal = entry.getString(COUPON_DEAL);
 							String expiration = entry.getString(COUPON_EXPIRATION);
-							//db.addToDB(id, image, locationId, restaurantId, restaurantName, deal, expiration);
+							db.addToCouponTable(id, image, expiration);
 						}
 						
 					}

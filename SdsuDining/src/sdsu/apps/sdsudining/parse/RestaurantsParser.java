@@ -23,7 +23,7 @@ public class RestaurantsParser extends SdsuDiningParser{
 
 	private JSONArray restaurants = null;
 
-	private String TAG = "RESTAURANTS PARSER";
+	private String TAG = "PARSER";
 
 	public RestaurantsParser(String url, Context context){
 		this.context = context;

@@ -7,16 +7,16 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".RestaurantsAtLocationListRowActivity" >
+    tools:context=".RestaurantsAtLocationListRow" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/noCouponsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView" />
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/couponsListViewImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"

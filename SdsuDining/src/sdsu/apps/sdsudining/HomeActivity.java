@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import sdsu.apps.sdsudining.parse.CateringParser;
 import sdsu.apps.sdsudining.parse.ContactParser;
+import sdsu.apps.sdsudining.parse.CouponsParser;
+import sdsu.apps.sdsudining.parse.FarmersParser;
 import sdsu.apps.sdsudining.parse.HoursParser;
 import sdsu.apps.sdsudining.parse.RestaurantsParser;
 import sdsu.apps.sdsudining.parse.SweetParser;
@@ -50,6 +52,8 @@ public class HomeActivity extends Activity {
 				new ContactParser(this.getString(R.string.CONTACT_URL), this.getApplicationContext());
 				new SweetParser(this.getString(R.string.SWEET_URL), this.getApplicationContext());
 				new CateringParser(this.getString(R.string.CATERING_URL), this.getApplicationContext());
+				new CouponsParser(this.getString(R.string.COUPON_URL), this.getApplicationContext());
+				new FarmersParser(this.getString(R.string.FARMERS_URL), this.getApplicationContext());
 				new RestaurantsParser(this.getString(R.string.RESTAURANTS_URL), this.getApplicationContext());
 				new HoursParser(this.getString(R.string.HOURS_URL), this.getApplicationContext());
 				//new BrowseByLocationParser("http://api.androidhive.info/contacts/", this.getApplicationContext());
@@ -121,8 +125,14 @@ public class HomeActivity extends Activity {
 
 		@Override
 		public void onClick(View v) {
-			Intent intent = new Intent(HomeActivity.this, BrowseByLocationActivity.class);
+			ArrayList<String> titles = new ArrayList<String>();
+			titles.add(getResources().getString(R.string.contact));
+			titles.add(getResources().getString(R.string.hours));
+			titles.add(getResources().getString(R.string.about));
+			
+			Intent intent = new Intent(HomeActivity.this, DetailsActivity.class);
 			intent.putExtra("labelString", getResources().getString(R.string.farmersMarketString));
+			intent.putExtra("titles", titles);
 			startActivity(intent);
 		}
 
@@ -132,7 +142,7 @@ public class HomeActivity extends Activity {
 
 		@Override
 		public void onClick(View v) {
-			Intent intent = new Intent(HomeActivity.this, PlainTestActivity.class);
+			Intent intent = new Intent(HomeActivity.this, CouponsListActivity.class);
 			intent.putExtra("labelString", getResources().getString(R.string.couponsString));
 			startActivity(intent);
 		}
@@ -145,8 +155,8 @@ public class HomeActivity extends Activity {
 		public void onClick(View v) {
 			ArrayList<String> titles = new ArrayList<String>();
 			titles.add(getResources().getString(R.string.contact));
-			titles.add(getResources().getString(R.string.information));
-			titles.add(getResources().getString(R.string.getting_started));
+			titles.add(getResources().getString(R.string.hours));
+			titles.add(getResources().getString(R.string.about));
 			
 			Intent intent = new Intent(HomeActivity.this, DetailsActivity.class);
 			intent.putExtra("labelString", getResources().getString(R.string.cateringString));
@@ -162,8 +172,8 @@ public class HomeActivity extends Activity {
 		public void onClick(View v) {
 			ArrayList<String> titles = new ArrayList<String>();
 			titles.add(getResources().getString(R.string.contact));
-			titles.add(getResources().getString(R.string.menu));
-			titles.add(getResources().getString(R.string.brochure));
+			titles.add(getResources().getString(R.string.hours));
+			titles.add(getResources().getString(R.string.about));
 			
 			Intent intent = new Intent(HomeActivity.this, DetailsActivity.class);
 			intent.putExtra("labelString", getResources().getString(R.string.sweetString));
@@ -179,7 +189,8 @@ public class HomeActivity extends Activity {
 		public void onClick(View v) {
 			ArrayList<String> titles = new ArrayList<String>();
 			titles.add(getResources().getString(R.string.contact));
-			titles.add(getResources().getString(R.string.address));
+			titles.add(getResources().getString(R.string.hours));
+			titles.add(getResources().getString(R.string.about));
 			
 			Intent intent = new Intent(HomeActivity.this, DetailsActivity.class);
 			intent.putExtra("labelString", getResources().getString(R.string.contactUsString));

@@ -26,6 +26,9 @@ public class DisplayContactFragment extends Fragment {
 		TextView website = (TextView) rootView.findViewById(R.id.website);
 		website.setText(getArguments().getString(getActivity().getResources().getString(R.string.website)));
 		
+		TextView address = (TextView) rootView.findViewById(R.id.address);
+		address.setText(getArguments().getString(getActivity().getResources().getString(R.string.address)));
+		
 		return rootView;
 	}
 

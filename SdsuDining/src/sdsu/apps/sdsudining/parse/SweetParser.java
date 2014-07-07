@@ -13,12 +13,12 @@ public class SweetParser extends SdsuDiningParser{
 	private Context context;
 	
 	private static String SWEET_OBJECT_TAG;
-	private static String SWEET_PHONE;
-	private static String SWEET_FAX;
-	private static String SWEET_EMAIL;
-	private static String SWEET_WEBSITE;
-	private static String SWEET_MENU;
-	private static String SWEET_ORDER_FORM;
+	private static String DB_PHONE;
+	private static String DB_FAX;
+	private static String DB_EMAIL;
+	private static String DB_WEBSITE;
+	private static String DB_ADDRESS;
+	private static String DB_ABOUT;
 	
 	private JSONArray sweet = null;
 
@@ -27,12 +27,12 @@ public class SweetParser extends SdsuDiningParser{
 	public SweetParser(String url, Context context){
 		this.context = context;
 		SWEET_OBJECT_TAG = context.getString(R.string.SWEET_OBJECT_TAG);
-		SWEET_PHONE = context.getString(R.string.SWEET_PHONE);
-		SWEET_FAX = context.getString(R.string.SWEET_FAX);
-		SWEET_EMAIL = context.getString(R.string.SWEET_EMAIL);
-		SWEET_WEBSITE = context.getString(R.string.SWEET_WEBSITE);
-		SWEET_MENU = context.getString(R.string.SWEET_MENU);
-		SWEET_ORDER_FORM = context.getString(R.string.SWEET_ORDER_FORM);
+		DB_PHONE = context.getString(R.string.DB_PHONE);
+		DB_FAX = context.getString(R.string.DB_FAX);
+		DB_EMAIL = context.getString(R.string.DB_EMAIL);
+		DB_WEBSITE = context.getString(R.string.DB_WEBSITE);
+		DB_ADDRESS = context.getString(R.string.DB_ADDRESS);
+		DB_ABOUT = context.getString(R.string.DB_ABOUT);
 		
 		AsyncWebServiceCall ws = new AsyncWebServiceCall();
 		ws.execute(url);
@@ -55,13 +55,13 @@ public class SweetParser extends SdsuDiningParser{
 						
 						for(int i=0; i<sweet.length(); i++){
 							JSONObject entry = sweet.getJSONObject(i);
-							String phone = entry.getString(SWEET_PHONE);
-							String fax = entry.getString(SWEET_FAX);
-							String email = entry.getString(SWEET_EMAIL);
-							String website = entry.getString(SWEET_WEBSITE);
-							String menu = entry.getString(SWEET_MENU);
-							String orderForm = entry.getString(SWEET_ORDER_FORM);
-							db.addToSweetTable(phone, fax, email, website, menu, orderForm);
+							String phone = entry.getString(DB_PHONE);
+							String fax = entry.getString(DB_FAX);
+							String email = entry.getString(DB_EMAIL);
+							String website = entry.getString(DB_WEBSITE);
+							String address = entry.getString(DB_ADDRESS);
+							String about = entry.getString(DB_ABOUT);
+							db.addToSweetTable(phone, fax, email, website, address, about);
 						}
 					}
 					catch (JSONException e) {

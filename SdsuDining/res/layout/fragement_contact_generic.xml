@@ -1,12 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+   
+    <TableLayout
+        android:id="@+id/tableLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:stretchColumns="1">
 
         <TableRow
             android:id="@+id/tableRow1"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_horizontal_margin" >
 
@@ -14,7 +19,7 @@
                 android:id="@+id/phoneHeading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:text="@string/phone"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/sdsu_red"
@@ -24,13 +29,14 @@
                 android:id="@+id/phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_weight="1"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow1"
-            android:layout_width="fill_parent"
+            android:id="@+id/tableRow2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_horizontal_margin" >
 
@@ -38,7 +44,7 @@
                 android:id="@+id/faxHeading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:text="@string/fax"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/sdsu_red"
@@ -48,13 +54,14 @@
                 android:id="@+id/fax"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_weight="1"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow1"
-            android:layout_width="fill_parent"
+            android:id="@+id/tableRow3"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_horizontal_margin" >
 
@@ -62,7 +69,7 @@
                 android:id="@+id/emailHeading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:text="@string/email"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/sdsu_red"
@@ -70,15 +77,17 @@
 
             <TextView
                 android:id="@+id/email"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_weight="1"
+                android:autoLink="email"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow1"
-            android:layout_width="fill_parent"
+            android:id="@+id/tableRow4"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_horizontal_margin" >
 
@@ -86,7 +95,7 @@
                 android:id="@+id/websiteHeading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:text="@string/website"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/sdsu_red"
@@ -96,7 +105,36 @@
                 android:id="@+id/website"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_weight="1"
+                android:autoLink="web"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </TableRow>
-    </LinearLayout>
+
+        <TableRow
+            android:id="@+id/tableRow5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin" >
+
+            <TextView
+                android:id="@+id/addressHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:text="@string/address"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/sdsu_red"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_weight="1"
+                android:autoLink="map"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </TableRow>
+    </TableLayout>
+</ScrollView>

@@ -39,8 +39,7 @@ public class RestaurantsAtLocationListActivity extends Activity {
 	private AQuery rootAQuery;
 	private ArrayList<String> entries = new ArrayList<String>();
 	private ArrayList<String> restaurantNames = new ArrayList<String>();
-	private String labelString = "";
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,13 +47,13 @@ public class RestaurantsAtLocationListActivity extends Activity {
 
 		Intent intent = getIntent();
 		this.setTitle(intent.getStringExtra("labelString"));
-		
+
 		// Enable Home button on action bar
 		final ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
 		SdsuDBHelper db = new SdsuDBHelper(this);
-		ArrayList<HashMap<String,String>> dbList = db.getRestaurantsAt(labelString);
+		ArrayList<HashMap<String,String>> dbList = db.getRestaurantsAt(intent.getStringExtra("labelString"));
 
 
 		rootAQuery = new AQuery(this);

@@ -7,6 +7,7 @@
     <color name="red">#FF0000</color>
     <color name="green">#00BB00</color>
     <color name="orange">#FE9301</color>
+    <color name="gray">#C3C3C3</color>
     <color name="holo_sdsu_light">#A81933</color>
 
 </resources>

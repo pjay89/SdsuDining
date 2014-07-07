@@ -17,7 +17,15 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 
 	// Database Version
 	private static final int DATABASE_VERSION = 1;
-	
+
+
+	private static String DB_PHONE;
+	private static String DB_FAX;
+	private static String DB_EMAIL;
+	private static String DB_WEBSITE;
+	private static String DB_ADDRESS;
+	private static String DB_ABOUT;
+
 	// Restaurant Table
 	private static String RESTAURANT_TABLE;
 	private static String RESTAURANT_ID;
@@ -28,33 +36,23 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 	private static String RESTAURANT_PHONE;
 	private static String RESTAURANT_WEBSITE;
 
-	private static String DB_FARMERS_MARKET;
-	
+	// Farmers Market Table
+	private static String FARMERS_TABLE;
+
+	// Coupons Table
+	private static String COUPON_TABLE;
+	private static String COUPON_ID;
+	private static String COUPON_IMAGE;
+	private static String COUPON_EXPIRATION;
+
 	// Catering Table
 	private static String CATERING_TABLE;
-	private static String CATERING_PHONE;
-	private static String CATERING_FAX;
-	private static String CATERING_EMAIL;
-	private static String CATERING_ADDRESS;
-	private static String CATERING_SNIPPET;
-	private static String CATERING_GUIDELINES;
-	private static String CATERING_SERVICE_LEVEL;
 
 	// Sweet Table
 	private static String SWEET_TABLE; 
-	private static String SWEET_PHONE;
-	private static String SWEET_FAX;
-	private static String SWEET_EMAIL;
-	private static String SWEET_WEBSITE;
-	private static String SWEET_MENU;
-	private static String SWEET_ORDER_FORM;
 
 	// Contact Table
 	private static String CONTACT_TABLE; 
-	private static String CONTACT_PHONE;
-	private static String CONTACT_FAX;
-	private static String CONTACT_EMAIL;
-	private static String CONTACT_ADDRESS;
 
 	// Hours Table
 	private static String HOURS_TABLE; 
@@ -62,7 +60,7 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 	private static String HOURS_DAY;
 	private static String HOURS_OPEN;
 	private static String HOURS_CLOSE;
-	
+
 
 
 
@@ -77,36 +75,32 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 		RESTAURANT_LOCATION_NAME = context.getString(R.string.RESTAURANT_LOCATION_NAME);
 		RESTAURANT_PHONE = context.getString(R.string.RESTAURANT_PHONE);
 		RESTAURANT_WEBSITE = context.getString(R.string.RESTAURANT_WEBSITE);
-		
-		DB_FARMERS_MARKET = context.getString(R.string.DB_FARMERS_MARKET);
-		
+
+		DB_PHONE = context.getString(R.string.DB_PHONE);
+		DB_FAX = context.getString(R.string.DB_FAX);
+		DB_EMAIL = context.getString(R.string.DB_EMAIL);
+		DB_WEBSITE = context.getString(R.string.DB_WEBSITE);
+		DB_ADDRESS = context.getString(R.string.DB_ADDRESS);
+		DB_ABOUT = context.getString(R.string.DB_ABOUT);
+
+		//Farmer's Market Table
+		FARMERS_TABLE = context.getString(R.string.FARMERS_TABLE);
+
+		//Coupon Table
+		COUPON_TABLE = context.getString(R.string.COUPON_TABLE);
+		COUPON_ID = context.getString(R.string.COUPON_ID);
+		COUPON_IMAGE = context.getString(R.string.COUPON_IMAGE);
+		COUPON_EXPIRATION = context.getString(R.string.COUPON_EXPIRATION);
+
 		//Catering Table
 		CATERING_TABLE = context.getString(R.string.CATERING_TABLE);
-		CATERING_PHONE = context.getString(R.string.CATERING_PHONE);
-		CATERING_FAX = context.getString(R.string.CATERING_FAX);
-		CATERING_EMAIL = context.getString(R.string.CATERING_EMAIL);
-		CATERING_ADDRESS = context.getString(R.string.CATERING_ADDRESS);
-		CATERING_SNIPPET = context.getString(R.string.CATERING_SNIPPET);
-		CATERING_GUIDELINES = context.getString(R.string.CATERING_GUIDELINES);
-		CATERING_SERVICE_LEVEL = context.getString(R.string.CATERING_SERVICE_LEVEL);
 
 		//Sweet Table
 		SWEET_TABLE = context.getString(R.string.SWEET_TABLE);
-		SWEET_PHONE = context.getString(R.string.SWEET_PHONE);
-		SWEET_FAX = context.getString(R.string.SWEET_FAX);
-		SWEET_EMAIL = context.getString(R.string.SWEET_EMAIL);
-		SWEET_WEBSITE = context.getString(R.string.SWEET_WEBSITE);
-		SWEET_MENU = context.getString(R.string.SWEET_MENU);
-		SWEET_ORDER_FORM = context.getString(R.string.SWEET_ORDER_FORM);
-
 
 		//Contact Table
 		CONTACT_TABLE = context.getString(R.string.CONTACT_TABLE);
-		CONTACT_PHONE = context.getString(R.string.CONTACT_PHONE);
-		CONTACT_FAX = context.getString(R.string.CONTACT_FAX);
-		CONTACT_EMAIL = context.getString(R.string.CONTACT_EMAIL);
-		CONTACT_ADDRESS = context.getString(R.string.CONTACT_ADDRESS);
-		
+
 		//Hours Table
 		HOURS_TABLE = context.getString(R.string.HOURS_TABLE);
 		HOURS_RESTAURANT_ID = context.getString(R.string.HOURS_RESTAURANT_ID);
@@ -116,14 +110,6 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 	}
 
 
-
-
-
-
-
-
-
-
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// RESTAURANT table create statement
@@ -131,43 +117,59 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 				+ RESTAURANT_TABLE + "(" + RESTAURANT_ID + " VARCHAR PRIMARY KEY," + RESTAURANT_NAME
 				+ " TEXT," + RESTAURANT_IMAGE + " TEXT," + RESTAURANT_LOCATION_ID 
 				+ " TEXT," + RESTAURANT_LOCATION_NAME + " TEXT," + RESTAURANT_PHONE 
-				+ " TEXT," + RESTAURANT_WEBSITE + " TEXT"+ ")"; 
+				+ " TEXT," + RESTAURANT_WEBSITE + " TEXT)"; 
 		Log.i(TAG, CREATE_TABLE_RESTAURANT);
 		db.execSQL(CREATE_TABLE_RESTAURANT);
 
+		//FARMERS table create statement
+		String CREATE_TABLE_FARMERS = "CREATE TABLE "
+				+ FARMERS_TABLE + "(id INTEGER PRIMARY KEY," + DB_PHONE
+				+ " TEXT," + DB_FAX + " TEXT," + DB_EMAIL 
+				+ " TEXT," + DB_WEBSITE + " TEXT," + DB_ADDRESS 
+				+ " TEXT," + DB_ABOUT + " TEXT)"; 
+		Log.i(TAG, CREATE_TABLE_FARMERS);
+		db.execSQL(CREATE_TABLE_FARMERS);
+		
+		//COUPON table create statement
+		String CREATE_TABLE_COUPON = "CREATE TABLE "
+				+ COUPON_TABLE + "(" + COUPON_ID + " VARCHAR PRIMARY KEY," + COUPON_IMAGE
+				+ " TEXT," + COUPON_EXPIRATION + " DATE)"; 
+		Log.i(TAG, CREATE_TABLE_COUPON);
+		db.execSQL(CREATE_TABLE_COUPON);
+
 		//CATERING table create statement
 		String CREATE_TABLE_CATERING = "CREATE TABLE "
-				+ CATERING_TABLE + "(id INTEGER PRIMARY KEY," + CATERING_PHONE
-				+ " TEXT," + CATERING_FAX + " TEXT," + CATERING_EMAIL 
-				+ " TEXT," + CATERING_ADDRESS + " TEXT," + CATERING_SNIPPET 
-				+ " TEXT," + CATERING_GUIDELINES + " TEXT," + CATERING_SERVICE_LEVEL 
-				+ " TEXT"+ ")"; 
+				+ CATERING_TABLE + "(id INTEGER PRIMARY KEY," + DB_PHONE
+				+ " TEXT," + DB_FAX + " TEXT," + DB_EMAIL 
+				+ " TEXT," + DB_WEBSITE + " TEXT," + DB_ADDRESS 
+				+ " TEXT," + DB_ABOUT + " TEXT)"; 
 		Log.i(TAG, CREATE_TABLE_CATERING);
 		db.execSQL(CREATE_TABLE_CATERING);
 
 		// SWEET table create statement
 		String CREATE_TABLE_SWEET = "CREATE TABLE "
-				+ SWEET_TABLE + "( id INTEGER PRIMARY KEY," + SWEET_PHONE
-				+ " TEXT," + SWEET_FAX + " TEXT," + SWEET_EMAIL 
-				+ " TEXT," + SWEET_WEBSITE + " TEXT," + SWEET_MENU 
-				+ " TEXT," + SWEET_ORDER_FORM + " TEXT"+ ")";
+				+ SWEET_TABLE + "( id INTEGER PRIMARY KEY," + DB_PHONE
+				+ " TEXT," + DB_FAX + " TEXT," + DB_EMAIL 
+				+ " TEXT," + DB_WEBSITE + " TEXT," + DB_ADDRESS 
+				+ " TEXT," + DB_ABOUT + " TEXT)";
 		Log.i(TAG, CREATE_TABLE_SWEET);
 		db.execSQL(CREATE_TABLE_SWEET);
 
 
 		// CONTACT table create statement
 		String CREATE_TABLE_CONTACT = "CREATE TABLE "
-				+ CONTACT_TABLE + "(id INTEGER PRIMARY KEY," + CONTACT_PHONE
-				+ " TEXT," + CONTACT_FAX + " TEXT," + CONTACT_EMAIL 
-				+ " TEXT," + CONTACT_ADDRESS	+ " TEXT"+ ")"; 
+				+ CONTACT_TABLE + "(id INTEGER PRIMARY KEY," + DB_PHONE
+				+ " TEXT," + DB_FAX + " TEXT," + DB_EMAIL 
+				+ " TEXT," + DB_WEBSITE + " TEXT," + DB_ADDRESS 
+				+ " TEXT," + DB_ABOUT + " TEXT)"; 
 		Log.i(TAG, CREATE_TABLE_CONTACT);
 		db.execSQL(CREATE_TABLE_CONTACT);
-		
+
 		// HOURS table create statement
 		String CREATE_TABLE_HOURS = "CREATE TABLE "
 				+ HOURS_TABLE + "(id INTEGER PRIMARY KEY," + HOURS_RESTAURANT_ID
 				+ " TEXT," + HOURS_DAY + " TEXT," + HOURS_OPEN 
-				+ " TEXT," + HOURS_CLOSE + " TEXT"+ ")";
+				+ " TEXT," + HOURS_CLOSE + " TEXT)";
 		Log.i(TAG, CREATE_TABLE_HOURS);
 		db.execSQL(CREATE_TABLE_HOURS);
 	}
@@ -175,13 +177,15 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL("DROP TABLE IF EXISTS " + RESTAURANT_TABLE);
+		db.execSQL("DROP TABLE IF EXISTS " + FARMERS_TABLE);
+		db.execSQL("DROP TABLE IF EXISTS " + COUPON_TABLE);
 		db.execSQL("DROP TABLE IF EXISTS " + CATERING_TABLE);
 		db.execSQL("DROP TABLE IF EXISTS " + SWEET_TABLE);
 		db.execSQL("DROP TABLE IF EXISTS " + CONTACT_TABLE);
 		db.execSQL("DROP TABLE IF EXISTS " + HOURS_TABLE);
 		onCreate(db);
 	}
-	
+
 	/* ******* RESTAURANTS ******* */
 	public void addToRestaurantTable(String id, String name, String image, String locationId, String locationName, String phone, String website){
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -198,11 +202,11 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 		db.insert(RESTAURANT_TABLE, null, values);
 		db.close();
 	}
-	
-	
-	public ArrayList<HashMap<String, String>> getUniqueRestaurantsExceptFarmersMarket(){
+
+
+	public ArrayList<HashMap<String, String>> getUniqueRestaurants(){
 		ArrayList<HashMap<String, String>> restaurants = new ArrayList<HashMap<String,String>>();
-		String query = "SELECT " + RESTAURANT_NAME + ", "+ RESTAURANT_IMAGE + " FROM " + RESTAURANT_TABLE + " WHERE " + RESTAURANT_LOCATION_NAME + " <> '" + DB_FARMERS_MARKET + "' GROUP BY " + RESTAURANT_NAME;
+		String query = "SELECT " + RESTAURANT_NAME + ", "+ RESTAURANT_IMAGE + " FROM " + RESTAURANT_TABLE + " GROUP BY " + RESTAURANT_NAME;
 
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(query, null);
@@ -220,7 +224,7 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 
 		return restaurants;
 	}
-	
+
 	public ArrayList<HashMap<String, String>> getAllRestaurantDetailsOf(String restaurantName){
 		ArrayList<HashMap<String, String>> restaurants = new ArrayList<HashMap<String,String>>();
 		String query = "SELECT * FROM " + RESTAURANT_TABLE + " WHERE " + RESTAURANT_NAME + "=\"" + restaurantName + "\" ORDER BY " + RESTAURANT_LOCATION_NAME;
@@ -246,11 +250,11 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 
 		return restaurants;
 	}
-	
-	public ArrayList<HashMap<String, String>> getUniqueLocationsExceptFarmersMarket(){
+
+	public ArrayList<HashMap<String, String>> getUniqueLocations(){
 		ArrayList<HashMap<String, String>> locations = new ArrayList<HashMap<String,String>>();
-		String query = "SELECT " + RESTAURANT_LOCATION_NAME + ", "+ RESTAURANT_LOCATION_ID + " FROM " + RESTAURANT_TABLE + " WHERE " + RESTAURANT_LOCATION_NAME + " <> '" + DB_FARMERS_MARKET + "' GROUP BY " + RESTAURANT_LOCATION_NAME;
-		
+		String query = "SELECT " + RESTAURANT_LOCATION_NAME + ", "+ RESTAURANT_LOCATION_ID + " FROM " + RESTAURANT_TABLE + " GROUP BY " + RESTAURANT_LOCATION_NAME;
+
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(query, null);
 		//Move to first row
@@ -267,8 +271,8 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 
 		return locations;
 	}
-	
-		
+
+
 	public ArrayList<HashMap<String, String>> getRestaurantsAt(String locationName){
 		ArrayList<HashMap<String, String>> restaurants = new ArrayList<HashMap<String,String>>();
 		String query = "SELECT " + RESTAURANT_ID + ", "+ RESTAURANT_NAME + ", "+ RESTAURANT_IMAGE + " FROM " + RESTAURANT_TABLE + " WHERE " + RESTAURANT_LOCATION_NAME + "=\"" + locationName + "\"";
@@ -290,18 +294,8 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 
 		return restaurants;
 	}
-	
-	
-	public ArrayList<HashMap<String, String>> getRestaurantsAtFarmersMarket(){
-		return getRestaurantsAt(DB_FARMERS_MARKET);
-	}
 
 
-	
-
-	
-
-	
 	public ArrayList<HashMap<String, String>> getAllRestaurantsAt(String locationId){
 		ArrayList<HashMap<String, String>> restaurants = new ArrayList<HashMap<String,String>>();
 		String query = "SELECT * FROM " + RESTAURANT_TABLE + " WHERE " + RESTAURANT_LOCATION_ID + "=\"" + locationId + "\"";
@@ -327,21 +321,100 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 
 		return restaurants;
 	}
+
+
+	/* ******* FARMER'S MARKET ******* */
+	public void addToFarmersTable(String phone, String fax, String email, String website, String address, String about){
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(DB_PHONE, phone);
+		values.put(DB_FAX, fax);
+		values.put(DB_EMAIL, email);
+		values.put(DB_WEBSITE, website);
+		values.put(DB_ADDRESS, address);
+		values.put(DB_ABOUT, about);
+
+		db.insert(FARMERS_TABLE, null, values);
+		db.close();
+	}
+
+	public ArrayList<HashMap<String, String>> getFarmersDetails(){
+		ArrayList<HashMap<String, String>> farmers = new ArrayList<HashMap<String,String>>();
+		String query = "SELECT * FROM " + FARMERS_TABLE;
+
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.rawQuery(query, null);
+		//Move to first row
+		cursor.moveToFirst();
+		while(cursor.getCount() > 0 && !cursor.isAfterLast()){
+			HashMap<String, String> entry = new HashMap<String, String>();
+			entry.put(DB_PHONE, cursor.getString(1));
+			entry.put(DB_FAX, cursor.getString(2));
+			entry.put(DB_EMAIL, cursor.getString(3));
+			entry.put(DB_WEBSITE, cursor.getString(4));
+			entry.put(DB_ADDRESS, cursor.getString(5));
+			entry.put(DB_ABOUT, cursor.getString(6));
+
+			farmers.add(entry);
+			cursor.moveToNext();
+		}
+		cursor.close();
+		db.close();
+
+		return farmers;
+	}	
+
+	
+	/* ******* COUPON ******* */
+	public void addToCouponTable(String id, String image, String expiration){
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(COUPON_ID, id);
+		values.put(COUPON_IMAGE, image);
+		values.put(COUPON_EXPIRATION, expiration);
+
+		db.insert(COUPON_TABLE, null, values);
+		db.close();
+	}
+
+	public ArrayList<HashMap<String, String>> getCouponDetails(){
+		ArrayList<HashMap<String, String>> coupons = new ArrayList<HashMap<String,String>>();
+		String query = "SELECT * FROM " + COUPON_TABLE + " WHERE " + COUPON_EXPIRATION + " >= DATE('now', 'localtime') OR " + COUPON_EXPIRATION + "= '' ORDER BY " + COUPON_EXPIRATION;
+
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.rawQuery(query, null);
+		//Move to first row
+		cursor.moveToFirst();
+		while(cursor.getCount() > 0 && !cursor.isAfterLast()){
+			HashMap<String, String> entry = new HashMap<String, String>();
+			entry.put(COUPON_ID, cursor.getString(0));
+			entry.put(COUPON_IMAGE, cursor.getString(1));
+			entry.put(COUPON_EXPIRATION, cursor.getString(2));
+
+			coupons.add(entry);
+			cursor.moveToNext();
+		}
+		cursor.close();
+		db.close();
+
+		return coupons;
+	}
 	
 	
 
 	/* ******* CATERING ******* */
-	public void addToCateringTable(String phone, String fax, String email, String address, String snippet, String guidelines, String level){
+	public void addToCateringTable(String phone, String fax, String email, String website, String address, String about){
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
-		values.put(CATERING_PHONE, phone);
-		values.put(CATERING_FAX, fax);
-		values.put(CATERING_EMAIL, email);
-		values.put(CATERING_ADDRESS, address);
-		values.put(CATERING_SNIPPET, snippet);
-		values.put(CATERING_GUIDELINES, guidelines);
-		values.put(CATERING_SERVICE_LEVEL, level);
+		values.put(DB_PHONE, phone);
+		values.put(DB_FAX, fax);
+		values.put(DB_EMAIL, email);
+		values.put(DB_WEBSITE, website);
+		values.put(DB_ADDRESS, address);
+		values.put(DB_ABOUT, about);
 
 		db.insert(CATERING_TABLE, null, values);
 		db.close();
@@ -357,13 +430,13 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 		cursor.moveToFirst();
 		while(cursor.getCount() > 0 && !cursor.isAfterLast()){
 			HashMap<String, String> entry = new HashMap<String, String>();
-			entry.put(CATERING_PHONE, cursor.getString(1));
-			entry.put(CATERING_FAX, cursor.getString(2));
-			entry.put(CATERING_EMAIL, cursor.getString(3));
-			entry.put(CATERING_ADDRESS, cursor.getString(4));
-			entry.put(CATERING_SNIPPET, cursor.getString(5));
-			entry.put(CATERING_GUIDELINES, cursor.getString(6));
-			entry.put(CATERING_SERVICE_LEVEL, cursor.getString(7));
+			entry.put(DB_PHONE, cursor.getString(1));
+			entry.put(DB_FAX, cursor.getString(2));
+			entry.put(DB_EMAIL, cursor.getString(3));
+			entry.put(DB_WEBSITE, cursor.getString(4));
+			entry.put(DB_ADDRESS, cursor.getString(5));
+			entry.put(DB_ABOUT, cursor.getString(6));
+
 			catering.add(entry);
 			cursor.moveToNext();
 		}
@@ -376,16 +449,16 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 
 
 	/* ******* SWEET ******* */
-	public void addToSweetTable(String phone, String fax, String email, String website, String menu, String orderForm){
+	public void addToSweetTable(String phone, String fax, String email, String website, String address, String about){
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
-		values.put(SWEET_PHONE, phone);
-		values.put(SWEET_FAX, fax);
-		values.put(SWEET_EMAIL, email);
-		values.put(SWEET_WEBSITE, website);
-		values.put(SWEET_MENU, menu);
-		values.put(SWEET_ORDER_FORM, orderForm);
+		values.put(DB_PHONE, phone);
+		values.put(DB_FAX, fax);
+		values.put(DB_EMAIL, email);
+		values.put(DB_WEBSITE, website);
+		values.put(DB_ADDRESS, address);
+		values.put(DB_ABOUT, about);
 
 		db.insert(SWEET_TABLE, null, values);
 		db.close();
@@ -402,12 +475,12 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 		cursor.moveToFirst();
 		while(cursor.getCount() > 0 && !cursor.isAfterLast()){
 			HashMap<String, String> entry = new HashMap<String, String>();
-			entry.put(SWEET_PHONE, cursor.getString(1));
-			entry.put(SWEET_FAX, cursor.getString(2));
-			entry.put(SWEET_EMAIL, cursor.getString(3));
-			entry.put(SWEET_WEBSITE, cursor.getString(4));
-			entry.put(SWEET_MENU, cursor.getString(5));
-			entry.put(SWEET_ORDER_FORM, cursor.getString(6));
+			entry.put(DB_PHONE, cursor.getString(1));
+			entry.put(DB_FAX, cursor.getString(2));
+			entry.put(DB_EMAIL, cursor.getString(3));
+			entry.put(DB_WEBSITE, cursor.getString(4));
+			entry.put(DB_ADDRESS, cursor.getString(5));
+			entry.put(DB_ABOUT, cursor.getString(6));
 			sweet.add(entry);
 			cursor.moveToNext();
 		}
@@ -421,14 +494,16 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 
 
 	/* ******* CONTACT ******* */
-	public void addToContactTable(String phone, String fax, String email, String address){
+	public void addToContactTable(String phone, String fax, String email, String website, String address, String about){
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
-		values.put(CONTACT_PHONE, phone);
-		values.put(CONTACT_FAX, fax);
-		values.put(CONTACT_EMAIL, email);
-		values.put(CONTACT_ADDRESS, address);
+		values.put(DB_PHONE, phone);
+		values.put(DB_FAX, fax);
+		values.put(DB_EMAIL, email);
+		values.put(DB_WEBSITE, website);
+		values.put(DB_ADDRESS, address);
+		values.put(DB_ABOUT, about);
 
 		db.insert(CONTACT_TABLE, null, values);
 		db.close();
@@ -444,10 +519,12 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 		cursor.moveToFirst();
 		while(cursor.getCount() > 0 && !cursor.isAfterLast()){
 			HashMap<String, String> entry = new HashMap<String, String>();
-			entry.put(CONTACT_PHONE, cursor.getString(1));
-			entry.put(CONTACT_FAX, cursor.getString(2));
-			entry.put(CONTACT_EMAIL, cursor.getString(3));
-			entry.put(CONTACT_ADDRESS, cursor.getString(4));
+			entry.put(DB_PHONE, cursor.getString(1));
+			entry.put(DB_FAX, cursor.getString(2));
+			entry.put(DB_EMAIL, cursor.getString(3));
+			entry.put(DB_WEBSITE, cursor.getString(4));
+			entry.put(DB_ADDRESS, cursor.getString(5));
+			entry.put(DB_ABOUT, cursor.getString(6));
 			contact.add(entry);
 			cursor.moveToNext();
 		}
@@ -456,9 +533,9 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 
 		return contact;
 	}
-	
-	
-	
+
+
+
 	/* ******* HOURS ******* */
 	public void addToHoursTable(String restaurantId, String day, String open, String close){
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -468,15 +545,15 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 		values.put(HOURS_DAY, day);
 		values.put(HOURS_OPEN, open);
 		values.put(HOURS_CLOSE, close);
-		
+
 		db.insert(HOURS_TABLE, null, values);
 		db.close();
 	}
-	
+
 	public String getHoursFor(String restaurandId, String day){
 		String hours = "";
 		String query = "SELECT " + HOURS_OPEN + ", " + HOURS_CLOSE + " FROM " + HOURS_TABLE + " WHERE " + HOURS_RESTAURANT_ID + "=\"" + restaurandId + "\" AND " + HOURS_DAY + "=\"" + day + "\"";
-		
+
 
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(query, null);
@@ -492,10 +569,10 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 		hours = hours.substring(1);
 		return hours;
 	}
-	
+
 	public ArrayList<String[]> getHoursForRestaurantStatus(String restaurandId, String today){
 		ArrayList<String[]> closingTimes = new ArrayList<String[]>();
-		
+
 		String query = "SELECT " + HOURS_OPEN + ", " + HOURS_CLOSE + " FROM " + HOURS_TABLE + " WHERE " + HOURS_RESTAURANT_ID + "=\"" + restaurandId + "\" AND " + HOURS_DAY + "=\"" + today + "\"";
 
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -506,13 +583,13 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 			String[] hours = new String[2];
 			hours[0] = cursor.getString(0);
 			hours[1] = cursor.getString(1);
-			
+
 			closingTimes.add(hours);
 			cursor.moveToNext();
 		}
 		cursor.close();
 		db.close();
-		
+
 		return closingTimes;
 	}
 
@@ -522,7 +599,19 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 		db.delete(RESTAURANT_TABLE, null, null);
 		db.close();
 	}
+
+	public void deleteFarmersTable(){
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(FARMERS_TABLE, null, null);
+		db.close();
+	}
 	
+	public void deleteCouponTable(){
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(COUPON_TABLE, null, null);
+		db.close();
+	}
+
 	public void deleteCateringTable(){
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(CATERING_TABLE, null, null);
@@ -540,7 +629,7 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 		db.delete(CONTACT_TABLE, null, null);
 		db.close();
 	}
-	
+
 	public void deleteHoursTable(){
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(HOURS_TABLE, null, null);

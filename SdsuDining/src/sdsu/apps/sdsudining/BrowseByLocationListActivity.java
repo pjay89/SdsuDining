@@ -17,7 +17,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class BrowseByLocationActivity extends ListActivity {
+public class BrowseByLocationListActivity extends ListActivity {
 	
 	private ArrayList<HashMap<String, String>> locations = new ArrayList<HashMap<String, String>>();
 	
@@ -30,7 +30,7 @@ public class BrowseByLocationActivity extends ListActivity {
 		this.setTitle(intent.getStringExtra("labelString"));
 		
 		SdsuDBHelper db = new SdsuDBHelper(this);
-		ArrayList<HashMap<String,String>> dbList = db.getUniqueLocationsExceptFarmersMarket();
+		ArrayList<HashMap<String,String>> dbList = db.getUniqueLocations();
 		
 		for(int i=0; i<dbList.size(); i++){
 			HashMap<String, String> entry = dbList.get(i);
@@ -86,7 +86,7 @@ public class BrowseByLocationActivity extends ListActivity {
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
 			HashMap<String, String> item = locations.get(position);
-			Intent intent = new Intent(BrowseByLocationActivity.this, RestaurantsAtLocationListActivity.class);
+			Intent intent = new Intent(BrowseByLocationListActivity.this, RestaurantsAtLocationListActivity.class);
 			intent.putExtra("labelString", item.get(getString(R.string.RESTAURANT_LOCATION_NAME)));
 			startActivity(intent);
 		}

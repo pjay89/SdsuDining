@@ -5,12 +5,14 @@
     <TableRow
         android:id="@+id/tableRow1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="@dimen/activity_horizontal_margin" >
 
         <TextView
             android:id="@+id/mondayHeading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:text="@string/monday"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/sdsu_red"
@@ -22,14 +24,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_weight="1"
-            android:text="TextView"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </TableRow>
 
     <TableRow
         android:id="@+id/tableRow2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="@dimen/table_row_spacing_5" >
 
         <TextView
             android:id="@+id/tuesdayHeading"
@@ -37,6 +39,7 @@
             android:layout_height="wrap_content"
             android:text="@string/tuesday"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:textColor="@color/sdsu_red"
             android:textStyle="bold" />
 
@@ -46,14 +49,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_weight="1"
-            android:text="TextView"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </TableRow>
 
     <TableRow
         android:id="@+id/tableRow3"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="@dimen/table_row_spacing_5" >
 
         <TextView
             android:id="@+id/wednesdayHeading"
@@ -61,6 +64,7 @@
             android:layout_height="wrap_content"
             android:text="@string/wednesday"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:textColor="@color/sdsu_red"
             android:textStyle="bold" />
 
@@ -70,14 +74,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_weight="1"
-            android:text="TextView"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </TableRow>
 
     <TableRow
         android:id="@+id/tableRow4"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="@dimen/table_row_spacing_5" >
 
         <TextView
             android:id="@+id/thursdayHeading"
@@ -85,6 +89,7 @@
             android:layout_height="wrap_content"
             android:text="@string/thursday"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:textColor="@color/sdsu_red"
             android:textStyle="bold" />
 
@@ -94,14 +99,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_weight="1"
-            android:text="TextView"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </TableRow>
 
     <TableRow
         android:id="@+id/tableRow5"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="@dimen/table_row_spacing_5" >
 
         <TextView
             android:id="@+id/fridayHeading"
@@ -109,6 +114,7 @@
             android:layout_height="wrap_content"
             android:text="@string/friday"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:textColor="@color/sdsu_red"
             android:textStyle="bold" />
 
@@ -118,14 +124,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_weight="1"
-            android:text="TextView"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </TableRow>
 
     <TableRow
         android:id="@+id/tableRow6"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="@dimen/table_row_spacing_5" >
 
         <TextView
             android:id="@+id/saturdayHeading"
@@ -133,6 +139,7 @@
             android:layout_height="wrap_content"
             android:text="@string/saturday"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:textColor="@color/sdsu_red"
             android:textStyle="bold" />
 
@@ -142,14 +149,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_weight="1"
-            android:text="TextView"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </TableRow>
 
     <TableRow
         android:id="@+id/tableRow7"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="@dimen/table_row_spacing_5" >
 
         <TextView
             android:id="@+id/sundayHeading"
@@ -157,6 +164,7 @@
             android:layout_height="wrap_content"
             android:text="@string/sunday"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:textColor="@color/sdsu_red"
             android:textStyle="bold" />
 
@@ -166,7 +174,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_weight="1"
-            android:text="TextView"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </TableRow>
 

@@ -12,29 +12,29 @@ public class CateringParser extends SdsuDiningParser{
 	private Context context;
 
 	private static  String CATERING_OBJECT_TAG;
-	private static String CATERING_PHONE;
-	private static String CATERING_FAX;
-	private static String CATERING_EMAIL;
-	private static String CATERING_ADDRESS;
-	private static String CATERING_SNIPPET;
-	private static String CATERING_GUIDELINES;
-	private static String CATERING_SERVICE_LEVEL;
+	private static String DB_PHONE;
+	private static String DB_FAX;
+	private static String DB_EMAIL;
+	private static String DB_WEBSITE;
+	private static String DB_ADDRESS;
+	private static String DB_ABOUT;
+	
+	
 
 	private JSONArray catering = null;
 
-	private String TAG = "CATERING PARSER";
+	private String TAG = "PARSER";
 
 	public CateringParser(String url, Context context){
 		this.context = context;
 		CATERING_OBJECT_TAG = context.getString(R.string.CATERING_OBJECT_TAG);
-		CATERING_PHONE = context.getString(R.string.CATERING_PHONE);
-		CATERING_FAX = context.getString(R.string.CATERING_FAX);
-		CATERING_EMAIL = context.getString(R.string.CATERING_EMAIL);
-		CATERING_ADDRESS = context.getString(R.string.CATERING_ADDRESS);
-		CATERING_SNIPPET = context.getString(R.string.CATERING_SNIPPET);
-		CATERING_GUIDELINES = context.getString(R.string.CATERING_GUIDELINES);
-		CATERING_SERVICE_LEVEL = context.getString(R.string.CATERING_SERVICE_LEVEL);
-
+		DB_PHONE = context.getString(R.string.DB_PHONE);
+		DB_FAX = context.getString(R.string.DB_FAX);
+		DB_EMAIL = context.getString(R.string.DB_EMAIL);
+		DB_WEBSITE = context.getString(R.string.DB_WEBSITE);
+		DB_ADDRESS = context.getString(R.string.DB_ADDRESS);
+		DB_ABOUT = context.getString(R.string.DB_ABOUT);
+		
 		AsyncWebServiceCall ws = new AsyncWebServiceCall();
 		ws.execute(url);
 	}
@@ -56,14 +56,14 @@ public class CateringParser extends SdsuDiningParser{
 						
 						for(int i=0; i<catering.length(); i++){
 							JSONObject entry = catering.getJSONObject(i);
-							String phone = entry.getString(CATERING_PHONE);
-							String fax = entry.getString(CATERING_FAX);
-							String email = entry.getString(CATERING_EMAIL);
-							String address = entry.getString(CATERING_ADDRESS);
-							String snippet = entry.getString(CATERING_SNIPPET);
-							String guidelines = entry.getString(CATERING_GUIDELINES);
-							String level = entry.getString(CATERING_SERVICE_LEVEL);
-							db.addToCateringTable(phone, fax, email, address, snippet, guidelines, level);
+							String phone = entry.getString(DB_PHONE);
+							String fax = entry.getString(DB_FAX);
+							String email = entry.getString(DB_EMAIL);
+							String website = entry.getString(DB_WEBSITE);
+							String address = entry.getString(DB_ADDRESS);
+							String about = entry.getString(DB_ABOUT);
+						
+							db.addToCateringTable(phone, fax, email, website, address, about);
 						}
 						
 					}

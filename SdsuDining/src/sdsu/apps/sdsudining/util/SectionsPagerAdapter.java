@@ -3,19 +3,16 @@ package sdsu.apps.sdsudining.util;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import sdsu.apps.sdsudining.DetailsActivity.DummySectionFragment;
 import sdsu.apps.sdsudining.R;
 import sdsu.apps.sdsudining.database.SdsuDBHelper;
-import sdsu.apps.sdsudining.fragements.CateringContactFragmentActivity;
+import sdsu.apps.sdsudining.fragements.DisplayAboutFragment;
 import sdsu.apps.sdsudining.fragements.DisplayContactFragment;
-import sdsu.apps.sdsudining.fragements.DisplayInfoFragment;
-import sdsu.apps.sdsudining.fragements.DisplayWebFragment;
+import sdsu.apps.sdsudining.fragements.DisplayHousFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
 
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -23,13 +20,11 @@ import android.util.Log;
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-	ArrayList<String> tabTitles;
-	String lableString;
-	Context context;
+	private ArrayList<HashMap<String, String>> dbList;
+	private ArrayList<String> tabTitles;
+	private String lableString;
+	private Context context;
 	
-	private String TAG = "SECTIONS";	
-
-
 	public SectionsPagerAdapter(FragmentManager fragmentManager, ArrayList<String> tabTitles, String lableString, Context context) {
 		super(fragmentManager);
 		this.tabTitles = tabTitles;
@@ -39,19 +34,23 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
 	@Override
 	public Fragment getItem(int position) {
-
-
-		if(lableString.equals(context.getString(R.string.cateringString))){
-			return getCateringFragement(position);
+		
+		if(lableString.equals(context.getString(R.string.farmersMarketString))){
+			dbList = getFarmersDBDetails();
+			return getFragement(position);
+		}
+		else if(lableString.equals(context.getString(R.string.cateringString))){
+			dbList = getCateringDBDetails();
+			return getFragement(position);
 		}
 		else if(lableString.equals(context.getString(R.string.sweetString))){
-			return getSweetFragment(position);
+			dbList = getSweetDBDetails();
+			return getFragement(position);
 		}
-
-
-
-		return new DummySectionFragment();
-
+		else{
+			dbList = getContactDBDetails();
+			return getFragement(position);
+		}
 	}
 
 	@Override
@@ -63,82 +62,84 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 	public CharSequence getPageTitle(int position) {
 		return (tabTitles.get(position));			
 	}
-
-	private Fragment getCateringFragement(int position){
-		/*Fragment fragment;
-		Bundle args = new Bundle();
-		if(position == 0){
-			fragment = new CateringContactFragementActivity();
-			args.putInt(CateringContactFragementActivity.ARG_SECTION_NUMBER, position + 1);
-		}
-		else if(position == 1){
-			fragment = new DummySectionFragment();
-			args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-		}
-		else{
-			fragment = new DummySectionFragment();
-			fragment.setArguments(args);
-			return fragment;
-		}*/
-		
-
+	
+	private ArrayList<HashMap<String, String>> getFarmersDBDetails(){
 		SdsuDBHelper db = new SdsuDBHelper(context.getApplicationContext());
-		ArrayList<HashMap<String, String>> dbList = db.getCateringDetails();
-		
-		String info="";
-		String gettingStarted="";
-		
-		for(int i=0; i<dbList.size(); i++){
-			HashMap<String, String> entry = dbList.get(i);
-			info = entry.get(context.getApplicationContext().getString(R.string.CATERING_SNIPPET));
-			gettingStarted = entry.get(context.getApplicationContext().getString(R.string.CATERING_GUIDELINES)) + "\n\n" + 
-						entry.get(context.getApplicationContext().getString(R.string.CATERING_SERVICE_LEVEL));
-			
-		}
+		dbList = db.getFarmersDetails();
 		db.close();
-		
-		if(position == 0){
-			return new CateringContactFragmentActivity();
-		}
-		if(position == 1){
-			Bundle args = new Bundle();
-			args.putString("info", info);
-			Fragment f = new DisplayInfoFragment();
-			f.setArguments(args);
-			return f;
-		}
-		
-		Bundle args = new Bundle();
-		args.putString("info", gettingStarted);
-		Fragment f = new DisplayInfoFragment();
-		f.setArguments(args);
-		return f;
-
+		return dbList;
 	}
 
-	
-	private Fragment getSweetFragment(int position){
+	private ArrayList<HashMap<String, String>> getCateringDBDetails(){
 		SdsuDBHelper db = new SdsuDBHelper(context.getApplicationContext());
-		ArrayList<HashMap<String, String>> dbList = db.getSweetDetails();
+		dbList = db.getCateringDetails();
+		db.close();
+		return dbList;
+	}
+	
+	private ArrayList<HashMap<String, String>> getSweetDBDetails(){
+		SdsuDBHelper db = new SdsuDBHelper(context.getApplicationContext());
+		dbList = db.getSweetDetails();
+		db.close();
+		return dbList;
+	}
+		
+	private ArrayList<HashMap<String, String>> getContactDBDetails(){
+		SdsuDBHelper db = new SdsuDBHelper(context.getApplicationContext());
+		dbList = db.getContactDetails();
+		db.close();
+		return dbList;
+	}
+	
+	private String getRestaurantHoursOn(String restaurantId, String day){
+		SdsuDBHelper db = new SdsuDBHelper(context);
+		String hours = db.getHoursFor(restaurantId, day);
+		db.close();
+		if(hours.equals(" - ")){
+			return "Closed";
+		}
+		return hours;
+	}
+	
+	private Fragment getHoursFragment(){
+		Bundle args = new Bundle();
+	
+		args.putString(context.getResources().getString(R.string.monday), getRestaurantHoursOn(lableString, context.getResources().getString(R.string.monday)));
+		args.putString(context.getResources().getString(R.string.tuesday), getRestaurantHoursOn(lableString, context.getResources().getString(R.string.tuesday)));
+		args.putString(context.getResources().getString(R.string.wednesday), getRestaurantHoursOn(lableString, context.getResources().getString(R.string.wednesday)));
+		args.putString(context.getResources().getString(R.string.thursday), getRestaurantHoursOn(lableString, context.getResources().getString(R.string.thursday)));
+		args.putString(context.getResources().getString(R.string.friday), getRestaurantHoursOn(lableString, context.getResources().getString(R.string.friday)));
+		args.putString(context.getResources().getString(R.string.saturday), getRestaurantHoursOn(lableString, context.getResources().getString(R.string.saturday)));
+		args.putString(context.getResources().getString(R.string.sunday), getRestaurantHoursOn(lableString, context.getResources().getString(R.string.sunday)));
+				
+		Fragment fragment =  new DisplayHousFragment();
+		fragment.setArguments(args);
+		return fragment;
+
+	}
+	
+	private Fragment getFragement(int position){
+		if(position == 1){
+			return getHoursFragment();
+		}
+		
 		
 		String phone="";
 		String fax="";
 		String email="";
 		String website="";
-		String menu="";
-		String orderForm="";
+		String address="";
+		String about="";
 		
 		for(int i=0; i<dbList.size(); i++){
 			HashMap<String, String> entry = dbList.get(i);
-			phone = entry.get(context.getApplicationContext().getString(R.string.SWEET_PHONE));
-			fax = entry.get(context.getApplicationContext().getString(R.string.SWEET_FAX));
-			email = entry.get(context.getApplicationContext().getString(R.string.SWEET_EMAIL));
-			website = entry.get(context.getApplicationContext().getString(R.string.SWEET_WEBSITE));
-			menu = entry.get(context.getApplicationContext().getString(R.string.SWEET_MENU));
-			orderForm = entry.get(context.getApplicationContext().getString(R.string.SWEET_ORDER_FORM));
+			phone = entry.get(context.getApplicationContext().getString(R.string.DB_PHONE));
+			fax = entry.get(context.getApplicationContext().getString(R.string.DB_FAX));
+			email = entry.get(context.getApplicationContext().getString(R.string.DB_EMAIL));
+			website = entry.get(context.getApplicationContext().getString(R.string.DB_WEBSITE));
+			address = entry.get(context.getApplicationContext().getString(R.string.DB_ADDRESS));
+			about = entry.get(context.getApplicationContext().getString(R.string.DB_ABOUT));
 		}
-		db.close();
-		
 		
 		Bundle args = new Bundle();
 		Fragment fragment;
@@ -148,22 +149,20 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 			args.putString(context.getResources().getString(R.string.fax), fax);
 			args.putString(context.getResources().getString(R.string.email), email);
 			args.putString(context.getResources().getString(R.string.website), website);
-			
+			args.putString(context.getResources().getString(R.string.address), address);
+						
 			fragment = new DisplayContactFragment();
 			fragment.setArguments(args);
 			return fragment;
 		}
-		else if(position == 1){
-			Log.i(TAG, menu);
-			args.putString(context.getResources().getString(R.string.menu), menu);
+		else{
+			args.putString(context.getResources().getString(R.string.about), about);
 			
-			fragment = new DisplayWebFragment();
+			fragment = new DisplayAboutFragment();
 			fragment.setArguments(args);
 			return fragment;
-		}
-		else{
+		
 			
 		}
-		return new DummySectionFragment();
 	}
 }

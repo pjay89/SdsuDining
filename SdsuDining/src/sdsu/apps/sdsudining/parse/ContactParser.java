@@ -14,10 +14,12 @@ public class ContactParser extends SdsuDiningParser{
 	private Context context;
 
 	private static String CONTACT_OBJECT_TAG;
-	private static String CONTACT_PHONE;
-	private static String CONTACT_FAX;
-	private static String CONTACT_EMAIL;
-	private static String CONTACT_ADDRESS;
+	private static String DB_PHONE;
+	private static String DB_FAX;
+	private static String DB_EMAIL;
+	private static String DB_WEBSITE;
+	private static String DB_ADDRESS;
+	private static String DB_ABOUT;
 
 	private JSONArray contact = null;
 
@@ -26,10 +28,12 @@ public class ContactParser extends SdsuDiningParser{
 	public ContactParser(String url, Context context){
 		this.context = context;
 		CONTACT_OBJECT_TAG = context.getString(R.string.CONTACT_OBJECT_TAG);
-		CONTACT_PHONE = context.getString(R.string.CONTACT_PHONE);
-		CONTACT_FAX = context.getString(R.string.CONTACT_FAX);
-		CONTACT_EMAIL = context.getString(R.string.CONTACT_EMAIL);
-		CONTACT_ADDRESS = context.getString(R.string.CONTACT_ADDRESS);
+		DB_PHONE = context.getString(R.string.DB_PHONE);
+		DB_FAX = context.getString(R.string.DB_FAX);
+		DB_EMAIL = context.getString(R.string.DB_EMAIL);
+		DB_WEBSITE = context.getString(R.string.DB_WEBSITE);
+		DB_ADDRESS = context.getString(R.string.DB_ADDRESS);
+		DB_ABOUT = context.getString(R.string.DB_ABOUT);
 
 		AsyncWebServiceCall ws = new AsyncWebServiceCall();
 		ws.execute(url);
@@ -54,11 +58,13 @@ public class ContactParser extends SdsuDiningParser{
 						
 						for(int i=0; i<contact.length(); i++){
 							JSONObject entry = contact.getJSONObject(i);
-							String phone = entry.getString(CONTACT_PHONE);
-							String fax = entry.getString(CONTACT_FAX);
-							String email = entry.getString(CONTACT_EMAIL);
-							String address = entry.getString(CONTACT_ADDRESS);
-							db.addToContactTable(phone, fax, email, address);
+							String phone = entry.getString(DB_PHONE);
+							String fax = entry.getString(DB_FAX);
+							String email = entry.getString(DB_EMAIL);
+							String website = entry.getString(DB_WEBSITE);
+							String address = entry.getString(DB_ADDRESS);
+							String about = entry.getString(DB_ABOUT);
+							db.addToContactTable(phone, fax, email, website, address, about);
 						}
 						
 					}
