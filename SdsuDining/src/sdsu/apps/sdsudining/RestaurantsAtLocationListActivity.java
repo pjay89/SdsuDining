@@ -39,6 +39,7 @@ public class RestaurantsAtLocationListActivity extends Activity {
 	private AQuery rootAQuery;
 	private ArrayList<String> entries = new ArrayList<String>();
 	private ArrayList<String> restaurantNames = new ArrayList<String>();
+	private String labelString = "";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +47,15 @@ public class RestaurantsAtLocationListActivity extends Activity {
 		setContentView(R.layout.activity_restaurants_at_location_list);
 
 		Intent intent = getIntent();
-		this.setTitle(intent.getStringExtra("labelString"));
+		labelString = intent.getStringExtra("labelString");
+		this.setTitle(labelString);
 
 		// Enable Home button on action bar
 		final ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
 		SdsuDBHelper db = new SdsuDBHelper(this);
-		ArrayList<HashMap<String,String>> dbList = db.getRestaurantsAt(intent.getStringExtra("labelString"));
+		ArrayList<HashMap<String,String>> dbList = db.getRestaurantsAt(labelString);
 
 
 		rootAQuery = new AQuery(this);
@@ -117,6 +119,7 @@ public class RestaurantsAtLocationListActivity extends Activity {
 		public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {			
 			Intent intent = new Intent(RestaurantsAtLocationListActivity.this, RestaurantsDetails.class);
 			intent.putExtra("labelString", restaurantNames.get(position));
+			intent.putExtra("autoSelectTab", labelString);
 			startActivity(intent);
 		}
 	

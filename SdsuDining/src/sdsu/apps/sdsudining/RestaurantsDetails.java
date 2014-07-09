@@ -69,8 +69,10 @@ public class RestaurantsDetails extends FragmentActivity implements ActionBar.Ta
 			 */
 			actionBar.addTab(actionBar.newTab().setText(restaurantsPagerAdapter.getPageTitle(i)).setTabListener(this));
 		}
+		
+		viewPager.setCurrentItem(restaurantsPagerAdapter.getPageTitlePosition(intent.getStringExtra("autoSelectTab")));
 	}
-
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {

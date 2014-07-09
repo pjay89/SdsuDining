@@ -16,8 +16,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Matrix.ScaleToFit;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -45,10 +43,7 @@ public class HomeActivity extends Activity {
 
 		boolean isForeground = SdsuDining.isAppStart();
 		if(isForeground){
-			if(SdsuDining.isNetworkConnected(this)){
-				//new ContactsParser(this.getString(R.string.CONTACTS_URL), this.getApplicationContext());
-				
-				
+			if(SdsuDining.isNetworkConnected(this)){				
 				new ContactParser(this.getString(R.string.CONTACT_URL), this.getApplicationContext());
 				new SweetParser(this.getString(R.string.SWEET_URL), this.getApplicationContext());
 				new CateringParser(this.getString(R.string.CATERING_URL), this.getApplicationContext());
@@ -56,8 +51,6 @@ public class HomeActivity extends Activity {
 				new FarmersParser(this.getString(R.string.FARMERS_URL), this.getApplicationContext());
 				new RestaurantsParser(this.getString(R.string.RESTAURANTS_URL), this.getApplicationContext());
 				new HoursParser(this.getString(R.string.HOURS_URL), this.getApplicationContext());
-				//new BrowseByLocationParser("http://api.androidhive.info/contacts/", this.getApplicationContext());
-
 			}
 			else{
 				final AlertDialog alert = new AlertDialog.Builder(this).create();

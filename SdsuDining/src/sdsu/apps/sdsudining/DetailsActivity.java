@@ -1,27 +1,16 @@
 package sdsu.apps.sdsudining;
 
 
-import java.util.ArrayList;
-
-import sdsu.apps.sdsudining.fragements.DisplayHousFragment;
 import sdsu.apps.sdsudining.util.SectionsPagerAdapter;
-import sdsu.apps.sdsudining.webService.DataFetcher;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 
 
@@ -43,9 +32,6 @@ public class DetailsActivity extends FragmentActivity implements ActionBar.TabLi
 	 * The {@link ViewPager} that will host the section contents.
 	 */
 	private ViewPager viewPager;
-	//static String res;
-
-	private static String TAG = "SDSU DINING TEST";
 
 	@Override
 	protected void onPause(){
@@ -141,36 +127,6 @@ public class DetailsActivity extends FragmentActivity implements ActionBar.TabLi
 	public void onTabReselected(ActionBar.Tab tab,
 			FragmentTransaction fragmentTransaction) {
 	}
-
-
-	/**
-	 * A dummy fragment representing a section of the app, but that simply
-	 * displays dummy text.
-	 */
-	public static class DummySectionFragment extends Fragment{
-		/**
-		 * The fragment argument representing the section number for this
-		 * fragment.
-		 */
-		public static final String ARG_SECTION_NUMBER = "section_number";
-
-
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_detail,
-					container, false);
-
-			return rootView;
-		}
-
-		public void refresh(String data){
-			TextView view = (TextView) this.getView();
-			view.setText(data);
-		}
-	}
-
 }
 
 
