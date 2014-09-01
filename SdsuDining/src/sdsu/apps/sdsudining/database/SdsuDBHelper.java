@@ -275,7 +275,7 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 
 	public ArrayList<HashMap<String, String>> getRestaurantsAt(String locationName){
 		ArrayList<HashMap<String, String>> restaurants = new ArrayList<HashMap<String,String>>();
-		String query = "SELECT " + RESTAURANT_ID + ", "+ RESTAURANT_NAME + ", "+ RESTAURANT_IMAGE + " FROM " + RESTAURANT_TABLE + " WHERE " + RESTAURANT_LOCATION_NAME + "=\"" + locationName + "\"";
+		String query = "SELECT " + RESTAURANT_ID + ", "+ RESTAURANT_NAME + ", "+ RESTAURANT_IMAGE + " FROM " + RESTAURANT_TABLE + " WHERE " + RESTAURANT_LOCATION_NAME + "=\"" + locationName + "\" ORDER BY " + RESTAURANT_NAME;
 		
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(query, null);

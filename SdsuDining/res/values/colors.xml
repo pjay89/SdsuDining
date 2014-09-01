@@ -8,6 +8,7 @@
     <color name="green">#00BB00</color>
     <color name="orange">#FE9301</color>
     <color name="gray">#C3C3C3</color>
+    <color name="dark_gray">#7F7F7F</color>
     <color name="holo_sdsu_light">#A81933</color>
 
 </resources>

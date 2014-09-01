@@ -11,7 +11,9 @@
     <string name="cateringString">Catering</string>
     <string name="sweetString">Sweet</string>
     <string name="contactUsString">Contact Us</string>
-    <string name="browseByMapString">Browse By Location</string>
+    <string name="browseByMapString">Filter Location</string>
+    <string name="closeToMeString">Close To Me</string>
+    <string name="openNowString">Open Now</string>
     <string name="title_activity_plain_test">PlainTestActivity</string>
     <string name="restaurantsImagesFolder">restaurantsImagesFolder</string>
     <string name="title_activity_plain_test_list_item">PlainTestListItemActivity</string>

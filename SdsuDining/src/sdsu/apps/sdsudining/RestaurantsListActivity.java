@@ -25,6 +25,8 @@ import android.widget.ListView;
 public class RestaurantsListActivity extends Activity {
 
 	private Button browseByMap;
+	private Button closeToMe;
+	private Button openNow;
 	private AQuery rootAQuery;
 	private ArrayList<String> entries = new ArrayList<String>();
 	private ArrayList<String> restaurantNames = new ArrayList<String>();
@@ -42,6 +44,12 @@ public class RestaurantsListActivity extends Activity {
 		Typeface font = Typeface.createFromAsset(getAssets(), "CenturyGothic.ttf");
 		browseByMap.setTypeface(font);
 		browseByMap.setOnClickListener(getBrowseByMapButtonListener);
+		
+		closeToMe = (Button) findViewById(R.id.closeToMe);
+		closeToMe.setTypeface(font);
+		
+		openNow = (Button) findViewById(R.id.openNow);
+		openNow.setTypeface(font);
 
 		SdsuDBHelper db = new SdsuDBHelper(this);
 		ArrayList<HashMap<String,String>> dbList = db.getUniqueRestaurants();

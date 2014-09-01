@@ -4,27 +4,64 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/browseByMap"
+    <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="70dp"
-        android:text="@string/browseByMapString"
-        android:textSize="@dimen/font_size_30"
-        android:typeface="normal" />
+        android:layout_height="wrap_content" >
 
-    <LinearLayout
-        android:id="@+id/restaurantsList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/browseByMap"
-        android:orientation="vertical" >
-
-        <ListView
-            android:id="@+id/restaurantsListView"
+        <TableRow
+            android:id="@+id/tableRow1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-        </ListView>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:showDividers="middle" 
+            android:divider="?android:attr/dividerHorizontal">
+
+            <Button
+                android:id="@+id/browseByMap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="60dp"
+                android:text="@string/browseByMapString"
+                android:typeface="normal" 
+                android:layout_weight="1"/>
+
+             <Button
+                 android:id="@+id/closeToMe"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+                 android:clickable="false"
+                 android:minHeight="60dp"
+                 android:text="@string/closeToMeString"
+                 android:textColor="@color/dark_gray"
+                 android:typeface="normal" />
+             
+             <Button
+                 android:id="@+id/openNow"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+                 android:clickable="false"
+                 android:minHeight="60dp"
+                 android:text="@string/openNowString"
+                 android:textColor="@color/dark_gray"
+                 android:typeface="normal" />
+
+        </TableRow>
+
+
+            <LinearLayout
+                android:id="@+id/restaurantsList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <ListView
+                    android:id="@+id/restaurantsListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+                </ListView>
+            </LinearLayout>
+
+    </TableLayout>
 
 </RelativeLayout>
