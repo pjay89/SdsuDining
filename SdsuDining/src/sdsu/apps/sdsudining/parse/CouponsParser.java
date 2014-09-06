@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import sdsu.apps.sdsudining.R;
 import sdsu.apps.sdsudining.database.SdsuDBHelper;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 
@@ -19,11 +20,15 @@ public class CouponsParser extends SdsuDiningParser{
 	private static String COUPON_EXPIRATION;
 	
 	private JSONArray coupon = null;
-
+	private ProgressDialog progressDialog;
+	
 	private String TAG = "PARSER";
 
-	public CouponsParser(String url, Context context){
+	public CouponsParser(String url, Context context, ProgressDialog progressDialog){
 		this.context = context;
+		this.progressDialog = progressDialog;
+		//this.progressDialog.show();
+		
 		COUPON_OBJECT_TAG = context.getString(R.string.COUPON_OBJECT_TAG);
 		COUPON_ID = context.getString(R.string.COUPON_ID);
 		COUPON_IMAGE = context.getString(R.string.COUPON_IMAGE);
@@ -62,6 +67,11 @@ public class CouponsParser extends SdsuDiningParser{
 					}
 				}
 				return null;
+			}
+
+			@Override
+			void onPostExecute() {
+				progressDialog.dismiss();
 			}
 		};
 	}

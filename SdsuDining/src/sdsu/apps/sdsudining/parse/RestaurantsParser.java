@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import sdsu.apps.sdsudining.R;
 import sdsu.apps.sdsudining.database.SdsuDBHelper;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 
@@ -22,11 +23,16 @@ public class RestaurantsParser extends SdsuDiningParser{
 	private static String RESTAURANT_WEBSITE;
 
 	private JSONArray restaurants = null;
-
+	private ProgressDialog progressDialog;
+	
 	private String TAG = "PARSER";
+	
 
-	public RestaurantsParser(String url, Context context){
+	public RestaurantsParser(String url, Context context, ProgressDialog progressDialog){
 		this.context = context;
+		this.progressDialog = progressDialog;
+		//this.progressDialog.show();
+		
 		RESTAURANTS_OBJECT_TAG = context.getString(R.string.RESTAURANTS_OBJECT_TAG);
 		RESTAURANT_ID = context.getString(R.string.RESTAURANT_ID);
 		RESTAURANT_NAME = context.getString(R.string.RESTAURANT_NAME);
@@ -35,7 +41,7 @@ public class RestaurantsParser extends SdsuDiningParser{
 		RESTAURANT_LOCATION_NAME = context.getString(R.string.RESTAURANT_LOCATION_NAME);
 		RESTAURANT_PHONE = context.getString(R.string.RESTAURANT_PHONE);
 		RESTAURANT_WEBSITE = context.getString(R.string.RESTAURANT_WEBSITE);
-
+		
 		AsyncWebServiceCall ws = new AsyncWebServiceCall();
 		ws.execute(url);
 	}
@@ -74,6 +80,11 @@ public class RestaurantsParser extends SdsuDiningParser{
 					}
 				}
 				return null;
+			}
+			
+			@Override
+			protected void onPostExecute(){
+				progressDialog.dismiss();
 			}
 		};
 	}

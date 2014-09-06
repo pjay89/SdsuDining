@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import sdsu.apps.sdsudining.R;
 import sdsu.apps.sdsudining.database.SdsuDBHelper;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 
@@ -22,11 +23,15 @@ public class ContactParser extends SdsuDiningParser{
 	private static String DB_ABOUT;
 
 	private JSONArray contact = null;
-
+	private ProgressDialog progressDialog;
+	
 	private String TAG = "PARSER";
 
-	public ContactParser(String url, Context context){
+	public ContactParser(String url, Context context, ProgressDialog progressDialog){
 		this.context = context;
+		this.progressDialog = progressDialog;
+		//this.progressDialog.show();
+		
 		CONTACT_OBJECT_TAG = context.getString(R.string.CONTACT_OBJECT_TAG);
 		DB_PHONE = context.getString(R.string.DB_PHONE);
 		DB_FAX = context.getString(R.string.DB_FAX);
@@ -73,6 +78,11 @@ public class ContactParser extends SdsuDiningParser{
 					}
 				}
 				return null;
+			}
+
+			@Override
+			void onPostExecute() {
+				progressDialog.dismiss();
 			}
 		};
 	}

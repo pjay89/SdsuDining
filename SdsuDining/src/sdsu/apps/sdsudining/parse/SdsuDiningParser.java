@@ -32,7 +32,9 @@ public abstract class SdsuDiningParser {
 		}
 	}
 	
-	abstract class AsyncJsonStringParser extends AsyncTask<String, Void, Void>{};
+	abstract class AsyncJsonStringParser extends AsyncTask<String, Void, Void>{
+		abstract void onPostExecute();
+	};
 
 	protected abstract AsyncJsonStringParser getAsyncJsonStringParser();
 }

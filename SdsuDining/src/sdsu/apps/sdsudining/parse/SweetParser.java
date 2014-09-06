@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import sdsu.apps.sdsudining.R;
 import sdsu.apps.sdsudining.database.SdsuDBHelper;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 
@@ -21,11 +22,15 @@ public class SweetParser extends SdsuDiningParser{
 	private static String DB_ABOUT;
 	
 	private JSONArray sweet = null;
-
+	private ProgressDialog progressDialog;
+	
 	private String TAG = "PARSER";
 	
-	public SweetParser(String url, Context context){
+	public SweetParser(String url, Context context, ProgressDialog progressDialog){
 		this.context = context;
+		this.progressDialog = progressDialog;
+		//this.progressDialog.show();
+		
 		SWEET_OBJECT_TAG = context.getString(R.string.SWEET_OBJECT_TAG);
 		DB_PHONE = context.getString(R.string.DB_PHONE);
 		DB_FAX = context.getString(R.string.DB_FAX);
@@ -69,6 +74,11 @@ public class SweetParser extends SdsuDiningParser{
 					}
 				}
 				return null;
+			}
+
+			@Override
+			void onPostExecute() {
+				progressDialog.dismiss();
 			}
 		};
 	}

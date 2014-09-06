@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import sdsu.apps.sdsudining.R;
 import sdsu.apps.sdsudining.database.SdsuDBHelper;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 
@@ -21,13 +22,18 @@ public class FarmersParser extends SdsuDiningParser{
 	private static String DB_WEBSITE;
 	private static String DB_ADDRESS;
 	private static String DB_ABOUT;
-	
+
 	private JSONArray farmers = null;
+	private ProgressDialog progressDialog;
 	
 	private String TAG = "PARSER";
 	
-	public FarmersParser(String url, Context context){
+
+	public FarmersParser(String url, Context context, ProgressDialog progressDialog){
 		this.context = context;
+		this.progressDialog = progressDialog;
+		//this.progressDialog.show();
+
 		FARMERS_OBJECT_TAG = context.getString(R.string.FARMERS_OBJECT_TAG);
 		DB_PHONE = context.getString(R.string.DB_PHONE);
 		DB_FAX = context.getString(R.string.DB_FAX);
@@ -35,13 +41,11 @@ public class FarmersParser extends SdsuDiningParser{
 		DB_WEBSITE = context.getString(R.string.DB_WEBSITE);
 		DB_ADDRESS = context.getString(R.string.DB_ADDRESS);
 		DB_ABOUT = context.getString(R.string.DB_ABOUT);
-		
+
 		AsyncWebServiceCall ws = new AsyncWebServiceCall();
 		ws.execute(url);
 	}
-	
-	
-	
+
 	@Override
 	protected AsyncJsonStringParser getAsyncJsonStringParser() {
 		return new AsyncJsonStringParser() {
@@ -56,7 +60,7 @@ public class FarmersParser extends SdsuDiningParser{
 						farmers = jsonObj.getJSONArray(FARMERS_OBJECT_TAG);
 						SdsuDBHelper db = new SdsuDBHelper(context);
 						db.deleteFarmersTable();
-						
+
 						for(int i=0; i<farmers.length(); i++){
 							JSONObject entry = farmers.getJSONObject(i);
 							String phone = entry.getString(DB_PHONE);
@@ -65,10 +69,10 @@ public class FarmersParser extends SdsuDiningParser{
 							String website = entry.getString(DB_WEBSITE);
 							String address = entry.getString(DB_ADDRESS);
 							String about = entry.getString(DB_ABOUT);
-						
+
 							db.addToFarmersTable(phone, fax, email, website, address, about);
 						}
-						
+
 					}
 					catch (JSONException e) {
 						Log.i(TAG, "ERROR: "+e.getMessage());
@@ -76,7 +80,12 @@ public class FarmersParser extends SdsuDiningParser{
 				}
 				return null;
 			}
+
+			@Override
+			void onPostExecute() {
+				progressDialog.dismiss();
+
+			}
 		};
 	}
-
 }

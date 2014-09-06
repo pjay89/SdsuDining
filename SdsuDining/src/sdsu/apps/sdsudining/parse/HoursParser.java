@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import sdsu.apps.sdsudining.R;
 import sdsu.apps.sdsudining.database.SdsuDBHelper;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 
@@ -19,11 +20,15 @@ public class HoursParser extends SdsuDiningParser{
 	private static String HOURS_CLOSE;
 	
 	private JSONArray hours = null;
+	private ProgressDialog progressDialog;
 	
 	private String TAG = "PARSER";
 	
-	public HoursParser(String url, Context context){
+	public HoursParser(String url, Context context, ProgressDialog progressDialog){
 		this.context = context;
+		this.progressDialog = progressDialog;
+		//this.progressDialog.show();
+		
 		HOURS_OBJECT_TAG = context.getString(R.string.HOURS_OBJECT_TAG);
 		HOURS_RESTAURANT_ID = context.getString(R.string.HOURS_RESTAURANT_ID);
 		HOURS_DAY = context.getString(R.string.HOURS_DAY);
@@ -63,6 +68,11 @@ public class HoursParser extends SdsuDiningParser{
 					
 				}
 				return null;
+			}
+
+			@Override
+			void onPostExecute() {
+				progressDialog.dismiss();
 			}
 		};
 	}

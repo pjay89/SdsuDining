@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import sdsu.apps.sdsudining.R;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -62,10 +63,12 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 	private static String HOURS_CLOSE;
 
 
-
+	//private ProgressDialog progressDialog;
 
 	public SdsuDBHelper(Context context){
 		super(context, context.getString(R.string.DATABASE_NAME), null, DATABASE_VERSION);
+		//progressDialog = new ProgressDialog(context);
+		
 		//Restaurant Table
 		RESTAURANT_TABLE = context.getString(R.string.RESTAURANT_TABLE);
 		RESTAURANT_ID = context.getString(R.string.RESTAURANT_ID);
@@ -189,7 +192,8 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 	/* ******* RESTAURANTS ******* */
 	public void addToRestaurantTable(String id, String name, String image, String locationId, String locationName, String phone, String website){
 		SQLiteDatabase db = this.getWritableDatabase();
-
+		//progressDialog.show();
+		
 		ContentValues values = new ContentValues();
 		values.put(RESTAURANT_ID, id);
 		values.put(RESTAURANT_NAME, name);
@@ -201,6 +205,7 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 
 		db.insert(RESTAURANT_TABLE, null, values);
 		db.close();
+		//progressDialog.dismiss();
 	}
 
 
@@ -326,7 +331,7 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 	/* ******* FARMER'S MARKET ******* */
 	public void addToFarmersTable(String phone, String fax, String email, String website, String address, String about){
 		SQLiteDatabase db = this.getWritableDatabase();
-
+				
 		ContentValues values = new ContentValues();
 		values.put(DB_PHONE, phone);
 		values.put(DB_FAX, fax);
@@ -539,7 +544,8 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 	/* ******* HOURS ******* */
 	public void addToHoursTable(String restaurantId, String day, String open, String close){
 		SQLiteDatabase db = this.getWritableDatabase();
-
+		//progressDialog.show();
+		
 		ContentValues values = new ContentValues();
 		values.put(HOURS_RESTAURANT_ID, restaurantId);
 		values.put(HOURS_DAY, day);
@@ -548,6 +554,7 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 
 		db.insert(HOURS_TABLE, null, values);
 		db.close();
+		//progressDialog.dismiss();
 	}
 
 	public String getHoursFor(String restaurandId, String day){

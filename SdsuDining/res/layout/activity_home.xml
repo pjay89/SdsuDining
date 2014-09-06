@@ -4,17 +4,18 @@
     android:layout_height="fill_parent" >
 
     <LinearLayout
+        android:id="@+id/categoriesLinearLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <ImageButton
+        <!--  <ImageButton
             android:id="@+id/restaurantsButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/restaurants"
             android:contentDescription="@string/restaurantsString"
-            android:scaleType="center" />
+            android:scaleType="center" />        
 
         <ImageButton
             android:id="@+id/farmersMarketButton"
@@ -50,6 +51,43 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/contactus"
+            android:contentDescription="@string/contactUsString" />
+            -->
+        
+        <ImageView
+            android:id="@+id/restaurantsButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/restaurantsString" />
+        
+        <ImageView
+            android:id="@+id/farmersMarketButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/farmersMarketString" />
+
+        <ImageView
+            android:id="@+id/couponsButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/couponsString" />
+        
+        <ImageView
+            android:id="@+id/cateringButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/cateringString" />
+
+        <ImageView
+            android:id="@+id/sweetButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/sweetString" />
+
+        <ImageView
+            android:id="@+id/contactUsButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:contentDescription="@string/contactUsString" />
 
     </LinearLayout>
