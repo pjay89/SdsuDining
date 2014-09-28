@@ -5,7 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import sdsu.apps.sdsudining.R;
 import sdsu.apps.sdsudining.database.SdsuDBHelper;
-import android.app.ProgressDialog;
+import sdsu.apps.sdsudining.objects.BusyWait;
 import android.content.Context;
 import android.util.Log;
 
@@ -21,14 +21,14 @@ public class CateringParser extends SdsuDiningParser{
 	private static String DB_ABOUT;
 	
 	private JSONArray catering = null;
-	private ProgressDialog progressDialog;
+	private BusyWait busyWait;
 
 	private String TAG = "PARSER";
 
-	public CateringParser(String url, Context context, ProgressDialog progressDialog){
+	public CateringParser(String url, Context context, BusyWait busyWait){
 		this.context = context;
-		this.progressDialog = progressDialog;
-		//this.progressDialog.show();
+		this.busyWait = busyWait;
+		this.busyWait.show();
 		
 		CATERING_OBJECT_TAG = context.getString(R.string.CATERING_OBJECT_TAG);
 		DB_PHONE = context.getString(R.string.DB_PHONE);
@@ -74,12 +74,8 @@ public class CateringParser extends SdsuDiningParser{
 						Log.i(TAG, "ERROR: "+e.getMessage());
 					}
 				}
+				busyWait.dismiss();
 				return null;
-			}
-
-			@Override
-			void onPostExecute() {
-				progressDialog.dismiss();
 			}
 		};
 	}

@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="11"
-        android:targetSdkVersion="18" />
+        android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_TASKS" />
@@ -20,7 +20,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="sdsu.apps.sdsudining.HomeActivity"
+            android:name=".HomeActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,69 +28,73 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="sdsu.apps.sdsudining.DetailsActivity" >
+        <activity android:name=".DetailsActivity" >
         </activity>
         <activity
-            android:name="sdsu.apps.sdsudining.RestaurantsListActivity"
+            android:name=".RestaurantsListActivity"
             android:label="@string/restaurantsString" >
         </activity>
-        <activity android:name="sdsu.apps.sdsudining.BrowseByLocationListActivity" >
+        <activity android:name=".BrowseByLocationListActivity" >
         </activity>
         <activity
-            android:name="sdsu.apps.sdsudining.CouponsListActivity"
+            android:name=".CouponsListActivity"
             android:label="@string/couponsString" >
         </activity>
         <activity
-            android:name="sdsu.apps.sdsudining.PlainTestActivity"
+            android:name=".PlainTestActivity"
             android:label="@string/title_activity_plain_test" >
         </activity>
         <activity
-            android:name="sdsu.apps.sdsudining.PlainTestListItemActivity"
+            android:name=".PlainTestListItemActivity"
             android:label="@string/title_activity_plain_test_list_item" >
         </activity>
         <activity
-            android:name="sdsu.apps.sdsudining.fragements.DisplayHousFragment"
+            android:name=".fragements.DisplayHousFragment"
             android:label="@string/title_activity_catering_contact" >
         </activity>
         <activity
-            android:name="sdsu.apps.sdsudining.fragements.DisplayAboutFragment"
+            android:name=".fragements.DisplayAboutFragment"
             android:label="@string/title_activity_display_info_fragment" >
         </activity>
         <activity
-            android:name="sdsu.apps.sdsudining.fragements.DisplayContactFragment"
+            android:name=".fragements.DisplayContactFragment"
             android:label="@string/title_activity_display_contact_fragment" >
         </activity>
         <activity
-            android:name="sdsu.apps.sdsudining.fragements.DisplayWebFragment"
+            android:name=".fragements.DisplayWebFragment"
             android:label="@string/title_activity_display_web_fragment" >
         </activity>
         <activity
-            android:name="sdsu.apps.sdsudining.RestaurantListRow"
+            android:name=".RestaurantListRow"
             android:label="@string/title_activity_restaurant_list_row" >
         </activity>
         <activity
-            android:name="sdsu.apps.sdsudining.BrowseByLocationListRow"
+            android:name=".BrowseByLocationListRow"
             android:label="@string/title_activity_browse_by_location_list_row" >
         </activity>
         <activity
-            android:name="sdsu.apps.sdsudining.RestaurantsDetails"
+            android:name=".RestaurantsDetails"
             android:label="@string/title_activity_restaurants_details" >
         </activity>
         <activity
-            android:name="sdsu.apps.sdsudining.fragements.DisplayRestaurantInfoFragment"
+            android:name=".fragements.DisplayRestaurantInfoFragment"
             android:label="@string/title_activity_display_restaurant_info_fragment" >
         </activity>
         <activity
-            android:name="sdsu.apps.sdsudining.RestaurantsAtLocationListActivity"
+            android:name=".RestaurantsAtLocationListActivity"
             android:label="@string/title_activity_restaurants_at_location_list" >
         </activity>
         <activity
-            android:name="sdsu.apps.sdsudining.RestaurantsAtLocationListRow"
+            android:name=".RestaurantsAtLocationListRow"
             android:label="@string/title_activity_restaurants_at_location_list_row" >
         </activity>
         <activity
-            android:name="sdsu.apps.sdsudining.CouponsListRow"
+            android:name=".CouponsListRow"
             android:label="@string/title_activity_coupons_list_row" >
+        </activity>
+        <activity
+            android:name=".LoadingActivity"
+            android:label="@string/title_activity_loading" >
         </activity>
     </application>
 

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import sdsu.apps.sdsudining.R;
-import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -20,6 +19,8 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 	private static final int DATABASE_VERSION = 1;
 
 
+	private static String DB_ID;
+	private static String LAST_MODIFIED;
 	private static String DB_PHONE;
 	private static String DB_FAX;
 	private static String DB_EMAIL;
@@ -79,6 +80,8 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 		RESTAURANT_PHONE = context.getString(R.string.RESTAURANT_PHONE);
 		RESTAURANT_WEBSITE = context.getString(R.string.RESTAURANT_WEBSITE);
 
+		DB_ID = context.getString(R.string.DB_ID);
+		LAST_MODIFIED = context.getString(R.string.LAST_MODIFIED);
 		DB_PHONE = context.getString(R.string.DB_PHONE);
 		DB_FAX = context.getString(R.string.DB_FAX);
 		DB_EMAIL = context.getString(R.string.DB_EMAIL);
@@ -126,10 +129,10 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 
 		//FARMERS table create statement
 		String CREATE_TABLE_FARMERS = "CREATE TABLE "
-				+ FARMERS_TABLE + "(id INTEGER PRIMARY KEY," + DB_PHONE
+				+ FARMERS_TABLE + "(" + DB_ID + " VARCHAR PRIMARY KEY," + DB_PHONE
 				+ " TEXT," + DB_FAX + " TEXT," + DB_EMAIL 
 				+ " TEXT," + DB_WEBSITE + " TEXT," + DB_ADDRESS 
-				+ " TEXT," + DB_ABOUT + " TEXT)"; 
+				+ " TEXT," + DB_ABOUT + " TEXT," + LAST_MODIFIED + " TIME)"; 
 		Log.i(TAG, CREATE_TABLE_FARMERS);
 		db.execSQL(CREATE_TABLE_FARMERS);
 		
@@ -170,9 +173,9 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 
 		// HOURS table create statement
 		String CREATE_TABLE_HOURS = "CREATE TABLE "
-				+ HOURS_TABLE + "(id INTEGER PRIMARY KEY," + HOURS_RESTAURANT_ID
+				+ HOURS_TABLE + "(" + DB_ID + " VARCHAR PRIMARY KEY," + HOURS_RESTAURANT_ID
 				+ " TEXT," + HOURS_DAY + " TEXT," + HOURS_OPEN 
-				+ " TEXT," + HOURS_CLOSE + " TEXT)";
+				+ " TEXT," + HOURS_CLOSE + " TEXT," + LAST_MODIFIED + " TIME)";
 		Log.i(TAG, CREATE_TABLE_HOURS);
 		db.execSQL(CREATE_TABLE_HOURS);
 	}
@@ -192,7 +195,6 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 	/* ******* RESTAURANTS ******* */
 	public void addToRestaurantTable(String id, String name, String image, String locationId, String locationName, String phone, String website){
 		SQLiteDatabase db = this.getWritableDatabase();
-		//progressDialog.show();
 		
 		ContentValues values = new ContentValues();
 		values.put(RESTAURANT_ID, id);
@@ -205,7 +207,6 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 
 		db.insert(RESTAURANT_TABLE, null, values);
 		db.close();
-		//progressDialog.dismiss();
 	}
 
 
@@ -329,21 +330,28 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 
 
 	/* ******* FARMER'S MARKET ******* */
-	public void addToFarmersTable(String phone, String fax, String email, String website, String address, String about){
+	public void addToFarmersTable(String id, String phone, String fax, String email, String website, String address, String about, String lastModified){
 		SQLiteDatabase db = this.getWritableDatabase();
 				
 		ContentValues values = new ContentValues();
+		values.put(DB_ID, id);
 		values.put(DB_PHONE, phone);
 		values.put(DB_FAX, fax);
 		values.put(DB_EMAIL, email);
 		values.put(DB_WEBSITE, website);
 		values.put(DB_ADDRESS, address);
 		values.put(DB_ABOUT, about);
+		values.put(LAST_MODIFIED, lastModified);
+		
+		int result = (int) db.insertWithOnConflict(FARMERS_TABLE, null, values, SQLiteDatabase.CONFLICT_IGNORE);
+		if(result == -1){
+			db.update(FARMERS_TABLE, values, (DB_ID + "=? AND " + LAST_MODIFIED+"<?"), new String[]{id, lastModified});
+		}
 
-		db.insert(FARMERS_TABLE, null, values);
 		db.close();
 	}
 
+	
 	public ArrayList<HashMap<String, String>> getFarmersDetails(){
 		ArrayList<HashMap<String, String>> farmers = new ArrayList<HashMap<String,String>>();
 		String query = "SELECT * FROM " + FARMERS_TABLE;
@@ -360,7 +368,6 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 			entry.put(DB_WEBSITE, cursor.getString(4));
 			entry.put(DB_ADDRESS, cursor.getString(5));
 			entry.put(DB_ABOUT, cursor.getString(6));
-
 			farmers.add(entry);
 			cursor.moveToNext();
 		}
@@ -542,21 +549,26 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 
 
 	/* ******* HOURS ******* */
-	public void addToHoursTable(String restaurantId, String day, String open, String close){
+	public void addToHoursTable(String id, String lastModified, String restaurantId, String day, String open, String close){
 		SQLiteDatabase db = this.getWritableDatabase();
-		//progressDialog.show();
 		
 		ContentValues values = new ContentValues();
+		values.put(DB_ID, id);
 		values.put(HOURS_RESTAURANT_ID, restaurantId);
 		values.put(HOURS_DAY, day);
 		values.put(HOURS_OPEN, open);
 		values.put(HOURS_CLOSE, close);
-
-		db.insert(HOURS_TABLE, null, values);
+		values.put(LAST_MODIFIED, lastModified);
+		
+		int result = (int) db.insertWithOnConflict(HOURS_TABLE, null, values, SQLiteDatabase.CONFLICT_IGNORE);
+		if(result == -1){
+			db.update(HOURS_TABLE, values, (DB_ID + "=? AND " + LAST_MODIFIED+"<?"), new String[]{id, lastModified});
+		}
+		
 		db.close();
-		//progressDialog.dismiss();
 	}
 
+	
 	public String getHoursFor(String restaurandId, String day){
 		String hours = "";
 		String query = "SELECT " + HOURS_OPEN + ", " + HOURS_CLOSE + " FROM " + HOURS_TABLE + " WHERE " + HOURS_RESTAURANT_ID + "=\"" + restaurandId + "\" AND " + HOURS_DAY + "=\"" + day + "\"";
@@ -573,7 +585,9 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 		cursor.close();
 		db.close();
 
-		hours = hours.substring(1);
+		if(hours.length() > 0){
+			hours = hours.substring(1);
+		}
 		return hours;
 	}
 

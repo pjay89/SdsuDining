@@ -62,9 +62,7 @@ public class BrowseByLocationListActivity extends ListActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.browse_by_location, menu);
-		return true;
+		return false;
 	}
 	
 	@Override

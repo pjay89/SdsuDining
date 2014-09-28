@@ -6,30 +6,34 @@ import org.json.JSONObject;
 
 import sdsu.apps.sdsudining.R;
 import sdsu.apps.sdsudining.database.SdsuDBHelper;
-import android.app.ProgressDialog;
+import sdsu.apps.sdsudining.objects.BusyWait;
 import android.content.Context;
 import android.util.Log;
 
 public class HoursParser extends SdsuDiningParser{
 	private Context context;
 	
-	private static String HOURS_OBJECT_TAG; 
+	private static String HOURS_OBJECT_TAG;
+	private static String DB_ID;
+	private static String LAST_MODIFIED;
 	private static String HOURS_RESTAURANT_ID;
 	private static String HOURS_DAY;
 	private static String HOURS_OPEN;
 	private static String HOURS_CLOSE;
 	
 	private JSONArray hours = null;
-	private ProgressDialog progressDialog;
+	private BusyWait busyWait;
 	
 	private String TAG = "PARSER";
 	
-	public HoursParser(String url, Context context, ProgressDialog progressDialog){
+	public HoursParser(String url, Context context, BusyWait busyWait){
 		this.context = context;
-		this.progressDialog = progressDialog;
-		//this.progressDialog.show();
+		this.busyWait = busyWait;
+		this.busyWait.show();
 		
 		HOURS_OBJECT_TAG = context.getString(R.string.HOURS_OBJECT_TAG);
+		DB_ID = context.getString(R.string.DB_ID);
+		LAST_MODIFIED = context.getString(R.string.LAST_MODIFIED);
 		HOURS_RESTAURANT_ID = context.getString(R.string.HOURS_RESTAURANT_ID);
 		HOURS_DAY = context.getString(R.string.HOURS_DAY);
 		HOURS_OPEN = context.getString(R.string.HOURS_OPEN);
@@ -51,15 +55,16 @@ public class HoursParser extends SdsuDiningParser{
 						JSONObject jsonObj = new JSONObject(jsonString);
 						hours = jsonObj.getJSONArray(HOURS_OBJECT_TAG);
 						SdsuDBHelper db = new SdsuDBHelper(context);
-						db.deleteHoursTable();
 						
 						for(int i=0; i<hours.length(); i++){
 							JSONObject entry = hours.getJSONObject(i);
+							String id = entry.getString(DB_ID);
+							String lastModified = entry.getString(LAST_MODIFIED);
 							String restaurantId = entry.getString(HOURS_RESTAURANT_ID);
 							String day = entry.getString(HOURS_DAY);
 							String open = entry.getString(HOURS_OPEN);
 							String close = entry.getString(HOURS_CLOSE);							
-							db.addToHoursTable(restaurantId, day, open, close);
+							db.addToHoursTable(id, lastModified, restaurantId, day, open, close);
 						}
 					}
 					catch (JSONException e) {
@@ -67,12 +72,8 @@ public class HoursParser extends SdsuDiningParser{
 					}
 					
 				}
+				busyWait.dismiss();
 				return null;
-			}
-
-			@Override
-			void onPostExecute() {
-				progressDialog.dismiss();
 			}
 		};
 	}

@@ -11,7 +11,7 @@
     <string name="cateringString">Catering</string>
     <string name="sweetString">Sweet</string>
     <string name="contactUsString">Contact Us</string>
-    <string name="browseByMapString">Filter Location</string>
+    <string name="browseByMapString">Eatery Locations</string>
     <string name="closeToMeString">Close To Me</string>
     <string name="openNowString">Open Now</string>
     <string name="title_activity_plain_test">PlainTestActivity</string>
@@ -48,6 +48,8 @@
     <string name="LOCATION_TABLE">locationTable</string>
     <string name="LOCATION_ID">locationId</string>
     <string name="LOCATION_NAME">locationName</string>
+    <string name="DB_ID">id</string>
+    <string name="LAST_MODIFIED">lastModified</string>
     <string name="DB_PHONE">phone</string>
     <string name="DB_FAX">fax</string>
     <string name="DB_EMAIL">email</string>
@@ -92,5 +94,6 @@
     <string name="title_activity_restaurants_at_location_list">RestaurantsAtLocationListActivity</string>
     <string name="title_activity_restaurants_at_location_list_row">RestaurantsAtLocationListRowActivity</string>
     <string name="title_activity_coupons_list_row">CouponsListRow</string>
+    <string name="title_activity_loading">LoadingActivity</string>
 
 </resources>

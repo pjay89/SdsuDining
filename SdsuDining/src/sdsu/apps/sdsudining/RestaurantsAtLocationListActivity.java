@@ -22,20 +22,6 @@ import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class RestaurantsAtLocationListActivity extends Activity {
-
-	/*@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_restaurants_at_location_list);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.restaurants_at_location_list, menu);
-		return true;
-	}*/
-	
 	private AQuery rootAQuery;
 	private ArrayList<String> entries = new ArrayList<String>();
 	private ArrayList<String> restaurantNames = new ArrayList<String>();
@@ -95,9 +81,7 @@ public class RestaurantsAtLocationListActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.restaurants_at_location_list, menu);
-		return true;
+		return false;
 	}
 
 	@Override

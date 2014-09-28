@@ -6,6 +6,7 @@ import com.androidquery.AQuery;
 
 
 
+import sdsu.apps.sdsudining.objects.BusyWait;
 import sdsu.apps.sdsudining.parse.CateringParser;
 import sdsu.apps.sdsudining.parse.ContactParser;
 import sdsu.apps.sdsudining.parse.CouponsParser;
@@ -14,13 +15,11 @@ import sdsu.apps.sdsudining.parse.HoursParser;
 import sdsu.apps.sdsudining.parse.RestaurantsParser;
 import sdsu.apps.sdsudining.parse.SweetParser;
 import android.os.Bundle;
-import android.os.Handler;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.view.Menu;
 import android.view.View;
@@ -29,34 +28,50 @@ import android.widget.ImageView;
 
 public class HomeActivity extends Activity {
 
+	BusyWait hoursBusyWait;
+	BusyWait farmersBusyWait;
+	BusyWait contactBusyWait;
+	BusyWait sweetBusyWait;
+	BusyWait cateringBusyWait;
+	BusyWait couponsBusyWait;
+	BusyWait restaurantsBusyWait;
+	
 	@Override
 	protected void onPause(){
 		super.onPause();
 		SdsuDining.appStatus(this);
+		hoursBusyWait.dismiss();
+		farmersBusyWait.dismiss();
+		contactBusyWait.dismiss();
+		sweetBusyWait.dismiss();
+		cateringBusyWait.dismiss();
+		couponsBusyWait.dismiss();
+		restaurantsBusyWait.dismiss();
 	}
-
+	
 	@Override
 	protected void onResume(){
 		super.onResume();
 
+		hoursBusyWait = new BusyWait(this);
+		farmersBusyWait = new BusyWait(this);
+		contactBusyWait = new BusyWait(this);
+		sweetBusyWait = new BusyWait(this);
+		cateringBusyWait = new BusyWait(this);
+		couponsBusyWait = new BusyWait(this);
+		restaurantsBusyWait = new BusyWait(this);
+		
+		
 		boolean isForeground = SdsuDining.isAppStart();
 		if(isForeground){
 			if(SdsuDining.isNetworkConnected(this)){
-				ProgressDialog progressDialog = new ProgressDialog(this);
-				progressDialog.setCanceledOnTouchOutside(false);
-				progressDialog.setCancelable(false);
-				progressDialog.setInverseBackgroundForced(true);
-				progressDialog.setMessage("Loading...");
-				progressDialog.show();
-				timeDelayRemoveDialog(10000, progressDialog);
-				
-				new HoursParser(this.getString(R.string.HOURS_URL), this.getApplicationContext(), progressDialog);
-				new ContactParser(this.getString(R.string.CONTACT_URL), this.getApplicationContext(), progressDialog);
-				new SweetParser(this.getString(R.string.SWEET_URL), this.getApplicationContext(), progressDialog);
-				new CateringParser(this.getString(R.string.CATERING_URL), this.getApplicationContext(), progressDialog);
-				new CouponsParser(this.getString(R.string.COUPON_URL), this.getApplicationContext(), progressDialog);
-				new FarmersParser(this.getString(R.string.FARMERS_URL), this.getApplicationContext(), progressDialog);
-				new RestaurantsParser(this.getString(R.string.RESTAURANTS_URL), this.getApplicationContext(), progressDialog);
+				new HoursParser(this.getString(R.string.HOURS_URL), this.getApplicationContext(), hoursBusyWait);
+				new FarmersParser(this.getString(R.string.FARMERS_URL), this.getApplicationContext(), farmersBusyWait);
+				new ContactParser(this.getString(R.string.CONTACT_URL), this.getApplicationContext(), contactBusyWait);
+				new SweetParser(this.getString(R.string.SWEET_URL), this.getApplicationContext(), sweetBusyWait);
+				new CateringParser(this.getString(R.string.CATERING_URL), this.getApplicationContext(), cateringBusyWait);
+				new CouponsParser(this.getString(R.string.COUPON_URL), this.getApplicationContext(), couponsBusyWait);
+				new RestaurantsParser(this.getString(R.string.RESTAURANTS_URL), this.getApplicationContext(), restaurantsBusyWait);
 			}
 			else{
 				final AlertDialog alert = new AlertDialog.Builder(this).create();
@@ -71,42 +86,17 @@ public class HomeActivity extends Activity {
 				alert.show();
 			}
 		}
-	}
-	
-	private void timeDelayRemoveDialog(long time, final Dialog d){
-		new Handler().postDelayed(new Runnable(){
-			public void run(){
-				d.dismiss();
-			}
-		}, time);
+/*		else{
+			this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
+		}*/
 	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.activity_home);
 
-/*			
-		restaurantsButton = (ImageButton) findViewById(R.id.farmersMarketButton);//restaurantsButton);
-		restaurantsButton.setOnClickListener(getRestaurantButtonListner);	
-  		
-  		farmersMarketButton = (ImageButton) findViewById(R.id.farmersMarketButton);
-		farmersMarketButton.setOnClickListener(getFarmersMarketButtonListener);
-		
-		couponsButton = (ImageButton) findViewById(R.id.couponsButton);
-		couponsButton.setOnClickListener(getCouponsButtonListener);
-
-		cateringButton = (ImageButton) findViewById(R.id.cateringButton);
-		cateringButton.setOnClickListener(getCateringButtonListener);
-		
-		sweetButton = (ImageButton) findViewById(R.id.sweetButton);
-		sweetButton.setOnClickListener(getSweetButtonListener);
-		
-		contactUsButton = (ImageButton) findViewById(R.id.contactUsButton);
-		contactUsButton.setOnClickListener(getContactUsButtonListener);
-*/
-		
-		
 		AQuery rootAQuery = new AQuery(this);
 		
 		Bitmap bm = rootAQuery.getCachedImage(R.drawable.restaurants);
@@ -149,9 +139,11 @@ public class HomeActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.home, menu);
-		return true;
+		//getMenuInflater().inflate(R.menu.home, menu);
+		//return true;
+		return false;
 	}
+	
 
 	public OnClickListener getRestaurantButtonListner = new OnClickListener(){
 

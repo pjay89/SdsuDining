@@ -6,8 +6,7 @@ import org.json.JSONObject;
 
 import sdsu.apps.sdsudining.R;
 import sdsu.apps.sdsudining.database.SdsuDBHelper;
-
-import android.app.ProgressDialog;
+import sdsu.apps.sdsudining.objects.BusyWait;
 import android.content.Context;
 import android.util.Log;
 
@@ -16,25 +15,29 @@ public class FarmersParser extends SdsuDiningParser{
 	private Context context;
 
 	private static  String FARMERS_OBJECT_TAG;
+	private static String DB_ID;
+	private static String LAST_MODIFIED;
 	private static String DB_PHONE;
 	private static String DB_FAX;
 	private static String DB_EMAIL;
 	private static String DB_WEBSITE;
 	private static String DB_ADDRESS;
 	private static String DB_ABOUT;
-
+	
 	private JSONArray farmers = null;
-	private ProgressDialog progressDialog;
+	private BusyWait busyWait;
 	
 	private String TAG = "PARSER";
 	
 
-	public FarmersParser(String url, Context context, ProgressDialog progressDialog){
+	public FarmersParser(String url, Context context, BusyWait busyWait){
 		this.context = context;
-		this.progressDialog = progressDialog;
-		//this.progressDialog.show();
+		this.busyWait = busyWait;
+		this.busyWait.show();
 
 		FARMERS_OBJECT_TAG = context.getString(R.string.FARMERS_OBJECT_TAG);
+		DB_ID = context.getString(R.string.DB_ID);
+		LAST_MODIFIED = context.getString(R.string.LAST_MODIFIED);
 		DB_PHONE = context.getString(R.string.DB_PHONE);
 		DB_FAX = context.getString(R.string.DB_FAX);
 		DB_EMAIL = context.getString(R.string.DB_EMAIL);
@@ -59,10 +62,12 @@ public class FarmersParser extends SdsuDiningParser{
 						JSONObject jsonObj = new JSONObject(jsonString);
 						farmers = jsonObj.getJSONArray(FARMERS_OBJECT_TAG);
 						SdsuDBHelper db = new SdsuDBHelper(context);
-						db.deleteFarmersTable();
+						//db.deleteFarmersTable();
 
 						for(int i=0; i<farmers.length(); i++){
 							JSONObject entry = farmers.getJSONObject(i);
+							String id = entry.getString(DB_ID);
+							String lastModified = entry.getString(LAST_MODIFIED);
 							String phone = entry.getString(DB_PHONE);
 							String fax = entry.getString(DB_FAX);
 							String email = entry.getString(DB_EMAIL);
@@ -70,21 +75,16 @@ public class FarmersParser extends SdsuDiningParser{
 							String address = entry.getString(DB_ADDRESS);
 							String about = entry.getString(DB_ABOUT);
 
-							db.addToFarmersTable(phone, fax, email, website, address, about);
+							db.addToFarmersTable(id, phone, fax, email, website, address, about, lastModified);
 						}
 
 					}
 					catch (JSONException e) {
-						Log.i(TAG, "ERROR: "+e.getMessage());
+						Log.e(TAG, "ERROR: "+e.getMessage());
 					}
 				}
+				busyWait.dismiss();
 				return null;
-			}
-
-			@Override
-			void onPostExecute() {
-				progressDialog.dismiss();
-
 			}
 		};
 	}

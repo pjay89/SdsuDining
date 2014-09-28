@@ -31,10 +31,12 @@ public class DataFetcher {
 			return response;
 		} catch (ClientProtocolException e) {
 			Log.e(TAG, "ERROR1: "+e.getMessage());
-			e.printStackTrace();
+			//Error Collector
+			//e.printStackTrace();
 		} catch (IOException e) {
 			Log.e(TAG, "ERROR2: "+e.getMessage());
-			e.printStackTrace();
+			//Error Collector
+			//e.printStackTrace();
 		}
 		
 		return null;
