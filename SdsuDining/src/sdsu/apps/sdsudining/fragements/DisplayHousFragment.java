@@ -1,6 +1,7 @@
 package sdsu.apps.sdsudining.fragements;
 
 import sdsu.apps.sdsudining.R;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,6 +14,14 @@ public class DisplayHousFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		View rootView = inflater.inflate(R.layout.fragement_hours, container, false);
+		
+		int orientation = getResources().getConfiguration().orientation;
+		if(orientation == Configuration.ORIENTATION_PORTRAIT){
+			rootView.setBackgroundResource(R.drawable.aboutus_bgi);
+		}
+		else{
+			rootView.setBackgroundResource(R.drawable.aboutus_bgi_land);
+		}
 		
 		TextView monday = (TextView) rootView.findViewById(R.id.mondayHoursText);
 		monday.setText(getArguments().getString(getResources().getString(R.string.monday)));
