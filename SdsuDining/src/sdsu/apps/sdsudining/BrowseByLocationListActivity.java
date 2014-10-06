@@ -26,8 +26,8 @@ public class BrowseByLocationListActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_browse_by_location);
 		
-		Intent intent = getIntent();
-		this.setTitle(intent.getStringExtra("labelString"));
+		//Intent intent = getIntent();
+		//this.setTitle(intent.getStringExtra("labelString"));
 		
 		SdsuDBHelper db = new SdsuDBHelper(this);
 		ArrayList<HashMap<String,String>> dbList = db.getUniqueLocations();

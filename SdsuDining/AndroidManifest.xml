@@ -19,50 +19,94 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
+        <activity
+            android:name=".LoadingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar">
+        </activity>
+        
+        
         <activity
             android:name=".HomeActivity"
             android:label="@string/app_name" >
+            
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailsActivity" >
+        
+        
+        <activity
+            android:name=".DetailsActivity"
+            android:parentActivityName=".HomeActivity" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="sdsu.apps.sdsudining.HomeActivity" />
         </activity>
         <activity
             android:name=".RestaurantsListActivity"
-            android:label="@string/restaurantsString" >
+            android:label="@string/restaurantsString"
+            android:parentActivityName=".HomeActivity" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="sdsu.apps.sdsudining.HomeActivity" />
         </activity>
-        <activity android:name=".BrowseByLocationListActivity" >
+        <activity
+            android:name=".BrowseByLocationListActivity"
+            android:label="@string/browseByMapString"
+            android:parentActivityName=".RestaurantsListActivity" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="sdsu.apps.sdsudining.RestaurantsListActivity" />
         </activity>
         <activity
             android:name=".CouponsListActivity"
-            android:label="@string/couponsString" >
-        </activity>
-        <activity
-            android:name=".PlainTestActivity"
-            android:label="@string/title_activity_plain_test" >
-        </activity>
-        <activity
-            android:name=".PlainTestListItemActivity"
-            android:label="@string/title_activity_plain_test_list_item" >
+            android:label="@string/couponsString"
+            android:parentActivityName=".HomeActivity" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="sdsu.apps.sdsudining.HomeActivity" />
         </activity>
         <activity
             android:name=".fragements.DisplayHousFragment"
-            android:label="@string/title_activity_catering_contact" >
+            android:label="@string/title_activity_catering_contact"
+            android:parentActivityName=".HomeActivity" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="sdsu.apps.sdsudining.HomeActivity" />
         </activity>
         <activity
             android:name=".fragements.DisplayAboutFragment"
-            android:label="@string/title_activity_display_info_fragment" >
+            android:label="@string/title_activity_display_info_fragment"
+            android:parentActivityName=".HomeActivity" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="sdsu.apps.sdsudining.HomeActivity" />
         </activity>
         <activity
             android:name=".fragements.DisplayContactFragment"
-            android:label="@string/title_activity_display_contact_fragment" >
-        </activity>
-        <activity
-            android:name=".fragements.DisplayWebFragment"
-            android:label="@string/title_activity_display_web_fragment" >
+            android:label="@string/title_activity_display_contact_fragment"
+            android:parentActivityName=".HomeActivity" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="sdsu.apps.sdsudining.HomeActivity" />
         </activity>
         <activity
             android:name=".RestaurantListRow"
@@ -74,7 +118,13 @@
         </activity>
         <activity
             android:name=".RestaurantsDetails"
-            android:label="@string/title_activity_restaurants_details" >
+            android:label="@string/title_activity_restaurants_details"
+            android:parentActivityName=".HomeActivity" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="sdsu.apps.sdsudining.HomeActivity" />
         </activity>
         <activity
             android:name=".fragements.DisplayRestaurantInfoFragment"
@@ -82,7 +132,13 @@
         </activity>
         <activity
             android:name=".RestaurantsAtLocationListActivity"
-            android:label="@string/title_activity_restaurants_at_location_list" >
+            android:label="@string/title_activity_restaurants_at_location_list"
+            android:parentActivityName=".BrowseByLocationListActivity" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="sdsu.apps.sdsudining.BrowseByLocationListActivity" />
         </activity>
         <activity
             android:name=".RestaurantsAtLocationListRow"
@@ -92,10 +148,7 @@
             android:name=".CouponsListRow"
             android:label="@string/title_activity_coupons_list_row" >
         </activity>
-        <activity
-            android:name=".LoadingActivity"
-            android:label="@string/title_activity_loading" >
-        </activity>
+        
     </application>
 
 </manifest>

@@ -8,6 +8,7 @@
     <dimen name="font_size_30">30dp</dimen>
     <dimen name="table_row_spacing_24">24dp</dimen>
     <dimen name="table_row_spacing_5">5dp</dimen>
+    <dimen name="margin_100">100dp</dimen>
     <dimen name="list_entry_height">100dp</dimen>
 
 </resources>

@@ -10,6 +10,7 @@ import sdsu.apps.sdsudining.database.SdsuDBHelper;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class CouponsListActivity extends Activity {
 
@@ -31,10 +33,24 @@ public class CouponsListActivity extends Activity {
 		// Enable Home button on action bar
 		final ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
+		
+		int orientation = getResources().getConfiguration().orientation;
+		View view = findViewById(R.id.couponsLayout);
+		if(orientation == Configuration.ORIENTATION_PORTRAIT){
+			view.setBackgroundResource(R.drawable.aboutus_bgi);
+		}
+		else{
+			view.setBackgroundResource(R.drawable.aboutus_bgi_land);
+		}
 
 		SdsuDBHelper db = new SdsuDBHelper(this);
 		ArrayList<HashMap<String,String>> dbList = db.getCouponDetails();
-
+	
+		if(dbList.size() > 0){
+			TextView noCouponsTextView = (TextView) findViewById(R.id.noCouponsTextView);
+			noCouponsTextView.setVisibility(TextView.INVISIBLE);
+		}
+		
 		rootAQuery = new AQuery(this);
 		for(int i=0; i<dbList.size(); i++){
 			HashMap<String, String> entry = dbList.get(i);

@@ -1,16 +1,17 @@
 package sdsu.apps.sdsudining.parse;
 
+import java.util.Observer;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import sdsu.apps.sdsudining.R;
 import sdsu.apps.sdsudining.database.SdsuDBHelper;
-import sdsu.apps.sdsudining.objects.BusyWait;
 import android.content.Context;
 import android.util.Log;
 
-public class HoursParser extends SdsuDiningParser{
+public class HoursParser extends SdsuDiningParser {
 	private Context context;
 	
 	private static String HOURS_OBJECT_TAG;
@@ -22,14 +23,14 @@ public class HoursParser extends SdsuDiningParser{
 	private static String HOURS_CLOSE;
 	
 	private JSONArray hours = null;
-	private BusyWait busyWait;
+
 	
 	private String TAG = "PARSER";
 	
-	public HoursParser(String url, Context context, BusyWait busyWait){
+	public HoursParser(String url, Context context, Observer observer){
 		this.context = context;
-		this.busyWait = busyWait;
-		this.busyWait.show();
+		
+		this.addObserver(observer);
 		
 		HOURS_OBJECT_TAG = context.getString(R.string.HOURS_OBJECT_TAG);
 		DB_ID = context.getString(R.string.DB_ID);
@@ -72,10 +73,18 @@ public class HoursParser extends SdsuDiningParser{
 					}
 					
 				}
-				busyWait.dismiss();
+				handleObservers();
 				return null;
 			}
 		};
 	}
+
+	@Override
+	protected void handleObservers() {
+		Log.i(TAG, "handle called in HOURS");
+		setChanged();
+		notifyObservers(context.getString(R.string.parserObserverComplete));
+	}
+	
 
 }

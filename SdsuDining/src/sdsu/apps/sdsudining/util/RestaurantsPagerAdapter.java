@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 public class RestaurantsPagerAdapter extends FragmentPagerAdapter{
 	ArrayList<HashMap<String,String>> dbList;
@@ -75,19 +76,22 @@ public class RestaurantsPagerAdapter extends FragmentPagerAdapter{
 	private long getRestaurantClosingTimeDifference(String restaurantId){
 		DiningHoursCalculator diningHoursCalc = new DiningHoursCalculator();
 		
+		Log.i("PLAIN TEST", restaurantId);
+		
 		SdsuDBHelper db = new SdsuDBHelper(context);
 		ArrayList<String[]> hours = db.getHoursForRestaurantStatus(restaurantId, diningHoursCalc.getPacificTimeDay());
 		db.close();
 		
 		long difference = 0;
+		//iterate through all the hours for a given day
 		for(String[] entry : hours){
 			difference = diningHoursCalc.getTimeDifference(entry[0], entry[1]);
 			if(difference > 0){
+				//stop iteration at first open encounter
 				break;
 			}
 		}
-		
-		//long difference = diningHoursCalc.getTimeDifference(closingTime);		
+	
 		return difference;
 	}
 	

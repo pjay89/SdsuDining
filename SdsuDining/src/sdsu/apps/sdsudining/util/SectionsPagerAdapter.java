@@ -37,19 +37,19 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 		
 		if(lableString.equals(context.getString(R.string.farmersMarketString))){
 			dbList = getFarmersDBDetails();
-			return getFragement(position);
+			return getFragement(position, R.drawable.aboutus_farmers);
 		}
 		else if(lableString.equals(context.getString(R.string.cateringString))){
 			dbList = getCateringDBDetails();
-			return getFragement(position);
+			return getFragement(position, R.drawable.aboutus_catering);
 		}
 		else if(lableString.equals(context.getString(R.string.sweetString))){
 			dbList = getSweetDBDetails();
-			return getFragement(position);
+			return getFragement(position, R.drawable.aboutus_sweet);
 		}
 		else{
 			dbList = getContactDBDetails();
-			return getFragement(position);
+			return getFragement(position, R.drawable.aboutus_contact);
 		}
 	}
 
@@ -118,7 +118,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
 	}
 	
-	private Fragment getFragement(int position){
+	private Fragment getFragement(int position, int imageId){
 		if(position == 1){
 			return getHoursFragment();
 		}
@@ -150,6 +150,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 			args.putString(context.getResources().getString(R.string.email), email);
 			args.putString(context.getResources().getString(R.string.website), website);
 			args.putString(context.getResources().getString(R.string.address), address);
+
 						
 			fragment = new DisplayContactFragment();
 			fragment.setArguments(args);
@@ -157,6 +158,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 		}
 		else{
 			args.putString(context.getResources().getString(R.string.about), about);
+			args.putInt(context.getResources().getString(R.string.image), imageId);
 			
 			fragment = new DisplayAboutFragment();
 			fragment.setArguments(args);

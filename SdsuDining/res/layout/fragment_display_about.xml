@@ -16,14 +16,21 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context=".DisplayAboutFragment" >
 
+        <ImageView
+            android:id="@+id/aboutImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@string/aboutUsString" />
+
         <TextView
             android:id="@+id/aboutUsHeading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:text="@string/aboutUsHeading"
+            android:layout_below="@id/aboutImage"
+            android:text="@string/aboutUsString"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/sdsu_red"
             android:textStyle="bold" />

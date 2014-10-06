@@ -1,12 +1,13 @@
 package sdsu.apps.sdsudining.parse;
 
+import java.util.Observer;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import sdsu.apps.sdsudining.R;
 import sdsu.apps.sdsudining.database.SdsuDBHelper;
-import sdsu.apps.sdsudining.objects.BusyWait;
 import android.content.Context;
 import android.util.Log;
 
@@ -16,21 +17,22 @@ public class CouponsParser extends SdsuDiningParser{
 
 	private static String COUPON_OBJECT_TAG;
 	private static String COUPON_ID;
+	private static String LAST_MODIFIED;
 	private static String COUPON_IMAGE;
 	private static String COUPON_EXPIRATION;
 	
 	private JSONArray coupon = null;
-	private BusyWait busyWait;
 	
 	private String TAG = "PARSER";
 
-	public CouponsParser(String url, Context context, BusyWait busyWait){
+	public CouponsParser(String url, Context context, Observer observer){
 		this.context = context;
-		this.busyWait = busyWait;
-		this.busyWait.show();
+
+		addObserver(observer);
 		
 		COUPON_OBJECT_TAG = context.getString(R.string.COUPON_OBJECT_TAG);
 		COUPON_ID = context.getString(R.string.COUPON_ID);
+		LAST_MODIFIED = context.getString(R.string.LAST_MODIFIED);
 		COUPON_IMAGE = context.getString(R.string.COUPON_IMAGE);
 		COUPON_EXPIRATION = context.getString(R.string.COUPON_EXPIRATION);
 
@@ -51,14 +53,14 @@ public class CouponsParser extends SdsuDiningParser{
 						JSONObject jsonObj = new JSONObject(jsonString);
 						coupon = jsonObj.getJSONArray(COUPON_OBJECT_TAG);
 						SdsuDBHelper db = new SdsuDBHelper(context);
-						db.deleteCouponTable();
 						
 						for(int i=0; i<coupon.length(); i++){
 							JSONObject entry = coupon.getJSONObject(i);
 							String id = entry.getString(COUPON_ID);
+							String lastModified = entry.getString(LAST_MODIFIED);
 							String image = entry.getString(COUPON_IMAGE);
 							String expiration = entry.getString(COUPON_EXPIRATION);
-							db.addToCouponTable(id, image, expiration);
+							db.addToCouponTable(id, image, expiration, lastModified);
 						}
 						
 					}
@@ -66,10 +68,17 @@ public class CouponsParser extends SdsuDiningParser{
 						Log.i(TAG, "ERROR: "+e.getMessage());
 					}
 				}
-				busyWait.dismiss();
+				handleObservers();
 				return null;
 			}
 		};
+	}
+
+	@Override
+	protected void handleObservers() {
+		Log.i(TAG, "handle called in COUPONS");
+		setChanged();
+		notifyObservers(context.getString(R.string.parserObserverComplete));
 	}
 
 }

@@ -31,14 +31,14 @@ public class SdsuDining extends Application{
 		ConnectivityManager connectivityManager = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
 		try{
 			if( connectivityManager.getActiveNetworkInfo().isConnected()){
-				Log.i(TAG, "yup");
+				Log.i(TAG, "internet yup");
 				return true;
 			}}
 		catch(RuntimeException e){
-			Log.i(TAG, "nope");
+			Log.i(TAG, "internet nope");
 			return false;
 		}
-		Log.i(TAG, "nope");
+		Log.i(TAG, "internet nope");
 		return false;
 	}
 	

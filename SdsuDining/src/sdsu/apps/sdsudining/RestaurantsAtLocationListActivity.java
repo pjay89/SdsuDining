@@ -62,8 +62,8 @@ public class RestaurantsAtLocationListActivity extends Activity {
 				
 							
 				AQuery listRowAQuery = new AQuery(convertView);
-				String url = entries.get(position);
-				int id = getApplicationContext().getResources().getIdentifier(url, "drawable", getPackageName());
+				String imageName = entries.get(position);
+				int id = getApplicationContext().getResources().getIdentifier(imageName, "drawable", getPackageName());
 				Bitmap bm = listRowAQuery.getCachedImage(id);
 				listRowAQuery.id(R.id.restaurantListViewImage).image(bm, AQuery.RATIO_PRESERVE);
 				return convertView;

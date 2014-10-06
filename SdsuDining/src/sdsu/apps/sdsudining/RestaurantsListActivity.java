@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,8 +33,24 @@ public class RestaurantsListActivity extends Activity {
 	private ArrayList<String> restaurantNames = new ArrayList<String>();
 
 	@Override
+	protected void onResume(){
+		super.onResume();
+		
+		Log.i("STATE TEST", "RESTLIST ONRESUME");
+		boolean isForeground = SdsuDining.isAppStart();
+		if(isForeground){
+			Intent intent = new Intent(this, LoadingActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			finish();
+		}
+	}
+	
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+		super.onCreate(savedInstanceState);	
+		Log.i("STATE TEST", "RESTLIST ONCREATE");
+		
 		setContentView(R.layout.activity_restaurants_list);
 
 		// Enable Home button on action bar
@@ -114,7 +131,7 @@ public class RestaurantsListActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			Intent intent = new Intent(RestaurantsListActivity.this, BrowseByLocationListActivity.class);
-			intent.putExtra("labelString", getResources().getString(R.string.browseByMapString));
+			//intent.putExtra("labelString", getResources().getString(R.string.browseByMapString));
 			startActivity(intent);
 		}
 

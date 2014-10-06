@@ -1,12 +1,13 @@
 package sdsu.apps.sdsudining.parse;
 
+import java.util.Observer;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import sdsu.apps.sdsudining.R;
 import sdsu.apps.sdsudining.database.SdsuDBHelper;
-import sdsu.apps.sdsudining.objects.BusyWait;
 import android.content.Context;
 import android.util.Log;
 
@@ -25,15 +26,14 @@ public class FarmersParser extends SdsuDiningParser{
 	private static String DB_ABOUT;
 	
 	private JSONArray farmers = null;
-	private BusyWait busyWait;
 	
 	private String TAG = "PARSER";
 	
 
-	public FarmersParser(String url, Context context, BusyWait busyWait){
+	public FarmersParser(String url, Context context, Observer observer){
 		this.context = context;
-		this.busyWait = busyWait;
-		this.busyWait.show();
+		
+		addObserver(observer);
 
 		FARMERS_OBJECT_TAG = context.getString(R.string.FARMERS_OBJECT_TAG);
 		DB_ID = context.getString(R.string.DB_ID);
@@ -62,7 +62,6 @@ public class FarmersParser extends SdsuDiningParser{
 						JSONObject jsonObj = new JSONObject(jsonString);
 						farmers = jsonObj.getJSONArray(FARMERS_OBJECT_TAG);
 						SdsuDBHelper db = new SdsuDBHelper(context);
-						//db.deleteFarmersTable();
 
 						for(int i=0; i<farmers.length(); i++){
 							JSONObject entry = farmers.getJSONObject(i);
@@ -83,9 +82,16 @@ public class FarmersParser extends SdsuDiningParser{
 						Log.e(TAG, "ERROR: "+e.getMessage());
 					}
 				}
-				busyWait.dismiss();
+				handleObservers();
 				return null;
 			}
 		};
+	}
+
+	@Override
+	protected void handleObservers() {
+		Log.i(TAG, "handle called in FARMERS");
+		setChanged();
+		notifyObservers(context.getString(R.string.parserObserverComplete));
 	}
 }

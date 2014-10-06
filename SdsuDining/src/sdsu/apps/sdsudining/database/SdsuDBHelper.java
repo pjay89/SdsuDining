@@ -62,13 +62,14 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 	private static String HOURS_DAY;
 	private static String HOURS_OPEN;
 	private static String HOURS_CLOSE;
+	
+	// GCM Table
+	private static String GCM_TABLE;
+	private static String GCM_REG_ID;
 
-
-	//private ProgressDialog progressDialog;
 
 	public SdsuDBHelper(Context context){
 		super(context, context.getString(R.string.DATABASE_NAME), null, DATABASE_VERSION);
-		//progressDialog = new ProgressDialog(context);
 		
 		//Restaurant Table
 		RESTAURANT_TABLE = context.getString(R.string.RESTAURANT_TABLE);
@@ -113,6 +114,11 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 		HOURS_DAY = context.getString(R.string.HOURS_DAY);
 		HOURS_OPEN = context.getString(R.string.HOURS_OPEN);
 		HOURS_CLOSE = context.getString(R.string.HOURS_CLOSE);
+		
+		//GCM Table
+		GCM_TABLE = context.getString(R.string.GCM_TABLE);
+		GCM_REG_ID = context.getString(R.string.GCM_REG_ID);
+
 	}
 
 
@@ -123,7 +129,7 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 				+ RESTAURANT_TABLE + "(" + RESTAURANT_ID + " VARCHAR PRIMARY KEY," + RESTAURANT_NAME
 				+ " TEXT," + RESTAURANT_IMAGE + " TEXT," + RESTAURANT_LOCATION_ID 
 				+ " TEXT," + RESTAURANT_LOCATION_NAME + " TEXT," + RESTAURANT_PHONE 
-				+ " TEXT," + RESTAURANT_WEBSITE + " TEXT)"; 
+				+ " TEXT," + RESTAURANT_WEBSITE + " TEXT," + LAST_MODIFIED + " TIME)"; 
 		Log.i(TAG, CREATE_TABLE_RESTAURANT);
 		db.execSQL(CREATE_TABLE_RESTAURANT);
 
@@ -139,35 +145,35 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 		//COUPON table create statement
 		String CREATE_TABLE_COUPON = "CREATE TABLE "
 				+ COUPON_TABLE + "(" + COUPON_ID + " VARCHAR PRIMARY KEY," + COUPON_IMAGE
-				+ " TEXT," + COUPON_EXPIRATION + " DATE)"; 
+				+ " TEXT," + COUPON_EXPIRATION + " DATE," + LAST_MODIFIED + " TIME)"; 
 		Log.i(TAG, CREATE_TABLE_COUPON);
 		db.execSQL(CREATE_TABLE_COUPON);
 
 		//CATERING table create statement
 		String CREATE_TABLE_CATERING = "CREATE TABLE "
-				+ CATERING_TABLE + "(id INTEGER PRIMARY KEY," + DB_PHONE
+				+ CATERING_TABLE + "(" + DB_ID + " VARCHAR PRIMARY KEY," + DB_PHONE
 				+ " TEXT," + DB_FAX + " TEXT," + DB_EMAIL 
 				+ " TEXT," + DB_WEBSITE + " TEXT," + DB_ADDRESS 
-				+ " TEXT," + DB_ABOUT + " TEXT)"; 
+				+ " TEXT," + DB_ABOUT + " TEXT," + LAST_MODIFIED + " TIME)"; 
 		Log.i(TAG, CREATE_TABLE_CATERING);
 		db.execSQL(CREATE_TABLE_CATERING);
 
 		// SWEET table create statement
 		String CREATE_TABLE_SWEET = "CREATE TABLE "
-				+ SWEET_TABLE + "( id INTEGER PRIMARY KEY," + DB_PHONE
+				+ SWEET_TABLE + "(" + DB_ID + " VARCHAR PRIMARY KEY," + DB_PHONE
 				+ " TEXT," + DB_FAX + " TEXT," + DB_EMAIL 
 				+ " TEXT," + DB_WEBSITE + " TEXT," + DB_ADDRESS 
-				+ " TEXT," + DB_ABOUT + " TEXT)";
+				+ " TEXT," + DB_ABOUT + " TEXT," + LAST_MODIFIED + " TIME)"; 
 		Log.i(TAG, CREATE_TABLE_SWEET);
 		db.execSQL(CREATE_TABLE_SWEET);
 
 
 		// CONTACT table create statement
 		String CREATE_TABLE_CONTACT = "CREATE TABLE "
-				+ CONTACT_TABLE + "(id INTEGER PRIMARY KEY," + DB_PHONE
+				+ CONTACT_TABLE + "(" + DB_ID + " VARCHAR PRIMARY KEY," + DB_PHONE
 				+ " TEXT," + DB_FAX + " TEXT," + DB_EMAIL 
 				+ " TEXT," + DB_WEBSITE + " TEXT," + DB_ADDRESS 
-				+ " TEXT," + DB_ABOUT + " TEXT)"; 
+				+ " TEXT," + DB_ABOUT + " TEXT," + LAST_MODIFIED + " TIME)"; 
 		Log.i(TAG, CREATE_TABLE_CONTACT);
 		db.execSQL(CREATE_TABLE_CONTACT);
 
@@ -178,6 +184,13 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 				+ " TEXT," + HOURS_CLOSE + " TEXT," + LAST_MODIFIED + " TIME)";
 		Log.i(TAG, CREATE_TABLE_HOURS);
 		db.execSQL(CREATE_TABLE_HOURS);
+		
+		// GCM table create statement
+				String CREATE_TABLE_GCM = "CREATE TABLE "
+						+ GCM_TABLE + "(" + DB_ID + " VARCHAR PRIMARY KEY," 
+						+ GCM_REG_ID + " TEXT)";
+				Log.i(TAG, CREATE_TABLE_GCM);
+				db.execSQL(CREATE_TABLE_GCM);
 	}
 
 	@Override
@@ -189,11 +202,12 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 		db.execSQL("DROP TABLE IF EXISTS " + SWEET_TABLE);
 		db.execSQL("DROP TABLE IF EXISTS " + CONTACT_TABLE);
 		db.execSQL("DROP TABLE IF EXISTS " + HOURS_TABLE);
+		db.execSQL("DROP TABLE IF EXISTS " + GCM_TABLE);
 		onCreate(db);
 	}
 
 	/* ******* RESTAURANTS ******* */
-	public void addToRestaurantTable(String id, String name, String image, String locationId, String locationName, String phone, String website){
+	public void addToRestaurantTable(String id, String name, String image, String locationId, String locationName, String phone, String website, String lastModified){
 		SQLiteDatabase db = this.getWritableDatabase();
 		
 		ContentValues values = new ContentValues();
@@ -204,8 +218,13 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 		values.put(RESTAURANT_LOCATION_NAME, locationName);
 		values.put(RESTAURANT_PHONE, phone);
 		values.put(RESTAURANT_WEBSITE, website);
+		values.put(LAST_MODIFIED, lastModified);
+		
+		int result = (int) db.insertWithOnConflict(RESTAURANT_TABLE, null, values, SQLiteDatabase.CONFLICT_IGNORE);
+		if(result == -1){
+			db.update(RESTAURANT_TABLE, values, (RESTAURANT_ID + "=? AND " + LAST_MODIFIED+"<?"), new String[]{id, lastModified});
+		}
 
-		db.insert(RESTAURANT_TABLE, null, values);
 		db.close();
 	}
 
@@ -379,15 +398,20 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 
 	
 	/* ******* COUPON ******* */
-	public void addToCouponTable(String id, String image, String expiration){
+	public void addToCouponTable(String id, String image, String expiration, String lastModified){
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
 		values.put(COUPON_ID, id);
 		values.put(COUPON_IMAGE, image);
 		values.put(COUPON_EXPIRATION, expiration);
+		values.put(LAST_MODIFIED, lastModified);
+		
+		int result = (int) db.insertWithOnConflict(COUPON_TABLE, null, values, SQLiteDatabase.CONFLICT_IGNORE);
+		if(result == -1){
+			db.update(COUPON_TABLE, values, (COUPON_ID + "=? AND " + LAST_MODIFIED+"<?"), new String[]{id, lastModified});
+		}
 
-		db.insert(COUPON_TABLE, null, values);
 		db.close();
 	}
 
@@ -417,18 +441,24 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 	
 
 	/* ******* CATERING ******* */
-	public void addToCateringTable(String phone, String fax, String email, String website, String address, String about){
+	public void addToCateringTable(String id, String phone, String fax, String email, String website, String address, String about, String lastModified){
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
+		values.put(DB_ID, id);
 		values.put(DB_PHONE, phone);
 		values.put(DB_FAX, fax);
 		values.put(DB_EMAIL, email);
 		values.put(DB_WEBSITE, website);
 		values.put(DB_ADDRESS, address);
 		values.put(DB_ABOUT, about);
+		values.put(LAST_MODIFIED, lastModified);
+		
+		int result = (int) db.insertWithOnConflict(CATERING_TABLE, null, values, SQLiteDatabase.CONFLICT_IGNORE);
+		if(result == -1){
+			db.update(CATERING_TABLE, values, (DB_ID + "=? AND " + LAST_MODIFIED+"<?"), new String[]{id, lastModified});
+		}
 
-		db.insert(CATERING_TABLE, null, values);
 		db.close();
 	}
 
@@ -461,18 +491,24 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 
 
 	/* ******* SWEET ******* */
-	public void addToSweetTable(String phone, String fax, String email, String website, String address, String about){
+	public void addToSweetTable(String id, String phone, String fax, String email, String website, String address, String about, String lastModified){
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
+		values.put(DB_ID, id);
 		values.put(DB_PHONE, phone);
 		values.put(DB_FAX, fax);
 		values.put(DB_EMAIL, email);
 		values.put(DB_WEBSITE, website);
 		values.put(DB_ADDRESS, address);
 		values.put(DB_ABOUT, about);
+		values.put(LAST_MODIFIED, lastModified);
+		
+		int result = (int) db.insertWithOnConflict(SWEET_TABLE, null, values, SQLiteDatabase.CONFLICT_IGNORE);
+		if(result == -1){
+			db.update(SWEET_TABLE, values, (DB_ID + "=? AND " + LAST_MODIFIED+"<?"), new String[]{id, lastModified});
+		}
 
-		db.insert(SWEET_TABLE, null, values);
 		db.close();
 	}
 
@@ -506,18 +542,24 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 
 
 	/* ******* CONTACT ******* */
-	public void addToContactTable(String phone, String fax, String email, String website, String address, String about){
+	public void addToContactTable(String id, String phone, String fax, String email, String website, String address, String about, String lastModified){
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
+		values.put(DB_ID, id);
 		values.put(DB_PHONE, phone);
 		values.put(DB_FAX, fax);
 		values.put(DB_EMAIL, email);
 		values.put(DB_WEBSITE, website);
 		values.put(DB_ADDRESS, address);
 		values.put(DB_ABOUT, about);
+		values.put(LAST_MODIFIED, lastModified);
+		
+		int result = (int) db.insertWithOnConflict(CONTACT_TABLE, null, values, SQLiteDatabase.CONFLICT_IGNORE);
+		if(result == -1){
+			db.update(CONTACT_TABLE, values, (DB_ID + "=? AND " + LAST_MODIFIED+"<?"), new String[]{id, lastModified});
+		}
 
-		db.insert(CONTACT_TABLE, null, values);
 		db.close();
 	}
 
@@ -586,6 +628,7 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 		db.close();
 
 		if(hours.length() > 0){
+			//remove first newline character
 			hours = hours.substring(1);
 		}
 		return hours;
@@ -613,47 +656,37 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 
 		return closingTimes;
 	}
-
-	/* **************************************************************** */
-	public void deleteRestaurantTable(){
-		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(RESTAURANT_TABLE, null, null);
-		db.close();
-	}
-
-	public void deleteFarmersTable(){
-		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(FARMERS_TABLE, null, null);
-		db.close();
-	}
 	
-	public void deleteCouponTable(){
+	
+	/* ******* GCM ******* */
+	public void storeGCMRegId(String regId){
 		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(COUPON_TABLE, null, null);
+		
+		ContentValues values = new ContentValues();
+		values.put(DB_ID, GCM_REG_ID);
+		values.put(GCM_REG_ID, regId);
+		
+		int result = (int) db.insertWithOnConflict(GCM_TABLE, null, values, SQLiteDatabase.CONFLICT_IGNORE);
+		if(result == -1){
+			db.update(GCM_TABLE, values, (DB_ID + "=?"), new String[]{GCM_REG_ID});
+		}		
 		db.close();
 	}
-
-	public void deleteCateringTable(){
-		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(CATERING_TABLE, null, null);
+	public String getGCMRegId(){
+		String regId = "";
+		String query = "SELECT " + GCM_REG_ID + " FROM " + GCM_TABLE; 
+		
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.rawQuery(query, null);
+		//Move to first row
+		cursor.moveToFirst();
+		while(cursor.getCount() > 0 && !cursor.isAfterLast()){
+			regId = cursor.getString(0);
+			cursor.moveToNext();
+		}
+		cursor.close();
 		db.close();
-	}
 
-	public void deleteSweetTable(){
-		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(SWEET_TABLE, null, null);
-		db.close();
-	}
-
-	public void deleteContactTable(){
-		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(CONTACT_TABLE, null, null);
-		db.close();
-	}
-
-	public void deleteHoursTable(){
-		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(HOURS_TABLE, null, null);
-		db.close();
+		return regId;
 	}
 }

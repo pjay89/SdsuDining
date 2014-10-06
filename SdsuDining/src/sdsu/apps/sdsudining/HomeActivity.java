@@ -21,6 +21,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -40,20 +41,22 @@ public class HomeActivity extends Activity {
 	protected void onPause(){
 		super.onPause();
 		SdsuDining.appStatus(this);
+		Log.i("STATE TEST", "HOME ONPAUSE");
+	/*	SdsuDining.appStatus(this);
 		hoursBusyWait.dismiss();
 		farmersBusyWait.dismiss();
 		contactBusyWait.dismiss();
 		sweetBusyWait.dismiss();
 		cateringBusyWait.dismiss();
 		couponsBusyWait.dismiss();
-		restaurantsBusyWait.dismiss();
+		restaurantsBusyWait.dismiss();*/
 	}
 	
 	@Override
 	protected void onResume(){
 		super.onResume();
 
-		hoursBusyWait = new BusyWait(this);
+		/*hoursBusyWait = new BusyWait(this);
 		farmersBusyWait = new BusyWait(this);
 		contactBusyWait = new BusyWait(this);
 		sweetBusyWait = new BusyWait(this);
@@ -85,15 +88,27 @@ public class HomeActivity extends Activity {
 				});
 				alert.show();
 			}
-		}
+		}*/
 /*		else{
 			this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
 		}*/
+		
+		Log.i("STATE TEST", "HOME ONRESUME");
+		boolean isForeground = SdsuDining.isAppStart();
+		Log.i("STATE TEST", "no change status " + isForeground);
+		if(isForeground){
+			Intent intent = new Intent(this, LoadingActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			finish();
+		}
+		
 	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Log.i("STATE TEST", "HOME ONCREATE");
 		
 		setContentView(R.layout.activity_home);
 
@@ -177,7 +192,7 @@ public class HomeActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			Intent intent = new Intent(HomeActivity.this, CouponsListActivity.class);
-			intent.putExtra("labelString", getResources().getString(R.string.couponsString));
+			//intent.putExtra("labelString", getResources().getString(R.string.couponsString));
 			startActivity(intent);
 		}
 

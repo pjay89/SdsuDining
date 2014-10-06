@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/couponsLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
@@ -25,5 +26,14 @@
 
         </ListView>
     </LinearLayout>
+    
+      <ProgressBar
+          android:id="@+id/couponsLoadingProgressBar"
+          style="@android:style/Widget.ProgressBar.Inverse"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_alignParentBottom="true"
+          android:layout_marginBottom="@dimen/margin_100"
+          android:contentDescription="@string/loadingString" />
 
 </RelativeLayout>
