@@ -10,5 +10,5 @@ public class Configurations {
 
 	// Google Project Number
 	static final String GOOGLE_PROJECT_ID = "397619223503";
-	static final String MESSAGE_KEY = "m";
+	public static final String MESSAGE_KEY = "m";
 }

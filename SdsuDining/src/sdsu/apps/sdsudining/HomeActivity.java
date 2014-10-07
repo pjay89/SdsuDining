@@ -2,24 +2,15 @@ package sdsu.apps.sdsudining;
 
 import java.util.ArrayList;
 
+import sdsu.apps.sdsudining.gcm.Configurations;
+
 import com.androidquery.AQuery;
 
-
-
-import sdsu.apps.sdsudining.objects.BusyWait;
-import sdsu.apps.sdsudining.parse.CateringParser;
-import sdsu.apps.sdsudining.parse.ContactParser;
-import sdsu.apps.sdsudining.parse.CouponsParser;
-import sdsu.apps.sdsudining.parse.FarmersParser;
-import sdsu.apps.sdsudining.parse.HoursParser;
-import sdsu.apps.sdsudining.parse.RestaurantsParser;
-import sdsu.apps.sdsudining.parse.SweetParser;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.Menu;
@@ -28,71 +19,17 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
 public class HomeActivity extends Activity {
-
-	BusyWait hoursBusyWait;
-	BusyWait farmersBusyWait;
-	BusyWait contactBusyWait;
-	BusyWait sweetBusyWait;
-	BusyWait cateringBusyWait;
-	BusyWait couponsBusyWait;
-	BusyWait restaurantsBusyWait;
 	
 	@Override
 	protected void onPause(){
 		super.onPause();
 		SdsuDining.appStatus(this);
 		Log.i("STATE TEST", "HOME ONPAUSE");
-	/*	SdsuDining.appStatus(this);
-		hoursBusyWait.dismiss();
-		farmersBusyWait.dismiss();
-		contactBusyWait.dismiss();
-		sweetBusyWait.dismiss();
-		cateringBusyWait.dismiss();
-		couponsBusyWait.dismiss();
-		restaurantsBusyWait.dismiss();*/
 	}
 	
 	@Override
 	protected void onResume(){
 		super.onResume();
-
-		/*hoursBusyWait = new BusyWait(this);
-		farmersBusyWait = new BusyWait(this);
-		contactBusyWait = new BusyWait(this);
-		sweetBusyWait = new BusyWait(this);
-		cateringBusyWait = new BusyWait(this);
-		couponsBusyWait = new BusyWait(this);
-		restaurantsBusyWait = new BusyWait(this);
-		
-		
-		boolean isForeground = SdsuDining.isAppStart();
-		if(isForeground){
-			if(SdsuDining.isNetworkConnected(this)){
-				new HoursParser(this.getString(R.string.HOURS_URL), this.getApplicationContext(), hoursBusyWait);
-				new FarmersParser(this.getString(R.string.FARMERS_URL), this.getApplicationContext(), farmersBusyWait);
-				new ContactParser(this.getString(R.string.CONTACT_URL), this.getApplicationContext(), contactBusyWait);
-				new SweetParser(this.getString(R.string.SWEET_URL), this.getApplicationContext(), sweetBusyWait);
-				new CateringParser(this.getString(R.string.CATERING_URL), this.getApplicationContext(), cateringBusyWait);
-				new CouponsParser(this.getString(R.string.COUPON_URL), this.getApplicationContext(), couponsBusyWait);
-				new RestaurantsParser(this.getString(R.string.RESTAURANTS_URL), this.getApplicationContext(), restaurantsBusyWait);
-			}
-			else{
-				final AlertDialog alert = new AlertDialog.Builder(this).create();
-				alert.setMessage("No Internet Connection\nFailed to Fetch Data from Server");
-				alert.setButton(DialogInterface.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						alert.cancel();
-					}
-				});
-				alert.show();
-			}
-		}*/
-/*		else{
-			this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
-		}*/
-		
 		Log.i("STATE TEST", "HOME ONRESUME");
 		boolean isForeground = SdsuDining.isAppStart();
 		Log.i("STATE TEST", "no change status " + isForeground);
@@ -149,8 +86,31 @@ public class HomeActivity extends Activity {
 		
 		ImageView  contactUsButton= (ImageView) findViewById(R.id.contactUsButton);
 		contactUsButton.setOnClickListener(getContactUsButtonListener);
+		
+		showMsg();
 	}
 
+	private void showMsg(){
+		Intent intent = getIntent();
+		String msg = intent.getStringExtra(Configurations.MESSAGE_KEY);
+		if(msg!=null){
+			// Prevent alert recreation on orientation change
+			Bundle extras = null;
+			intent.replaceExtras(extras);
+			
+			final AlertDialog alert = new AlertDialog.Builder(this).create();
+			alert.setMessage(msg);
+			alert.setButton(DialogInterface.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					alert.cancel();
+				}
+			});
+			alert.show();
+		}
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -192,7 +152,6 @@ public class HomeActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			Intent intent = new Intent(HomeActivity.this, CouponsListActivity.class);
-			//intent.putExtra("labelString", getResources().getString(R.string.couponsString));
 			startActivity(intent);
 		}
 

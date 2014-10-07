@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.util.Log;
@@ -56,7 +57,8 @@ public class RestaurantsListActivity extends Activity {
 		// Enable Home button on action bar
 		final ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
-
+		
+		
 		browseByMap = (Button) findViewById(R.id.browseByMap);
 		Typeface font = Typeface.createFromAsset(getAssets(), "CenturyGothic.ttf");
 		browseByMap.setTypeface(font);

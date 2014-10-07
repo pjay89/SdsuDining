@@ -3,6 +3,12 @@ package sdsu.apps.sdsudining;
 import java.util.Observable;
 import java.util.Observer;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+
+import sdsu.apps.sdsudining.database.SdsuDBHelper;
+import sdsu.apps.sdsudining.gcm.Configurations;
+import sdsu.apps.sdsudining.gcm.RegIdRegistrar;
 import sdsu.apps.sdsudining.parse.CateringParser;
 import sdsu.apps.sdsudining.parse.ContactParser;
 import sdsu.apps.sdsudining.parse.CouponsParser;
@@ -23,18 +29,33 @@ public class LoadingActivity extends Activity implements Observer{
 
 	private int count = 0;
 	private static int TOTAL_PARSERS_COUNT = 7;
+	private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+	
+	
+	private static final String TAG = "SDSU_GCM";
 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_loading);
-
+		
+		if(checkGooglePlayServices()){
+			SdsuDBHelper db = new SdsuDBHelper(getApplicationContext());
+			if(db.getGCMRegId().equals("")){
+				Log.i(TAG, "GCM regId is blank. Calling registerInBackground");
+				registerInBackground();
+			}
+			db.close();
+		}
 	}
 
 	@Override
 	protected void onResume(){
 		super.onResume();
+		
+		// You need to do the Play Services APK check here too.
+		checkGooglePlayServices();
 
 		Log.i("STATE TEST", "LOADING ONRESUME");
 		if(SdsuDining.isNetworkConnected(this)){
@@ -47,9 +68,8 @@ public class LoadingActivity extends Activity implements Observer{
 			new RestaurantsParser(this.getString(R.string.RESTAURANTS_URL), this.getApplicationContext(), this);
 		}
 		else{
-			ProgressBar progressBar = (ProgressBar) findViewById(R.id.loadingProgressBar);
-			progressBar.setVisibility(View.GONE);
-
+			hideProgressBar();
+			
 			final AlertDialog alert = new AlertDialog.Builder(this).create();
 			alert.setMessage("No Internet Connection\nFailed to Fetch Data from Server");
 			alert.setCanceledOnTouchOutside(false);
@@ -78,12 +98,41 @@ public class LoadingActivity extends Activity implements Observer{
 		}
 	}
 	
+	private void hideProgressBar(){
+		ProgressBar progressBar = (ProgressBar) findViewById(R.id.loadingProgressBar);
+		progressBar.setVisibility(View.GONE);
+	}
 
 	private void navigateToHome(){
 		SdsuDining.setFalse();
+		
+		Intent notificationIntent = getIntent();
+		
 		Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+		intent.putExtra(Configurations.MESSAGE_KEY, notificationIntent.getStringExtra(Configurations.MESSAGE_KEY));
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
 		finish();
 	}
+	
+	private boolean checkGooglePlayServices(){
+		int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+		if(resultCode != ConnectionResult.SUCCESS){
+			if(GooglePlayServicesUtil.isUserRecoverableError(resultCode)){
+				GooglePlayServicesUtil.getErrorDialog(resultCode, this, PLAY_SERVICES_RESOLUTION_REQUEST).show();
+			}
+			else{
+				Log.e(TAG, "This device is not supported");
+				finish();
+			}
+			return false;
+		}
+		return true;
+	}
+	
+	private void registerInBackground(){
+		RegIdRegistrar registrar = new RegIdRegistrar(getApplicationContext());
+		registrar.register();
+	}
+
 }

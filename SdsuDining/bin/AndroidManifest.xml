@@ -14,11 +14,27 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <!-- GCM permissions -->
+    <permission
+        android:name="sdsu.apps.sdsudining.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="sdsu.apps.sdsudining.permission.C2D_MESSAGE" />
+	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
+        <meta-data
+    android:name="com.google.android.gms.version"
+    android:value="@integer/google_play_services_version" />
         
         <activity
             android:name=".LoadingActivity"
@@ -148,6 +164,19 @@
             android:name=".CouponsListRow"
             android:label="@string/title_activity_coupons_list_row" >
         </activity>
+        
+        <!-- GCM RECEIVER -->
+        <receiver
+            android:name=".gcm.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                
+                <category android:name="sdsu.apps.sdsudining" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".gcm.GcmIntentService" />
         
     </application>
 
