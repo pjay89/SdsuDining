@@ -1555,11 +1555,11 @@ containing a value of this type.
         public static final int contactUsButton=0x7f080060;
         public static final int couponsButton=0x7f08005d;
         public static final int couponsLayout=0x7f080051;
-        public static final int couponsList=0x7f080053;
+        public static final int couponsList=0x7f080054;
         public static final int couponsListRowLinearLayout=0x7f080056;
-        public static final int couponsListView=0x7f080054;
+        public static final int couponsListView=0x7f080055;
         public static final int couponsListViewImage=0x7f080057;
-        public static final int couponsLoadingProgressBar=0x7f080055;
+        public static final int couponsLoadingProgressBar=0x7f080052;
         public static final int default_activity_button=0x7f08003a;
         public static final int dialog=0x7f080021;
         public static final int disableHome=0x7f08001b;
@@ -1596,7 +1596,7 @@ containing a value of this type.
         public static final int mondayHoursText=0x7f08007f;
         public static final int monochrome=0x7f080013;
         public static final int never=0x7f08001c;
-        public static final int noCouponsTextView=0x7f080052;
+        public static final int noCouponsTextView=0x7f080053;
         public static final int none=0x7f080000;
         public static final int normal=0x7f080001;
         public static final int openNow=0x7f08006c;

@@ -3,12 +3,19 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
+      <ProgressBar
+          android:id="@+id/couponsLoadingProgressBar"
+          style="@android:style/Widget.ProgressBar.Inverse"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/margin_100"
+          android:contentDescription="@string/loadingString" />
+    
     <TextView
         android:id="@+id/noCouponsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/activity_vertical_margin"
-        android:text="@string/noCouponsString"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/sdsu_red"
         android:textStyle="bold" />
@@ -26,14 +33,5 @@
 
         </ListView>
     </LinearLayout>
-    
-      <ProgressBar
-          android:id="@+id/couponsLoadingProgressBar"
-          style="@android:style/Widget.ProgressBar.Inverse"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_alignParentBottom="true"
-          android:layout_marginBottom="@dimen/margin_100"
-          android:contentDescription="@string/loadingString" />
 
 </RelativeLayout>

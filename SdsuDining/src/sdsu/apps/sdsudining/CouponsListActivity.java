@@ -16,8 +16,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView.FindListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class CouponsListActivity extends Activity {
@@ -46,9 +48,11 @@ public class CouponsListActivity extends Activity {
 		SdsuDBHelper db = new SdsuDBHelper(this);
 		ArrayList<HashMap<String,String>> dbList = db.getCouponDetails();
 	
-		if(dbList.size() > 0){
+		if(dbList.size() == 0){
 			TextView noCouponsTextView = (TextView) findViewById(R.id.noCouponsTextView);
-			noCouponsTextView.setVisibility(TextView.INVISIBLE);
+			noCouponsTextView.setText(R.string.noCouponsString);
+			ProgressBar couponsProgressBar = (ProgressBar) findViewById(R.id.couponsLoadingProgressBar);
+			couponsProgressBar.setVisibility(View.INVISIBLE);
 		}
 		
 		rootAQuery = new AQuery(this);
@@ -69,7 +73,7 @@ public class CouponsListActivity extends Activity {
 				String url = entries.get(position);
 				ImageOptions options = new ImageOptions();
 				options.ratio = AQuery.RATIO_PRESERVE;
-				listRowAQuery.id(R.id.couponsListViewImage).image(url, options);
+				listRowAQuery.progress(R.id.couponsLoadingProgressBar).id(R.id.couponsListViewImage).image(url, options);
 				return convertView;
 			}
 		};

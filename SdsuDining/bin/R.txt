@@ -414,11 +414,11 @@ int id collapseActionView 0x7f080020
 int id contactUsButton 0x7f080060
 int id couponsButton 0x7f08005d
 int id couponsLayout 0x7f080051
-int id couponsList 0x7f080053
+int id couponsList 0x7f080054
 int id couponsListRowLinearLayout 0x7f080056
-int id couponsListView 0x7f080054
+int id couponsListView 0x7f080055
 int id couponsListViewImage 0x7f080057
-int id couponsLoadingProgressBar 0x7f080055
+int id couponsLoadingProgressBar 0x7f080052
 int id default_activity_button 0x7f08003a
 int id dialog 0x7f080021
 int id disableHome 0x7f08001b
@@ -455,7 +455,7 @@ int id mondayHeading 0x7f08007e
 int id mondayHoursText 0x7f08007f
 int id monochrome 0x7f080013
 int id never 0x7f08001c
-int id noCouponsTextView 0x7f080052
+int id noCouponsTextView 0x7f080053
 int id none 0x7f080000
 int id normal 0x7f080001
 int id openNow 0x7f08006c
