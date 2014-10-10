@@ -38,6 +38,16 @@ public class DetailsActivity extends FragmentActivity implements ActionBar.TabLi
 		super.onPause();
 		SdsuDining.appStatus(this);
 	}
+	
+	@Override
+	protected void onResume(){
+		super.onResume();
+		boolean isForeground = SdsuDining.isAppStart();
+		if(isForeground){
+			Intent intent = new Intent(this, LoadingActivity.class);
+			startActivityForResult(intent, 0);
+		}
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -92,9 +102,6 @@ public class DetailsActivity extends FragmentActivity implements ActionBar.TabLi
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			Intent intent = new Intent(this, HomeActivity.class);
-			startActivity(intent);
-			overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 			finish();
 			return true;
 		}

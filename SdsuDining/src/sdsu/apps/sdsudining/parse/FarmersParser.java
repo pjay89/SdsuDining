@@ -76,6 +76,8 @@ public class FarmersParser extends SdsuDiningParser{
 
 							db.addToFarmersTable(id, phone, fax, email, website, address, about, lastModified);
 						}
+						
+						db.close();
 
 					}
 					catch (JSONException e) {

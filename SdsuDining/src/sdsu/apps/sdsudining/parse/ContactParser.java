@@ -77,6 +77,8 @@ public class ContactParser extends SdsuDiningParser{
 							db.addToContactTable(id, phone, fax, email, website, address, about, lastModified);
 						}
 						
+						db.close();
+						
 					}
 					catch (JSONException e) {
 						Log.i(TAG, "ERRORs: "+e.getMessage());

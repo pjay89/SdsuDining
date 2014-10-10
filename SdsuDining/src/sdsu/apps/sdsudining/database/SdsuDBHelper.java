@@ -228,6 +228,11 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 		db.close();
 	}
 
+	public void removeFromRestaurantsTable(String id){
+		SQLiteDatabase db = this.getWritableDatabase();
+		
+		db.delete(RESTAURANT_TABLE, RESTAURANT_ID + "=?", new String[]{id});
+	}
 
 	public ArrayList<HashMap<String, String>> getUniqueRestaurants(){
 		ArrayList<HashMap<String, String>> restaurants = new ArrayList<HashMap<String,String>>();
@@ -413,6 +418,12 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 		}
 
 		db.close();
+	}
+	
+	public void removeFromCouponTable(String id){
+		SQLiteDatabase db = this.getWritableDatabase();
+		
+		db.delete(COUPON_TABLE, COUPON_ID + "=?", new String[]{id});
 	}
 
 	public ArrayList<HashMap<String, String>> getCouponDetails(){
@@ -608,6 +619,12 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 		}
 		
 		db.close();
+	}
+	
+	public void removeFromHoursTable(String id){
+		SQLiteDatabase db = this.getWritableDatabase();
+		
+		db.delete(HOURS_TABLE, DB_ID + "=?", new String[]{id});
 	}
 
 	

@@ -79,7 +79,7 @@ public class LoadingActivity extends Activity implements Observer{
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					alert.cancel();
-					navigateToHome();
+					navigateToActivity();
 				}
 			});
 			alert.show();
@@ -94,7 +94,7 @@ public class LoadingActivity extends Activity implements Observer{
 		}
 		
 		if(count == TOTAL_PARSERS_COUNT){
-			navigateToHome();
+			navigateToActivity();
 		}
 	}
 	
@@ -103,16 +103,40 @@ public class LoadingActivity extends Activity implements Observer{
 		progressBar.setVisibility(View.GONE);
 	}
 
-	private void navigateToHome(){
-		SdsuDining.setFalse();
+	private void navigateToActivity(){
+		/*SdsuDining.setFalse();
 		
 		Intent notificationIntent = getIntent();
 		
-		Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+		Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 		intent.putExtra(Configurations.MESSAGE_KEY, notificationIntent.getStringExtra(Configurations.MESSAGE_KEY));
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
-		finish();
+		finish();*/
+		
+		SdsuDining.setFalse();
+		count = 0;
+		
+		Intent notificationIntent = getIntent();
+		String notificationMessage = notificationIntent.getStringExtra(Configurations.MESSAGE_KEY);
+		
+		// If LoadingActivity is called by GCM notification, clear backstack, navigate to HomeActivity, and display message
+		// Else navigate to backstack activity
+		if(notificationMessage != null){
+			Log.i("STATE TEST", "entered notif msg");
+			
+			Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+			intent.putExtra(Configurations.MESSAGE_KEY, notificationMessage);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
+			finish();
+		}
+		else{
+			Log.i("STATE TEST", "entered else");			
+
+			finish();
+		}
+		
 	}
 	
 	private boolean checkGooglePlayServices(){

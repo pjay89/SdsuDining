@@ -73,6 +73,9 @@ public class SweetParser extends SdsuDiningParser{
 							String about = entry.getString(DB_ABOUT);
 							db.addToSweetTable(id, phone, fax, email, website, address, about, lastModified);
 						}
+						
+						db.close();
+						
 					}
 					catch (JSONException e) {
 						Log.i(TAG, "ERROR: "+e.getMessage());

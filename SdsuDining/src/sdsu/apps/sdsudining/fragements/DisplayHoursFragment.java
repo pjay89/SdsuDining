@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class DisplayHousFragment extends Fragment {
+public class DisplayHoursFragment extends Fragment {
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -17,10 +17,10 @@ public class DisplayHousFragment extends Fragment {
 		
 		int orientation = getResources().getConfiguration().orientation;
 		if(orientation == Configuration.ORIENTATION_PORTRAIT){
-			rootView.setBackgroundResource(R.drawable.aboutus_bgi);
+			rootView.setBackgroundResource(R.drawable.background_portrait);
 		}
 		else{
-			rootView.setBackgroundResource(R.drawable.aboutus_bgi_land);
+			rootView.setBackgroundResource(R.drawable.background_landscape);
 		}
 		
 		TextView monday = (TextView) rootView.findViewById(R.id.mondayHoursText);

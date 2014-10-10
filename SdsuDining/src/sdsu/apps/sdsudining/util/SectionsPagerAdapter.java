@@ -7,7 +7,7 @@ import sdsu.apps.sdsudining.R;
 import sdsu.apps.sdsudining.database.SdsuDBHelper;
 import sdsu.apps.sdsudining.fragements.DisplayAboutFragment;
 import sdsu.apps.sdsudining.fragements.DisplayContactFragment;
-import sdsu.apps.sdsudining.fragements.DisplayHousFragment;
+import sdsu.apps.sdsudining.fragements.DisplayHoursFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -95,7 +95,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 		SdsuDBHelper db = new SdsuDBHelper(context);
 		String hours = db.getHoursFor(restaurantId, day);
 		db.close();
-		if(hours.equals(" - ")){
+		if(hours.equals(" - ") || hours.equals("")){
 			return "Closed";
 		}
 		return hours;
@@ -112,7 +112,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 		args.putString(context.getResources().getString(R.string.saturday), getRestaurantHoursOn(lableString, context.getResources().getString(R.string.saturday)));
 		args.putString(context.getResources().getString(R.string.sunday), getRestaurantHoursOn(lableString, context.getResources().getString(R.string.sunday)));
 				
-		Fragment fragment =  new DisplayHousFragment();
+		Fragment fragment =  new DisplayHoursFragment();
 		fragment.setArguments(args);
 		return fragment;
 

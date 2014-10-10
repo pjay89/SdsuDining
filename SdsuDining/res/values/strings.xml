@@ -54,6 +54,7 @@
     <string name="LOCATION_NAME">locationName</string>
     <string name="DB_ID">id</string>
     <string name="LAST_MODIFIED">lastModified</string>
+    <string name="ACTIVE">active</string>
     <string name="DB_PHONE">phone</string>
     <string name="DB_FAX">fax</string>
     <string name="DB_EMAIL">email</string>

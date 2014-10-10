@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,8 +25,34 @@ public class RestaurantsAtLocationListActivity extends Activity {
 	private AQuery rootAQuery;
 	private ArrayList<String> entries = new ArrayList<String>();
 	private ArrayList<String> restaurantNames = new ArrayList<String>();
+	ArrayAdapter<String> adapter;
 	private String labelString = "";
-	
+
+
+	@Override
+	protected void onPause(){
+		super.onPause();
+		SdsuDining.appStatus(this);
+	}
+
+	@Override
+	protected void onResume(){
+		super.onResume();
+		boolean isForeground = SdsuDining.isAppStart();
+		if(isForeground){
+			Intent intent = new Intent(this, LoadingActivity.class);
+			startActivityForResult(intent, 0);
+		}
+
+		// Refresh with new data
+		if(adapter != null){
+			restaurantNames.clear();
+			entries.clear(); 
+		}
+
+		loadListItems();
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -40,7 +65,9 @@ public class RestaurantsAtLocationListActivity extends Activity {
 		// Enable Home button on action bar
 		final ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
+	}
 
+	private void loadListItems(){
 		SdsuDBHelper db = new SdsuDBHelper(this);
 		ArrayList<HashMap<String,String>> dbList = db.getRestaurantsAt(labelString);
 
@@ -52,16 +79,16 @@ public class RestaurantsAtLocationListActivity extends Activity {
 			restaurantNames.add(entry.get(getString(R.string.RESTAURANT_NAME)));
 		}
 		db.close();
-		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.activity_restaurant_list_row, entries){
+
+		adapter = new ArrayAdapter<String>(this, R.layout.activity_restaurant_list_row, entries){
 
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent){
 				if(convertView == null){
 					convertView = getLayoutInflater().inflate(R.layout.activity_restaurant_list_row, null);
 				}
-				
-							
+
+
 				AQuery listRowAQuery = new AQuery(convertView);
 				String imageName = entries.get(position);
 				int id = getApplicationContext().getResources().getIdentifier(imageName, "drawable", getPackageName());
@@ -75,11 +102,11 @@ public class RestaurantsAtLocationListActivity extends Activity {
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(getRestaurantItemClickListener);
 
-		
-		rootAQuery.id(R.id.restaurantsAtLocationListView).adapter(adapter);
-		
-	}
 
+		rootAQuery.id(R.id.restaurantsAtLocationListView).adapter(adapter);
+	}
+	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		return false;
@@ -89,10 +116,7 @@ public class RestaurantsAtLocationListActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			Intent intent = new Intent(this, HomeActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
-			overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+			finish();
 			return true;
 		}
 		return false;
@@ -107,13 +131,6 @@ public class RestaurantsAtLocationListActivity extends Activity {
 			intent.putExtra("autoSelectTab", labelString);
 			startActivity(intent);
 		}
-	
+
 	};
-
-	@Override
-	protected void onPause(){
-		super.onPause();
-		SdsuDining.appStatus(this);
-	}
-
 }

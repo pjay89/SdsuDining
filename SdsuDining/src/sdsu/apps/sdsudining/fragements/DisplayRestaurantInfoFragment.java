@@ -11,16 +11,17 @@ import android.widget.TextView;
 
 public class DisplayRestaurantInfoFragment extends Fragment {
 
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		View rootView = inflater.inflate(R.layout.fragment_display_restaurant_info, container, false);
 
 		int orientation = getResources().getConfiguration().orientation;
 		if(orientation == Configuration.ORIENTATION_PORTRAIT){
-			rootView.setBackgroundResource(R.drawable.aboutus_bgi);
+			rootView.setBackgroundResource(R.drawable.background_portrait);
 		}
 		else{
-			rootView.setBackgroundResource(R.drawable.aboutus_bgi_land);
+			rootView.setBackgroundResource(R.drawable.background_landscape);
 		}
 		
 		TextView monday = (TextView) rootView.findViewById(R.id.mondayHoursText);

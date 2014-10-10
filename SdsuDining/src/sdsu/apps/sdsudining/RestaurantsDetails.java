@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -31,12 +32,17 @@ public class RestaurantsDetails extends FragmentActivity implements ActionBar.Ta
 		super.onPause();
 		SdsuDining.appStatus(this);
 	}
-
+	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
-		setContentView(R.layout.activity_restaurants_details);
+	protected void onResume(){
+		super.onResume();
+		boolean isForeground = SdsuDining.isAppStart();
+		if(isForeground){
+			Log.i("PAGER", "isforeground");
+			Intent intent = new Intent(this, LoadingActivity.class);
+			startActivityForResult(intent, 0);
+		}
+		
 		Intent intent = getIntent();
 		this.setTitle(intent.getStringExtra("labelString"));
 
@@ -45,8 +51,16 @@ public class RestaurantsDetails extends FragmentActivity implements ActionBar.Ta
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
+		// Refresh with new data
+		if(viewPager != null){
+			Log.i("PAGER", "remove tabs/views");
+			viewPager.removeAllViews();
+			actionBar.removeAllTabs();
+			restaurantsPagerAdapter.notifyDataSetChanged();
+		}
+		
 		restaurantsPagerAdapter = new RestaurantsPagerAdapter(getSupportFragmentManager(), intent.getStringExtra("labelString"), getApplicationContext());
-
+		
 		// Set up the ViewPager with the sections adapter.
 		viewPager = (ViewPager) findViewById(R.id.restaurantsPager);
 		viewPager.setAdapter(restaurantsPagerAdapter);
@@ -73,13 +87,19 @@ public class RestaurantsDetails extends FragmentActivity implements ActionBar.Ta
 		viewPager.setCurrentItem(restaurantsPagerAdapter.getPageTitlePosition(intent.getStringExtra("autoSelectTab")));
 	}
 	
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		setContentView(R.layout.activity_restaurants_details);
+		
+	}
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			Intent intent = new Intent(this, HomeActivity.class);
-			startActivity(intent);
-			overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 			finish();
 			return true;
 		}

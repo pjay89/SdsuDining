@@ -11,10 +11,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
 
-public class RestaurantsPagerAdapter extends FragmentPagerAdapter{
+public class RestaurantsPagerAdapter extends FragmentStatePagerAdapter{
 	ArrayList<HashMap<String,String>> dbList;
 	private Context context;
 	
@@ -27,6 +27,10 @@ public class RestaurantsPagerAdapter extends FragmentPagerAdapter{
 		db.close();
 	}
 	
+	@Override
+	public int getItemPosition(Object object) {
+	     return POSITION_NONE;
+	}
 	
 	@Override
 	public Fragment getItem(int position) {
@@ -99,7 +103,8 @@ public class RestaurantsPagerAdapter extends FragmentPagerAdapter{
 		SdsuDBHelper db = new SdsuDBHelper(context);
 		String hours = db.getHoursFor(restaurantId, day);
 		db.close();
-		if(hours.equals(" - ")){
+		
+		if(hours.equals(" - ") || hours.equals("")){
 			return "Closed";
 		}
 		return hours;

@@ -74,6 +74,8 @@ public class CateringParser extends SdsuDiningParser{
 							db.addToCateringTable(id, phone, fax, email, website, address, about, lastModified);
 						}
 						
+						db.close();
+						
 					}
 					catch (JSONException e) {
 						Log.i(TAG, "ERROR: "+e.getMessage());

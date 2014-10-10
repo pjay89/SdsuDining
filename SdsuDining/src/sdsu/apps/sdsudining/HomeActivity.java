@@ -32,12 +32,14 @@ public class HomeActivity extends Activity {
 		super.onResume();
 		Log.i("STATE TEST", "HOME ONRESUME");
 		boolean isForeground = SdsuDining.isAppStart();
-		Log.i("STATE TEST", "no change status " + isForeground);
 		if(isForeground){
-			Intent intent = new Intent(this, LoadingActivity.class);
+			/*Intent intent = new Intent(this, LoadingActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
-			finish();
+			finish();*/
+			
+			Intent intent = new Intent(this, LoadingActivity.class);
+			startActivityForResult(intent, 0);
 		}
 		
 	}

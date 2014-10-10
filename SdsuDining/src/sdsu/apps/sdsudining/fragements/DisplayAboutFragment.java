@@ -20,10 +20,10 @@ public class DisplayAboutFragment extends Fragment {
 		
 		int orientation = getResources().getConfiguration().orientation;
 		if(orientation == Configuration.ORIENTATION_PORTRAIT){
-			rootView.setBackgroundResource(R.drawable.aboutus_bgi);
+			rootView.setBackgroundResource(R.drawable.background_portrait);
 		}
 		else{
-			rootView.setBackgroundResource(R.drawable.aboutus_bgi_land);
+			rootView.setBackgroundResource(R.drawable.background_landscape);
 		}
 		
 		AQuery rootAQuery = new AQuery(rootView);

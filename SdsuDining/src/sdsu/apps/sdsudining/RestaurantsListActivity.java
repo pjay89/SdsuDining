@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.util.Log;
@@ -32,7 +31,16 @@ public class RestaurantsListActivity extends Activity {
 	private AQuery rootAQuery;
 	private ArrayList<String> entries = new ArrayList<String>();
 	private ArrayList<String> restaurantNames = new ArrayList<String>();
+	ArrayAdapter<String> adapter;
 
+
+	@Override
+	protected void onPause(){
+		super.onPause();
+		SdsuDining.appStatus(this);
+	}
+	
+	
 	@Override
 	protected void onResume(){
 		super.onResume();
@@ -40,11 +48,25 @@ public class RestaurantsListActivity extends Activity {
 		Log.i("STATE TEST", "RESTLIST ONRESUME");
 		boolean isForeground = SdsuDining.isAppStart();
 		if(isForeground){
-			Intent intent = new Intent(this, LoadingActivity.class);
+			/*Intent intent = new Intent(this, LoadingActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
-			finish();
+			finish();*/			
+			Intent intent = new Intent(this, LoadingActivity.class);
+			startActivityForResult(intent, 0);
+
 		}
+
+		// Refresh with new data
+		if(adapter != null){
+			restaurantNames.clear();
+			entries.clear(); 
+			
+			//adapter.clear();
+			//adapter.notifyDataSetChanged();
+		}
+		
+		loadListItems();		
 	}
 	
 	@Override
@@ -54,7 +76,7 @@ public class RestaurantsListActivity extends Activity {
 		
 		setContentView(R.layout.activity_restaurants_list);
 
-		// Enable Home button on action bar
+		// Enable Back button on action bar
 		final ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		
@@ -69,7 +91,10 @@ public class RestaurantsListActivity extends Activity {
 		
 		openNow = (Button) findViewById(R.id.openNow);
 		openNow.setTypeface(font);
+		
+	}
 
+	private void loadListItems(){
 		SdsuDBHelper db = new SdsuDBHelper(this);
 		ArrayList<HashMap<String,String>> dbList = db.getUniqueRestaurants();
 
@@ -82,7 +107,7 @@ public class RestaurantsListActivity extends Activity {
 		}
 		db.close();
 		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.activity_restaurant_list_row, entries){
+		adapter = new ArrayAdapter<String>(this, R.layout.activity_restaurant_list_row, entries){
 
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent){
@@ -106,10 +131,8 @@ public class RestaurantsListActivity extends Activity {
 
 		
 		rootAQuery.id(R.id.restaurantsListView).adapter(adapter);
-		
-		
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		return false;
@@ -119,10 +142,7 @@ public class RestaurantsListActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			Intent intent = new Intent(this, HomeActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
-			overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+			finish();
 			return true;
 		}
 		return false;
@@ -133,7 +153,6 @@ public class RestaurantsListActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			Intent intent = new Intent(RestaurantsListActivity.this, BrowseByLocationListActivity.class);
-			//intent.putExtra("labelString", getResources().getString(R.string.browseByMapString));
 			startActivity(intent);
 		}
 
@@ -152,11 +171,7 @@ public class RestaurantsListActivity extends Activity {
 
 
 
-	@Override
-	protected void onPause(){
-		super.onPause();
-		SdsuDining.appStatus(this);
-	}
+
 
 
 
