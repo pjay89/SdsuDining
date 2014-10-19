@@ -78,11 +78,11 @@ public class RestaurantsPagerAdapter extends FragmentStatePagerAdapter{
 	}
 	
 	private long getRestaurantClosingTimeDifference(String restaurantId){
-		DiningHoursCalculator diningHoursCalc = new DiningHoursCalculator();
+		//DiningHoursCalculator diningHoursCalc = new DiningHoursCalculator();
 		
 		Log.i("PLAIN TEST", restaurantId);
 		
-		SdsuDBHelper db = new SdsuDBHelper(context);
+		/*SdsuDBHelper db = new SdsuDBHelper(context);
 		ArrayList<String[]> hours = db.getHoursForRestaurantStatus(restaurantId, diningHoursCalc.getPacificTimeDay());
 		db.close();
 		
@@ -94,8 +94,71 @@ public class RestaurantsPagerAdapter extends FragmentStatePagerAdapter{
 				//stop iteration at first open encounter
 				break;
 			}
+		}*/
+		
+		//LATEST!
+		/*SdsuDBHelper db = new SdsuDBHelper(context);
+		ArrayList<String[]> hours = db.getHoursForRestaurantStatus(restaurantId, diningHoursCalc.getPacificTimeDay());
+		db.close();
+		
+		long difference = 0;
+		//iterate through all the hours for a given day
+		for(String[] entry : hours){
+			difference = diningHoursCalc.getTodayTimeDifference(entry[0], entry[1]);
+			if(difference > 0){
+				//stop iteration at first open encounter
+				break;
+			}
 		}
 	
+		return difference;*/
+		
+		long difference = getRestaurantTodayTimeDifference(restaurantId);
+		if(difference == 0){
+			difference = getRestaurantYesterdayTimeDifference(restaurantId);
+		}
+		
+		return difference;
+		
+	}
+	
+	private long getRestaurantTodayTimeDifference(String restaurantId){
+		DiningHoursCalculator diningHoursCalc = new DiningHoursCalculator();
+		
+		SdsuDBHelper db = new SdsuDBHelper(context);
+		ArrayList<String[]> hours = db.getHoursForRestaurantStatus(restaurantId, diningHoursCalc.getPacificTimeDay());
+		db.close();
+		
+		long difference = 0;
+		//iterate through all the hours for a given day
+		for(String[] entry : hours){
+			difference = diningHoursCalc.getTodayTimeDifference(entry[0], entry[1]);
+			if(difference > 0){
+				//stop iteration at first open encounter
+				break;
+			}
+		}
+		
+		return difference;
+	}
+	
+	private long getRestaurantYesterdayTimeDifference(String restaurantId){
+		DiningHoursCalculator diningHoursCalc = new DiningHoursCalculator();
+		
+		SdsuDBHelper db = new SdsuDBHelper(context);
+		ArrayList<String[]> hours = db.getHoursForRestaurantStatus(restaurantId, diningHoursCalc.getYesterdayPacificTimeDay());
+		db.close();
+		
+		long difference = 0;
+		//iterate through all the hours for a given day
+		for(String[] entry : hours){
+			difference = diningHoursCalc.getYesterdayTimeDifference(entry[0], entry[1]);
+			if(difference > 0){
+				//stop iteration at first open encounter
+				break;
+			}
+		}
+		
 		return difference;
 	}
 	
