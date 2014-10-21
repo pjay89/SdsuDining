@@ -19,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="@dimen/font_size_30"
@@ -29,6 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/restaurantStatus"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
         layout="@layout/fragement_hours" />
@@ -37,6 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+		android:layout_alignParentStart="true"
         android:layout_below="@+id/include1"
         android:layout_marginTop="@dimen/activity_horizontal_margin" >
 
@@ -52,6 +55,7 @@
                 android:text="@string/phone"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:textColor="@color/sdsu_red"
                 android:textStyle="bold" />
 
@@ -60,6 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_weight="1"
                 android:autoLink="phone"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -77,6 +82,7 @@
                 android:text="@string/website"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:textColor="@color/sdsu_red"
                 android:textStyle="bold" />
 
@@ -85,6 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_weight="1"
                 android:autoLink="web"
                 android:textAppearance="?android:attr/textAppearanceMedium" />

@@ -13,6 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:text="@string/monday"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/sdsu_red"
@@ -23,6 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </TableRow>
@@ -40,6 +42,7 @@
             android:text="@string/tuesday"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:textColor="@color/sdsu_red"
             android:textStyle="bold" />
 
@@ -48,6 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </TableRow>
@@ -65,6 +69,7 @@
             android:text="@string/wednesday"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:textColor="@color/sdsu_red"
             android:textStyle="bold" />
 
@@ -73,6 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </TableRow>
@@ -90,6 +96,7 @@
             android:text="@string/thursday"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:textColor="@color/sdsu_red"
             android:textStyle="bold" />
 
@@ -98,6 +105,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </TableRow>
@@ -115,6 +123,7 @@
             android:text="@string/friday"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:textColor="@color/sdsu_red"
             android:textStyle="bold" />
 
@@ -123,6 +132,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </TableRow>
@@ -140,6 +150,7 @@
             android:text="@string/saturday"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:textColor="@color/sdsu_red"
             android:textStyle="bold" />
 
@@ -148,6 +159,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </TableRow>
@@ -165,6 +177,7 @@
             android:text="@string/sunday"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:textColor="@color/sdsu_red"
             android:textStyle="bold" />
 
@@ -173,6 +186,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </TableRow>

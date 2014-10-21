@@ -12,14 +12,15 @@
     <TextView
         android:id="@+id/noCouponsTextView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_height="wrap_content" />
 
     <ImageView
         android:id="@+id/couponsListViewImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:src="@drawable/coupons" />
+        android:contentDescription="@string/couponsString"
+        android:src="@drawable/coupons"
+        tools:ignore="InefficientWeight" />
 
 </LinearLayout>
