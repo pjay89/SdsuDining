@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
+    <issue id="InflateParams">
+        <ignore path="src/sdsu/apps/sdsudining/RestaurantsListActivity.java" />
+    </issue>
     <issue id="SimpleDateFormat">
         <ignore path="src/sdsu/apps/sdsudining/util/HoursCalculator.java" />
     </issue>
