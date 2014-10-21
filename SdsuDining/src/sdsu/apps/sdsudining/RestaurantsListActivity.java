@@ -168,12 +168,4 @@ public class RestaurantsListActivity extends Activity {
 		}
 	
 	};
-
-
-
-
-
-
-
-
 }
