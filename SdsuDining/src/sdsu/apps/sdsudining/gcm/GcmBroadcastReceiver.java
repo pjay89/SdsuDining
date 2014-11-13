@@ -6,6 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.WakefulBroadcastReceiver;
 
+/**
+ * Broadcast receiver which listens for pushed messages from GCM servers. 
+ * For additional information, refer to Android's GCM Push Notification Client Implementation webpage.
+ * 
+ * @author Priya Jayaprakash
+ *
+ */
 public class GcmBroadcastReceiver extends WakefulBroadcastReceiver{
 
 	@Override

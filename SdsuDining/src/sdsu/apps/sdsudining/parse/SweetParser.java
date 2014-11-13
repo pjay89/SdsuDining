@@ -9,7 +9,14 @@ import org.json.JSONObject;
 import sdsu.apps.sdsudining.R;
 import sdsu.apps.sdsudining.database.SdsuDBHelper;
 import android.content.Context;
-import android.util.Log;
+
+/**
+ * Concrete parser for Sweet category. Fetches, parses, and stores data to local db.
+ * Upon completion, notify observer
+ * 
+ * @author Priya Jayaprakash
+ *
+ */
 
 public class SweetParser extends SdsuDiningParser{
 	private Context context;
@@ -26,7 +33,6 @@ public class SweetParser extends SdsuDiningParser{
 	
 	private JSONArray sweet = null;
 	
-	private String TAG = "PARSER";
 	
 	public SweetParser(String url, Context context, Observer observer){
 		this.context = context;
@@ -78,7 +84,8 @@ public class SweetParser extends SdsuDiningParser{
 						
 					}
 					catch (JSONException e) {
-						Log.i(TAG, "ERROR: "+e.getMessage());
+						//Error Collector
+						//e.printStackTrace();
 					}
 				}
 				handleObservers();
@@ -89,7 +96,6 @@ public class SweetParser extends SdsuDiningParser{
 
 	@Override
 	protected void handleObservers() {
-		Log.i(TAG, "handle called in SWEET");
 		setChanged();
 		notifyObservers(context.getString(R.string.parserObserverComplete));
 		

@@ -12,8 +12,14 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
-
+/**
+ * DetailsActivity: 
+ * 	- Fetch data if app is in foreground
+ *  - Load data from db
+ *  - Display data for the respective fragments 
+ * @author Priya Jayaprakash
+ *
+ */
 
 
 public class DetailsActivity extends FragmentActivity implements ActionBar.TabListener {

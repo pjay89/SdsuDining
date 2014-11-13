@@ -11,8 +11,15 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.util.Log;
+
+/**
+ * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
+ * one of the sections/tabs/pages.
+ * @author Priya Jayaprakash
+ *
+ */
 
 public class RestaurantsPagerAdapter extends FragmentStatePagerAdapter{
 	ArrayList<HashMap<String,String>> dbList;
@@ -32,6 +39,9 @@ public class RestaurantsPagerAdapter extends FragmentStatePagerAdapter{
 	     return POSITION_NONE;
 	}
 	
+	/**
+	 * Create each fragment by providing the necessary data to be displayed
+	 */
 	@Override
 	public Fragment getItem(int position) {
 		HashMap<String, String> entry = dbList.get(position);
@@ -77,49 +87,21 @@ public class RestaurantsPagerAdapter extends FragmentStatePagerAdapter{
 		return 0;
 	}
 	
+
 	private long getRestaurantClosingTimeDifference(String restaurantId){
-		//DiningHoursCalculator diningHoursCalc = new DiningHoursCalculator();
-		
-		Log.i("PLAIN TEST", restaurantId);
-		
-		/*SdsuDBHelper db = new SdsuDBHelper(context);
-		ArrayList<String[]> hours = db.getHoursForRestaurantStatus(restaurantId, diningHoursCalc.getPacificTimeDay());
-		db.close();
-		
-		long difference = 0;
-		//iterate through all the hours for a given day
-		for(String[] entry : hours){
-			difference = diningHoursCalc.getTimeDifference(entry[0], entry[1]);
-			if(difference > 0){
-				//stop iteration at first open encounter
-				break;
-			}
-		}*/
-		
-		//LATEST!
-		/*SdsuDBHelper db = new SdsuDBHelper(context);
-		ArrayList<String[]> hours = db.getHoursForRestaurantStatus(restaurantId, diningHoursCalc.getPacificTimeDay());
-		db.close();
-		
-		long difference = 0;
-		//iterate through all the hours for a given day
-		for(String[] entry : hours){
-			difference = diningHoursCalc.getTodayTimeDifference(entry[0], entry[1]);
-			if(difference > 0){
-				//stop iteration at first open encounter
-				break;
-			}
-		}
-	
-		return difference;*/
+		/**
+		 * Calculate time difference used to display restaurant status. If today's difference is 0 (no match found OR closed), 
+		 * verify previous day's hours as well to monitor restaurant status. For example, these checks handle the following situations:
+		 * A) Current time: 10am, Today Open: 8am, Today Close: 11pm
+		 * B) Current time: 10am, Today Open: 12am, Today Close: 12am
+		 * C) Current time: 12am, Today Open: 7am, Today Close: 5pm BUT Yesterday Open: 7am Yesterday Close: 1am (ie. next day)
+		 */
 		
 		long difference = getRestaurantTodayTimeDifference(restaurantId);
 		if(difference == 0){
 			difference = getRestaurantYesterdayTimeDifference(restaurantId);
-		}
-		
-		return difference;
-		
+		}		
+		return difference;	
 	}
 	
 	private long getRestaurantTodayTimeDifference(String restaurantId){

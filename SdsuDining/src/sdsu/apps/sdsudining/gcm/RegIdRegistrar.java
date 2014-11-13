@@ -8,12 +8,18 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
+
+/**
+ * Registers device with GCM Servers, gets the regId, sends regId to 3rd party application server and stores regId to local DB as well.
+ * Storing regId to local DB prevents repetitive requests from app for regId from GCM Servers
+ * 
+ * @author Priya Jayaprakash
+ *
+ */
 
 public class RegIdRegistrar {
 	private Context context;
 	
-	private static final String TAG = "SDSU_GCM";
 	
 	public RegIdRegistrar(Context context){
 		this.context = context;
@@ -26,7 +32,7 @@ public class RegIdRegistrar {
 
 	
 	protected class GCMServerRegistrar extends AsyncTask<Void, Void, String>{
-		
+		// Register the device with GCM servers
 		@Override
 		protected String doInBackground(Void... params) {
 			String regId = "";
@@ -34,11 +40,9 @@ public class RegIdRegistrar {
 			try {
 				regId = gcm.register(Configurations.GOOGLE_PROJECT_ID);
 			} catch (IOException e) {
-				Log.e(TAG, "gcm serv registrar: " + e.getMessage());
             	//Error Collector
     			//e.printStackTrace();
 			}
-			Log.i(TAG, "GCM SRVR registered");
 			return regId;
 		}
 		
@@ -55,16 +59,14 @@ public class RegIdRegistrar {
 		protected Void doInBackground(String... params) {
 			String regId = params[0];
 			
+			// Send regId to 3rd party application server
 			ExternalServerConnector connector = new ExternalServerConnector();
 			connector.sendRegIdToExternalServer(context, regId);
-			Log.i(TAG, "APPSRVR registered");
 			
 			// Save regId to local device DB
 			SdsuDBHelper db = new SdsuDBHelper(context);
 			db.storeGCMRegId(regId);
 			db.close();
-			Log.i(TAG, "LOCAL DB registered");
-			
 			
 			return null;
 		}

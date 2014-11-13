@@ -8,13 +8,16 @@ import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
-import android.util.Log;
 
+/**
+ * DataFetcher class: Used to fetch data from the respective URLs using HttpGet
+ * @author Priya Jayaprakash
+ *
+ */
 
 public class DataFetcher {
 	private final HttpClient Client = new DefaultHttpClient();
 	private String url; 
-	private String TAG = "DATAFETCHER";	
 	
 	public DataFetcher(String url){
 		this.url = url;
@@ -27,14 +30,11 @@ public class DataFetcher {
 		
 		try {
 			response = Client.execute(httpget, responseHandler);
-			Log.i(TAG, response);
 			return response;
 		} catch (ClientProtocolException e) {
-			Log.e(TAG, "ERROR1: "+e.getMessage());
 			//Error Collector
 			//e.printStackTrace();
 		} catch (IOException e) {
-			Log.e(TAG, "ERROR2: "+e.getMessage());
 			//Error Collector
 			//e.printStackTrace();
 		}

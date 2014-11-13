@@ -4,6 +4,13 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
+/**
+ * RestaurantListRow:
+ * 	- Display each list row item
+ * @author Priya Jayaprakash
+ *
+ */
+
 public class RestaurantListRow extends Activity {
 
 	@Override

@@ -8,7 +8,14 @@ import org.json.JSONObject;
 import sdsu.apps.sdsudining.R;
 import sdsu.apps.sdsudining.database.SdsuDBHelper;
 import android.content.Context;
-import android.util.Log;
+
+/**
+ * Concrete parser for Catering category. Fetches, parses, and stores data to local db.
+ * Upon completion, notify observer
+ * 
+ * @author Priya Jayaprakash
+ *
+ */
 
 public class CateringParser extends SdsuDiningParser{
 	private Context context;
@@ -25,7 +32,6 @@ public class CateringParser extends SdsuDiningParser{
 	
 	private JSONArray catering = null;
 
-	private String TAG = "PARSER";
 
 	public CateringParser(String url, Context context, Observer observer){
 		this.context = context;
@@ -78,7 +84,8 @@ public class CateringParser extends SdsuDiningParser{
 						
 					}
 					catch (JSONException e) {
-						Log.i(TAG, "ERROR: "+e.getMessage());
+						//Error Collector
+						//e.printStackTrace();
 					}
 				}
 				handleObservers();
@@ -89,7 +96,6 @@ public class CateringParser extends SdsuDiningParser{
 
 	@Override
 	protected void handleObservers() {
-		Log.i(TAG, "handle called in CATERING");
 		setChanged();
 		notifyObservers(context.getString(R.string.parserObserverComplete));
 	}

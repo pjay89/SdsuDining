@@ -9,7 +9,15 @@ import org.json.JSONObject;
 import sdsu.apps.sdsudining.R;
 import sdsu.apps.sdsudining.database.SdsuDBHelper;
 import android.content.Context;
-import android.util.Log;
+
+
+/**
+ * Concrete parser for Contact category. Fetches, parses, and stores data to local db.
+ * Upon completion, notify observer
+ * 
+ * @author Priya Jayaprakash
+ *
+ */
 
 public class ContactParser extends SdsuDiningParser{
 
@@ -27,8 +35,6 @@ public class ContactParser extends SdsuDiningParser{
 
 	private JSONArray contact = null;
 	
-	private String TAG = "PARSER";
-
 	public ContactParser(String url, Context context, Observer observer){
 		this.context = context;
 		
@@ -81,7 +87,8 @@ public class ContactParser extends SdsuDiningParser{
 						
 					}
 					catch (JSONException e) {
-						Log.i(TAG, "ERRORs: "+e.getMessage());
+						//Error Collector
+						//e.printStackTrace();
 					}
 				}
 				handleObservers();
@@ -94,7 +101,6 @@ public class ContactParser extends SdsuDiningParser{
 
 	@Override
 	protected void handleObservers() {
-		Log.i(TAG, "handle called in CONTACT");
 		setChanged();
 		notifyObservers(context.getString(R.string.parserObserverComplete));
 	}

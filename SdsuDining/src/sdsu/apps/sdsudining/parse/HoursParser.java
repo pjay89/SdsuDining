@@ -9,7 +9,14 @@ import org.json.JSONObject;
 import sdsu.apps.sdsudining.R;
 import sdsu.apps.sdsudining.database.SdsuDBHelper;
 import android.content.Context;
-import android.util.Log;
+
+/**
+ * Concrete parser for Hours category. Fetches, parses, and stores data to local db.
+ * Upon completion, notify observer
+ * 
+ * @author Priya Jayaprakash
+ *
+ */
 
 public class HoursParser extends SdsuDiningParser {
 	private Context context;
@@ -25,8 +32,6 @@ public class HoursParser extends SdsuDiningParser {
 
 	private JSONArray hours = null;
 
-
-	private String TAG = "PARSER";
 
 	public HoursParser(String url, Context context, Observer observer){
 		this.context = context;
@@ -80,7 +85,8 @@ public class HoursParser extends SdsuDiningParser {
 						db.close();
 					}
 					catch (JSONException e) {
-						Log.i(TAG, "ERROR: "+e.getMessage());
+						//Error Collector
+						//e.printStackTrace();
 					}
 
 				}
@@ -92,7 +98,6 @@ public class HoursParser extends SdsuDiningParser {
 
 	@Override
 	protected void handleObservers() {
-		Log.i(TAG, "handle called in HOURS");
 		setChanged();
 		notifyObservers(context.getString(R.string.parserObserverComplete));
 	}

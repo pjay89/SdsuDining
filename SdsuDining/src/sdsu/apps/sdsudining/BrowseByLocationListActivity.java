@@ -17,6 +17,15 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.AdapterView.OnItemClickListener;
 
+/**
+ * BrowseByLocationListActivity: 
+ * 	- Fetch data if app is in foreground
+ * 	- Load data from db
+ *  - Display data and add click handlers
+ * @author Priya Jayaprakash
+ *
+ */
+
 public class BrowseByLocationListActivity extends ListActivity {
 
 	private ArrayList<HashMap<String, String>> locations = new ArrayList<HashMap<String, String>>();

@@ -11,7 +11,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +21,17 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+
+/**
+ * RestaurantsListActivity:
+ * 	- Fetch data if app is in foreground
+ * 	- Load data from db
+ *  - Adjust images ratio
+ *  - Display images and add click handlers
+ *  - Add button listeners
+ * @author Priya Jayaprakash
+ *
+ */
 
 public class RestaurantsListActivity extends Activity {
 
@@ -44,14 +54,8 @@ public class RestaurantsListActivity extends Activity {
 	@Override
 	protected void onResume(){
 		super.onResume();
-		
-		Log.i("STATE TEST", "RESTLIST ONRESUME");
 		boolean isForeground = SdsuDining.isAppStart();
-		if(isForeground){
-			/*Intent intent = new Intent(this, LoadingActivity.class);
-			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
-			finish();*/			
+		if(isForeground){	
 			Intent intent = new Intent(this, LoadingActivity.class);
 			startActivityForResult(intent, 0);
 
@@ -61,9 +65,6 @@ public class RestaurantsListActivity extends Activity {
 		if(adapter != null){
 			restaurantNames.clear();
 			entries.clear(); 
-			
-			//adapter.clear();
-			//adapter.notifyDataSetChanged();
 		}
 		
 		loadListItems();		
@@ -72,7 +73,6 @@ public class RestaurantsListActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);	
-		Log.i("STATE TEST", "RESTLIST ONCREATE");
 		
 		setContentView(R.layout.activity_restaurants_list);
 

@@ -9,6 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+/**
+ * Contact Fragment: display respective data for all required fields
+ * @author Priya Jayaprakash
+ *
+ */
+
 public class DisplayContactFragment extends Fragment {
 
 	

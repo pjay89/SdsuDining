@@ -21,6 +21,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
+/**
+ * RestaurantsAtLocationListActivity: 
+ * 	- Fetch data if app is in foreground
+ * 	- Load data from db
+ *  - Adjust images ratio
+ *  - Display images and add click handlers
+ * @author Priya Jayaprakash
+ *
+ */
+
 public class RestaurantsAtLocationListActivity extends Activity {
 	private AQuery rootAQuery;
 	private ArrayList<String> entries = new ArrayList<String>();

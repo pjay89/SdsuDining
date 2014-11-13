@@ -7,9 +7,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+/**
+ * RestaurantsDetails: 
+ * 	- Fetch data if app is in foreground
+ *  - Load data from db
+ *  - Display data for the restaurant location details fragments 
+ * @author Priya Jayaprakash
+ *
+ */
+
 
 public class RestaurantsDetails extends FragmentActivity implements ActionBar.TabListener {
 	/**
@@ -38,7 +47,6 @@ public class RestaurantsDetails extends FragmentActivity implements ActionBar.Ta
 		super.onResume();
 		boolean isForeground = SdsuDining.isAppStart();
 		if(isForeground){
-			Log.i("PAGER", "isforeground");
 			Intent intent = new Intent(this, LoadingActivity.class);
 			startActivityForResult(intent, 0);
 		}
@@ -53,7 +61,6 @@ public class RestaurantsDetails extends FragmentActivity implements ActionBar.Ta
 
 		// Refresh with new data
 		if(viewPager != null){
-			Log.i("PAGER", "remove tabs/views");
 			viewPager.removeAllViews();
 			actionBar.removeAllTabs();
 			restaurantsPagerAdapter.notifyDataSetChanged();

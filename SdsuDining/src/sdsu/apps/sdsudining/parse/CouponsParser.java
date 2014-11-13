@@ -9,8 +9,14 @@ import org.json.JSONObject;
 import sdsu.apps.sdsudining.R;
 import sdsu.apps.sdsudining.database.SdsuDBHelper;
 import android.content.Context;
-import android.util.Log;
 
+/**
+ * Concrete parser for Coupons category. Fetches, parses, and stores data to local db.
+ * Upon completion, notify observer
+ * 
+ * @author Priya Jayaprakash
+ *
+ */
 public class CouponsParser extends SdsuDiningParser{
 
 	private Context context;
@@ -24,7 +30,6 @@ public class CouponsParser extends SdsuDiningParser{
 	
 	private JSONArray coupon = null;
 	
-	private String TAG = "PARSER";
 
 	public CouponsParser(String url, Context context, Observer observer){
 		this.context = context;
@@ -76,7 +81,8 @@ public class CouponsParser extends SdsuDiningParser{
 						db.close();		
 					}
 					catch (JSONException e) {
-						Log.i(TAG, "ERROR: "+e.getMessage());
+						//Error Collector
+						//e.printStackTrace();
 					}
 				}
 				handleObservers();
@@ -87,7 +93,6 @@ public class CouponsParser extends SdsuDiningParser{
 
 	@Override
 	protected void handleObservers() {
-		Log.i(TAG, "handle called in COUPONS");
 		setChanged();
 		notifyObservers(context.getString(R.string.parserObserverComplete));
 	}

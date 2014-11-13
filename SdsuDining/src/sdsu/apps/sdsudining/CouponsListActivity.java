@@ -21,6 +21,15 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+/**
+ * CouponListActivity:
+ * 	- Fetch data if app is in foreground
+ * 	- Load data from db
+ *  - Adjust image ratio and display image
+ * @author Priya Jayaprakash
+ *
+ */
+
 public class CouponsListActivity extends Activity {
 
 	private AQuery rootAQuery;

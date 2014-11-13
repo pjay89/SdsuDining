@@ -9,7 +9,14 @@ import org.json.JSONObject;
 import sdsu.apps.sdsudining.R;
 import sdsu.apps.sdsudining.database.SdsuDBHelper;
 import android.content.Context;
-import android.util.Log;
+
+/**
+ * Concrete parser for Farmer's Market category. Fetches, parses, and stores data to local db.
+ * Upon completion, notify observer
+ * 
+ * @author Priya Jayaprakash
+ *
+ */
 
 public class FarmersParser extends SdsuDiningParser{
 
@@ -25,10 +32,7 @@ public class FarmersParser extends SdsuDiningParser{
 	private static String DB_ADDRESS;
 	private static String DB_ABOUT;
 	
-	private JSONArray farmers = null;
-	
-	private String TAG = "PARSER";
-	
+	private JSONArray farmers = null;	
 
 	public FarmersParser(String url, Context context, Observer observer){
 		this.context = context;
@@ -81,7 +85,8 @@ public class FarmersParser extends SdsuDiningParser{
 
 					}
 					catch (JSONException e) {
-						Log.e(TAG, "ERROR: "+e.getMessage());
+						//Error Collector
+						//e.printStackTrace();
 					}
 				}
 				handleObservers();
@@ -92,7 +97,6 @@ public class FarmersParser extends SdsuDiningParser{
 
 	@Override
 	protected void handleObservers() {
-		Log.i(TAG, "handle called in FARMERS");
 		setChanged();
 		notifyObservers(context.getString(R.string.parserObserverComplete));
 	}

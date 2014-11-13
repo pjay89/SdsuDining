@@ -4,6 +4,13 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
+/**
+ * CouponsListRow:
+ * 	- Display each list row item
+ * @author Priya Jayaprakash
+ *
+ */
+
 public class CouponsListRow extends Activity {
 
 	@Override

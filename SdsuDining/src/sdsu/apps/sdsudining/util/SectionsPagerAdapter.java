@@ -17,6 +17,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
  * one of the sections/tabs/pages.
+ * @author Priya Jayaprakash
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 

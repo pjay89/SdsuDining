@@ -21,18 +21,23 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+
+/**
+ * LoadingActivity: 
+ * - Fetch data if network connectivity is available
+ * - Register device with GCM
+ * - Auto redirect to HomeActivity on Observable update
+ * @author Priya Jayaprakash
+ *
+ */
 
 public class LoadingActivity extends Activity implements Observer{
 
 	private int count = 0;
 	private static int TOTAL_PARSERS_COUNT = 7;
 	private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-	
-	
-	private static final String TAG = "SDSU_GCM";
 
 
 	@Override
@@ -43,7 +48,6 @@ public class LoadingActivity extends Activity implements Observer{
 		if(checkGooglePlayServices()){
 			SdsuDBHelper db = new SdsuDBHelper(getApplicationContext());
 			if(db.getGCMRegId().equals("")){
-				Log.i(TAG, "GCM regId is blank. Calling registerInBackground");
 				registerInBackground();
 			}
 			db.close();
@@ -57,7 +61,6 @@ public class LoadingActivity extends Activity implements Observer{
 		// You need to do the Play Services APK check here too.
 		checkGooglePlayServices();
 
-		Log.i("STATE TEST", "LOADING ONRESUME");
 		if(SdsuDining.isNetworkConnected(this)){
 			new HoursParser(this.getString(R.string.HOURS_URL), this.getApplicationContext(), this);
 			new FarmersParser(this.getString(R.string.FARMERS_URL), this.getApplicationContext(), this);
@@ -103,17 +106,7 @@ public class LoadingActivity extends Activity implements Observer{
 		progressBar.setVisibility(View.GONE);
 	}
 
-	private void navigateToActivity(){
-		/*SdsuDining.setFalse();
-		
-		Intent notificationIntent = getIntent();
-		
-		Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-		intent.putExtra(Configurations.MESSAGE_KEY, notificationIntent.getStringExtra(Configurations.MESSAGE_KEY));
-		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		startActivity(intent);
-		finish();*/
-		
+	private void navigateToActivity(){		
 		SdsuDining.setFalse();
 		count = 0;
 		
@@ -123,7 +116,6 @@ public class LoadingActivity extends Activity implements Observer{
 		// If LoadingActivity is called by GCM notification, clear backstack, navigate to HomeActivity, and display message
 		// Else navigate to backstack activity
 		if(notificationMessage != null){
-			Log.i("STATE TEST", "entered notif msg");
 			
 			Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
 			intent.putExtra(Configurations.MESSAGE_KEY, notificationMessage);
@@ -132,8 +124,6 @@ public class LoadingActivity extends Activity implements Observer{
 			finish();
 		}
 		else{
-			Log.i("STATE TEST", "entered else");			
-
 			finish();
 		}
 		
@@ -146,7 +136,6 @@ public class LoadingActivity extends Activity implements Observer{
 				GooglePlayServicesUtil.getErrorDialog(resultCode, this, PLAY_SERVICES_RESOLUTION_REQUEST).show();
 			}
 			else{
-				Log.e(TAG, "This device is not supported");
 				finish();
 			}
 			return false;

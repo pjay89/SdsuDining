@@ -9,11 +9,16 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
+
+
+/**
+ * SdsuDBHelper class: Database class used to store data. Keep db version consistent to prevent db version collisions. 
+ * @author Priya Jayaprakash
+ *
+ */
+
 
 public class SdsuDBHelper extends SQLiteOpenHelper{
-
-	private static final String TAG = "DATABASEHELPER";
 
 	// Database Version
 	private static final int DATABASE_VERSION = 1;
@@ -130,7 +135,6 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 				+ " TEXT," + RESTAURANT_IMAGE + " TEXT," + RESTAURANT_LOCATION_ID 
 				+ " TEXT," + RESTAURANT_LOCATION_NAME + " TEXT," + RESTAURANT_PHONE 
 				+ " TEXT," + RESTAURANT_WEBSITE + " TEXT," + LAST_MODIFIED + " TIME)"; 
-		Log.i(TAG, CREATE_TABLE_RESTAURANT);
 		db.execSQL(CREATE_TABLE_RESTAURANT);
 
 		//FARMERS table create statement
@@ -139,14 +143,12 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 				+ " TEXT," + DB_FAX + " TEXT," + DB_EMAIL 
 				+ " TEXT," + DB_WEBSITE + " TEXT," + DB_ADDRESS 
 				+ " TEXT," + DB_ABOUT + " TEXT," + LAST_MODIFIED + " TIME)"; 
-		Log.i(TAG, CREATE_TABLE_FARMERS);
 		db.execSQL(CREATE_TABLE_FARMERS);
 		
 		//COUPON table create statement
 		String CREATE_TABLE_COUPON = "CREATE TABLE "
 				+ COUPON_TABLE + "(" + COUPON_ID + " VARCHAR PRIMARY KEY," + COUPON_IMAGE
 				+ " TEXT," + COUPON_EXPIRATION + " DATE," + LAST_MODIFIED + " TIME)"; 
-		Log.i(TAG, CREATE_TABLE_COUPON);
 		db.execSQL(CREATE_TABLE_COUPON);
 
 		//CATERING table create statement
@@ -155,7 +157,6 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 				+ " TEXT," + DB_FAX + " TEXT," + DB_EMAIL 
 				+ " TEXT," + DB_WEBSITE + " TEXT," + DB_ADDRESS 
 				+ " TEXT," + DB_ABOUT + " TEXT," + LAST_MODIFIED + " TIME)"; 
-		Log.i(TAG, CREATE_TABLE_CATERING);
 		db.execSQL(CREATE_TABLE_CATERING);
 
 		// SWEET table create statement
@@ -164,7 +165,6 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 				+ " TEXT," + DB_FAX + " TEXT," + DB_EMAIL 
 				+ " TEXT," + DB_WEBSITE + " TEXT," + DB_ADDRESS 
 				+ " TEXT," + DB_ABOUT + " TEXT," + LAST_MODIFIED + " TIME)"; 
-		Log.i(TAG, CREATE_TABLE_SWEET);
 		db.execSQL(CREATE_TABLE_SWEET);
 
 
@@ -174,7 +174,6 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 				+ " TEXT," + DB_FAX + " TEXT," + DB_EMAIL 
 				+ " TEXT," + DB_WEBSITE + " TEXT," + DB_ADDRESS 
 				+ " TEXT," + DB_ABOUT + " TEXT," + LAST_MODIFIED + " TIME)"; 
-		Log.i(TAG, CREATE_TABLE_CONTACT);
 		db.execSQL(CREATE_TABLE_CONTACT);
 
 		// HOURS table create statement
@@ -182,19 +181,19 @@ public class SdsuDBHelper extends SQLiteOpenHelper{
 				+ HOURS_TABLE + "(" + DB_ID + " VARCHAR PRIMARY KEY," + HOURS_RESTAURANT_ID
 				+ " TEXT," + HOURS_DAY + " TEXT," + HOURS_OPEN 
 				+ " TEXT," + HOURS_CLOSE + " TEXT," + LAST_MODIFIED + " TIME)";
-		Log.i(TAG, CREATE_TABLE_HOURS);
 		db.execSQL(CREATE_TABLE_HOURS);
 		
 		// GCM table create statement
-				String CREATE_TABLE_GCM = "CREATE TABLE "
-						+ GCM_TABLE + "(" + DB_ID + " VARCHAR PRIMARY KEY," 
-						+ GCM_REG_ID + " TEXT)";
-				Log.i(TAG, CREATE_TABLE_GCM);
-				db.execSQL(CREATE_TABLE_GCM);
+		String CREATE_TABLE_GCM = "CREATE TABLE "
+				+ GCM_TABLE + "(" + DB_ID + " VARCHAR PRIMARY KEY," 
+				+ GCM_REG_ID + " TEXT)";
+		db.execSQL(CREATE_TABLE_GCM);
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		// When db version changes are implemented, do not drop (delete) table. 
+		// Simply implement all version change handlers
 		db.execSQL("DROP TABLE IF EXISTS " + RESTAURANT_TABLE);
 		db.execSQL("DROP TABLE IF EXISTS " + FARMERS_TABLE);
 		db.execSQL("DROP TABLE IF EXISTS " + COUPON_TABLE);

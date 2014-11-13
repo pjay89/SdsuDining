@@ -8,11 +8,17 @@ import android.app.Application;
 import android.app.ActivityManager.RunningTaskInfo;
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.util.Log;
+
+/**
+ * SdsuDining:
+ * - Verifies if network connectivity is available
+ * - Verifies if application has appeared to the foreground
+ * @author Priya Jayaprakash
+ *
+ */
 
 public class SdsuDining extends Application{
-	private static boolean isAppStart = true;
-	private static String TAG = "STATE TEST";	
+	private static boolean isAppStart = true;	
 	
 	public static void  appStatus(Activity activity){
 		ActivityManager activityManager = (ActivityManager) activity.getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
@@ -31,24 +37,19 @@ public class SdsuDining extends Application{
 		ConnectivityManager connectivityManager = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
 		try{
 			if( connectivityManager.getActiveNetworkInfo().isConnected()){
-				Log.i(TAG, "internet yup");
 				return true;
 			}}
 		catch(RuntimeException e){
-			Log.i(TAG, "internet nope");
 			return false;
 		}
-		Log.i(TAG, "internet nope");
 		return false;
 	}
 	
 	public static void setTrue(){
-		Log.i(TAG, "state set to true");
 		isAppStart = true;
 	}
 	
 	public static void setFalse(){
-		Log.i(TAG, "state set to false");
 		isAppStart = false;
 	}
 	

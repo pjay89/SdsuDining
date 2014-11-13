@@ -9,6 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+/**
+ * Restaurants Fragment: display respective data for all required fields. 
+ * Restaurant status is displayed with correct color and Open, Closed, x mins to Close tags
+ * 
+ * @author Priya Jayaprakash
+ *
+ */
+
 public class DisplayRestaurantInfoFragment extends Fragment {
 
 

@@ -9,10 +9,17 @@ import java.net.URL;
 import sdsu.apps.sdsudining.R;
 
 import android.content.Context;
-import android.util.Log;
+
+/**
+ * Connects to the external 3rd party application server and sends the regID. 
+ * The regID will be stored on the 3rd party server and used to send future 
+ * push notification messages 
+ * 
+ * @author Priya Jayaprakash
+ *
+ */
 
 public class ExternalServerConnector {
-	private static final String TAG = "SDSU_GCM";
 
 	public void sendRegIdToExternalServer(final Context context, final String regId){
 
@@ -35,23 +42,15 @@ public class ExternalServerConnector {
 			out.close();
 			
 			int status = httpConnection.getResponseCode();
-			if(status == 200){
-				Log.i(TAG, "Shared regId with ExternalServer");
-			}
-			else{
-				Log.e(TAG, "Response code: " + String.valueOf(status));
+			if(status != 200){
 				//Error Collector
 				//e.printStackTrace();
 			}
-			
-
 		} 
 		catch (MalformedURLException e) {
-			Log.e(TAG, "malformed: " + e.getMessage());
 			//Error Collector
 			//e.printStackTrace();
 		} catch (IOException e) {
-			Log.e(TAG, "esc io excpetion: " + e.getMessage());
 			//Error Collector
 			//e.printStackTrace();
 		};

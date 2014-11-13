@@ -4,6 +4,13 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
+/**
+ * BrowseByLocationListRow:
+ * 	- Display each list row item
+ * @author Priya Jayaprakash
+ *
+ */
+
 public class BrowseByLocationListRow extends Activity {
 
 	@Override

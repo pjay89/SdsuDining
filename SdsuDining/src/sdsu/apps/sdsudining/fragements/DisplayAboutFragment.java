@@ -12,6 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+/**
+ * About Fragment: display respective data for all required fields
+ * @author Priya Jayaprakash
+ *
+ */
+
 public class DisplayAboutFragment extends Fragment {
 
 	@Override

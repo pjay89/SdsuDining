@@ -14,9 +14,18 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
+
+/**
+ * Intent service which creates the notification object displays it and notifies user.
+ * Each notification must have a unique ID to prevent overwriting older ones.  
+ * This is obtained by using local device timestamp when message is received from GCM servers and adding a random number to timestamp
+ * 
+ * For additional information, refer to Android's GCM Push Notification Client Implementation webpage.
+ * 
+ * @author Priya Jayaprakash
+ *
+ */
 
 public class GcmIntentService extends IntentService{
 
@@ -25,7 +34,6 @@ public class GcmIntentService extends IntentService{
 	}
 
 	private NotificationManager mNotificationManager;
-	private static final String TAG = "SDSU_GCM";
 	
 	@Override
 	protected void onHandleIntent(Intent intent) {
@@ -47,11 +55,8 @@ public class GcmIntentService extends IntentService{
                 // This loop represents the service doing some work.
                 for (int i=0; i<5; i++) {
                     try {
-                    	Log.i(TAG, "Working... " + (i+1)
-                                + "/5 @ " + SystemClock.elapsedRealtime());
                         Thread.sleep(5000);
                     } catch (InterruptedException e) {
-                    	Log.e(TAG, "gcm intent serv: " + e.getMessage());
                     	//Error Collector
             			//e.printStackTrace();
                     }
